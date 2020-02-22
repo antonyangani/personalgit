@@ -1,0 +1,4 @@
+---
+# tasks file for testing
+- include setup.yml
+- include copying.yml

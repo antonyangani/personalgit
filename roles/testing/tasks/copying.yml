@@ -1,0 +1,5 @@
+---
+- name: copying a block of text to a remote file
+  copy:
+    content: 'This is a new line added by ansible just now'
+    dest: /root/somefile.txt

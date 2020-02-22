@@ -1,0 +1,13 @@
+---
+#Installing packages
+
+- name: installing epel package
+  yum:
+      name: epel-release
+      state: present
+
+- name: install htop
+  yum:
+      name: htop
+      state: present
+
