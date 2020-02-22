@@ -1,0 +1,8 @@
+---
+#Starting apache servie
+- name: Starting the HTTPD
+  service:
+      name: httpd
+      state: started
+
+

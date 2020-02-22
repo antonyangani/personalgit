@@ -1,0 +1,8 @@
+---
+#Installing httpd service
+- name: Installing HTTPD
+  yum:
+      name: httpd
+      state: latest
+
+

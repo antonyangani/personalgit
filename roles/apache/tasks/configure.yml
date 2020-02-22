@@ -1,0 +1,16 @@
+---
+#This will configure the httpd service
+- name: Configuring the httpd.conf file and sending sample html file
+  copy:
+      src: httpd.conf
+      dest: /etc/httpd/conf/httpd.conf 
+  notify:
+    - restart_httpd
+
+- name: send index.html
+  copy:
+      src: index.html
+      dest: /var/www/html/index.html
+       
+
+
