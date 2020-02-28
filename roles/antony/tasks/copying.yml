@@ -1,6 +1,0 @@
----
-- name: copying a block of text to a remote file
-  blockinfile:
-      dest: /root/somefile.txt 
-      block: "{{ lookup('file', 'SSL_FILE') }}"
-      backup: yes
