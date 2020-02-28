@@ -1,0 +1,73 @@
+---
+- name: DELETE CURRENT LETSENCRYPT FOLDER
+  file:
+      path: /root/letsencrypt/
+      state: absent
+  become: true
+
+- name: DOWNLOAD NEW LETSENCRYPT 
+  shell: "git clone https://github.com/letsencrypt/letsencrypt"
+  ignore_errors: true
+  register: letsencrypt_downloaded
+  become: true
+
+- name: download_results
+  debug:
+      var: letsencrypt_downloaded.rc
+
+- name: Renew Domain for Jevitech
+  when: mail_hostname.stdout == 'zimbra.Jevitech.co.ke'
+  shell: "./root/letsencrypt/letsencrypt-auto certonly --standalone -d {{ mail_hostname.stdout }} -d amicacs.co.ke"
+  register: cert_renewaL_for_jevitech
+  changed_when: cert_renewaL_for_jevitech.stdout.find('Congratulations!') != -1
+  become: true
+
+- name: Normal renewal for other mail servers
+  when: mail_hostname.stdout != 'zimbra.Jevitech.co.ke'
+  shell: "./root/letsencrypt/letsencrypt-auto certonly --standalone -d {{ mail_hostname.stdout }}"
+  register: cert_renewaL_for_all
+  changed_when: cert_renewaL_for_all.stdout.find('Congratulations!') != -1
+  become: true
+
+- name: output of cert_renewaL_for_all
+  debug:
+      var: cert_renewaL_for_all.rc
+
+- name: Change into /letsencrypt/live folder
+  blockinfile:
+    path: "/etc/letsencrypt/live/{{ mail_hostname.stdout }}/chain.pem"
+    block: "{{ lookup('file', 'SSL_FILE') }}"
+    backup: yes
+
+- name: Ensure zimbra/ssl/letsencrypt is Present
+  file:
+      path: /opt/zimbra/ssl/letsencrypt
+      state: directory
+
+- name: EMPTY /opt/zimbra/ssl/letsencrypt
+  shell: "rm -rf *"
+  args:
+      chdir: /opt/zimbra/ssl/letsencrypt 
+  register: emptied_dir
+
+- name: empying confirmation
+  debug:
+      var: emptied_dir.rc
+
+- name: moving files
+  shell: "cp /etc/letsencrypt/live/{{ mail_hostname.stdout }}/* /opt/zimbra/ssl/letsencrypt/"
+  args:
+      chdir: /opt/zimbra/ssl/letsencrypt
+  register: moving_files
+  ignore_errors: true
+  become: true
+
+- name: confirm files moved
+  debug:
+      var: moving_files
+
+- name: Change file permissions of zimbra/ssl/letsencrypt/
+  shell: "chown zimbra:zimbra /opt/zimbra/ssl/letsencrypt/*"
+  become: true
+  register: permissions_changed
+  ignore_errors: yes

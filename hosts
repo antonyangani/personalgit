@@ -33,10 +33,16 @@
 62.12.114.126
 
 [mail]
-62.12.115.134
+jevitech.co.ke ansible_user=root ansible_password=
+
 
 [cpanel]
 62.12.114.181
+
+[tiks]
+#62.12.119.42 ansible_user=admin ansible_network_os=routeros
+41.242.1.132 ansible_user=admin ansible_port=2022 ansible_network_os=routeros
+
 # If you have multiple hosts following a pattern you can specify
 # them like this:
 

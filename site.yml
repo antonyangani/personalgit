@@ -1,4 +1,14 @@
 ---
 - hosts: 62.12.115.25
+  become: yes
+  vars_prompt:
+    - name: hostname
+      prompt: "What is the new_hostname? e.g. cpanel.angani.co"
+      private: no
+
+    - name: password
+      prompt: "Enter server password"
+      private: yes
+
   roles:
-    - antony
+    - cpanel

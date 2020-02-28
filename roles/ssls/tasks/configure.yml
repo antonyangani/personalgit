@@ -1,0 +1,60 @@
+---
+- name: zmmanager verification
+  shell: "/opt/zimbra/bin/zmcertmgr verifycrt comm privkey.pem cert.pem chain.pem"
+  args:
+      chdir: /opt/zimbra/ssl/letsencrypt/
+  become: yes
+  become_method: sudo
+  become_user: zimbra
+  register: zmmanager_verification
+  ignore_errors: true
+
+- name: delete commercial file
+  file:
+      path: "/opt/zimbra/ssl/zimbra/commercial/commercial.key"
+      state: absent
+  become: yes
+
+- name: create backup
+  shell: "{{ item  }}"
+  loop:
+    - "cp -r /opt/zimbra/ssl/zimbra{,-bak.$(date '+%Y%m%d')}"
+    - "cp /opt/zimbra/ssl/letsencrypt/privkey.pem /opt/zimbra/ssl/zimbra/commercial/commercial.key"
+  become: yes
+
+- name: ensure permissions of commercial.key file
+  file:
+    path: /opt/zimbra/ssl/zimbra/commercial/commercial.key
+    owner: zimbra
+    group: zimbra
+
+- name: Deploy crypt
+  shell: "/opt/zimbra/bin/zmcertmgr deploycrt comm cert.pem chain.pem"
+  args:
+    chdir: /opt/zimbra/ssl/letsencrypt/
+  become: true
+  become_method: sudo
+  become_user: zimbra
+  register: deploy_cert
+
+- name: Verify Cert Deloyment
+  debug:
+    var: deploy_cert.rc
+
+- name: restart zimbra services
+  shell: "~/bin/zmcontrol restart && ~/bin/zmproxyctl restart"
+  become: true
+  become_method: sudo
+  become_user: zimbra
+  ignore_errors: true
+  register: restarted
+
+- name: CONFIRMATION OF RESTART
+  debug:
+    var: restarted.rc
+
+
+
+
+
+

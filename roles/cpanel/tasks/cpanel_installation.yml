@@ -1,0 +1,13 @@
+---
+#installing cPanel
+
+- name: Download cPanel Installer
+  shell: curl -o latest -L https://securedownloads.cpanel.net/latest
+  become: true
+  register: installer_downloaded
+
+- name: The Installation process
+  shell: sh latest
+  ignore_errors: true
+  become: true
+  register: cpanel_installed

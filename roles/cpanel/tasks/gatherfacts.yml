@@ -1,0 +1,10 @@
+---
+#Gathering facts from the user
+- name: hostname
+  prompt: "What is this cpanel's hostname? e.g. cpanel.angani.co"
+  private: no
+
+- name: password
+  prompt: "What is your mysql password? (You can use the cpanel root password)"
+  private: yes
+
