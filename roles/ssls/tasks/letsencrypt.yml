@@ -17,13 +17,20 @@
 
 - name: Renew Domain for Jevitech
   when: mail_hostname.stdout == 'zimbra.Jevitech.co.ke'
-  shell: "./root/letsencrypt/letsencrypt-auto certonly --standalone -d {{ mail_hostname.stdout }} -d amicacs.co.ke"
+  shell: "./root/letsencrypt/letsencrypt-auto certonly --standalone -d {{ mail_hostname.stdout }} -d mail.amicacs.co.ke"
+  register: cert_renewaL_for_jevitech
+  changed_when: cert_renewaL_for_jevitech.stdout.find('Congratulations!') != -1
+  become: true
+
+- name: Renew Domain for Jevitech
+  when: mail_hostname.stdout == 'mail.empire.co.ke'
+  shell: "./root/letsencrypt/letsencrypt-auto certonly --standalone -d {{ mail_hostname.stdout }} -d mail.prudentialgroup.net"
   register: cert_renewaL_for_jevitech
   changed_when: cert_renewaL_for_jevitech.stdout.find('Congratulations!') != -1
   become: true
 
 - name: Normal renewal for other mail servers
-  when: mail_hostname.stdout != 'zimbra.Jevitech.co.ke'
+  when: mail_hostname.stdout != 'zimbra.Jevitech.co.ke' and mail_hostname.stdout != 'mail.empire.co.ke'
   shell: "./root/letsencrypt/letsencrypt-auto certonly --standalone -d {{ mail_hostname.stdout }}"
   register: cert_renewaL_for_all
   changed_when: cert_renewaL_for_all.stdout.find('Congratulations!') != -1
@@ -47,7 +54,8 @@
 - name: EMPTY /opt/zimbra/ssl/letsencrypt
   shell: "rm -rf *"
   args:
-      chdir: /opt/zimbra/ssl/letsencrypt 
+      chdir: /opt/zimbra/ssl/letsencrypt
+      warn: false 
   register: emptied_dir
 
 - name: empying confirmation

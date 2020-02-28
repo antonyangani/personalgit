@@ -33,7 +33,8 @@
 62.12.114.126
 
 [mail]
-jevitech.co.ke ansible_user=root ansible_password=
+62.12.114.232 ansible_user=angani
+
 
 
 [cpanel]

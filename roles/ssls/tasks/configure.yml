@@ -48,10 +48,10 @@
   become_user: zimbra
   ignore_errors: true
   register: restarted
+  changed_when: restarted.stdout.find('Starting proxy...done')
+  async: 120
+  poll: 0
 
-- name: CONFIRMATION OF RESTART
-  debug:
-    var: restarted.rc
 
 
 
