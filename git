@@ -74,3 +74,10 @@ e.g. git clone https://github.com/some_path /home/antonyng/custom_dir
 -- git stash 
 -- git pull origin master
 
+#MAC git push issues
+-- open "Keychain Access.app" (You can find it in Spotlight or LaunchPad)
+-- Select "All items" in Category
+-- Search "git"
+-- Delete every old & strange item
+-- push the changes again => git push -u origin master
+
