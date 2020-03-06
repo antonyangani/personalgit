@@ -1,0 +1,15 @@
+#Installing wowza
+-- Install centos server
+-- install latest java library
+-- go to wowza site and register for a free account
+-- download the .run file
+-- make .run file executable
+
+-- chmod +x file_name.run
+-- Install file ( ./file_name.run )
+-- finish the installation using the credentials sent to your email ( license for app and vieo player )
+-- open port 1935 on firewall-cmd
+-- firewall-cmd --zone=public --permanent --add-port=1935/tcp
+-- firewall-cmd --reload
+-- firewall-cmd --list-all
+-- start streaming ( use the test  )

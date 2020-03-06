@@ -1,0 +1,7 @@
+#To Use IPAM 
+-- Login to the web portal ( Credentials on KeyPass )
+-- On the dashboard, click on SUBNETS
+-- Choose the location desire (EADC or Chancery )
+-- On EADC > Choose EADC-VMWARE-PUBLIC > Choose the right subnet ( e.g. 62.12.119.0/26 )
+-- At the very bottom, you will see the visual representation of allocated IPs.
+-- ( Those in green are allocated while blank are free to be used )

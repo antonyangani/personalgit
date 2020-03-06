@@ -1,0 +1,9 @@
+#Check hardware clock time
+-- hwclock -r
+#Resync hardware clock with system clock
+-- hwclock --systohc
+#using the timedatectl
+
+-- timedatectl list-timezones
+-- timedatectl set-timezone Africa/Nairobi
+

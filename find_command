@@ -1,0 +1,9 @@
+#Find and move files into a different location
+-- find . -type f -iname '*.gif' -exec mv '{}' my_pics/ \;
+
+#find a file of a particular size and delete it
+-- find . -type f -size +100M -delete
+OR
+-- find . -type f -size +4G -delete
+
+

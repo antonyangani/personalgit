@@ -1,0 +1,76 @@
+#GETTING STARTED WITH GITHUB
+-- install git
+-- git config --global user.name {username}
+-- git config --global user.email {email}
+-- git config --list
+
+#To Start tracking
+-- cd into the folder to be tracked
+-- git init
+-- git status (Shows you all files that are not being tracke by git)
+
+#CREATING A GIT-IGNORE File
+-- touch .gitignore
+-- within the file add something like
+
+DS_Store
+.project
+*.pyc
+
+#STATE OF FILE
+-- git has three main stages 
+        => Working directory (can be seen by: git status)
+        => Staging area
+        => Committed file
+#Adding files to staging area
+-- git add -A  /  git add {specific_file}
+-- git status
+#Removing files from staging area
+-- git reset {file_name} / git reset ( The last one removes all files from the staging area )
+#Committing files
+-- git commit -m "inset a comment here"
+-- git status
+-- git log
+
+#Checking for changes after modification
+-- git diff
+-- git add -A
+-- git commit { filename } -m "made a change to the file by adding yadayada.."
+ 
+
+#Cloning remote repo
+-- git clone {URL_TO_REMOTE_REPO} {LOCATION_IN_LOCAL_MACHINE_TO_DOWNLOAD_DATA}
+e.g. git clone https://github.com/some_path /home/antonyng/custom_dir
+
+#Adding remote
+-- git remote add origin https://github.com/antonyangani/ansible.git
+
+#Best Practice
+-- create branches
+-- git branch -a #Lists all the active branches
+
+-- git branch {branch_name}
+-- git checkout {branch_name}
+
+#committing changes from a branch to remote 
+-- git push -u origin {branch_name}
+-- git checkout master
+-- git merge {branch_name} #This merges the branch with the master branch
+
+#Delete a branch
+-- git branch --merged #Make sure the branch has been merged with master
+-- git branch -d {branch_name} #This deletes locally
+-- git push origin --delete {branch_name} #this deletes branch in remote repo
+
+#Setting up password caching
+-- git config credential.helper store
+-- git config --global credential.helper store
+-- git push origin master
+-- username: antonyangani
+-- password: **Antonyngayo1991**
+
+#Incase of a merge error during pull
+-- git add *
+-- git stash 
+-- git pull origin master
+

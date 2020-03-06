@@ -1,0 +1,53 @@
+#Creating an IPSEC connection between 2 VPCs
+-- The first action would be to create two PFSENSE servers for each VPC ( there is a cheatshet for that )
+-- On each PFSENSE do the following
+    -- Go to Interfaces > Assignments > VLANS > Add > parent interface (em1 lan)> VLAN Tag ( put the VLAN ID for the VPC network) > save 
+    -- Go to Interface assignments > Add the newest addition 
+    -- Go to interfaces > OPT1 > Change Description > IPV4 static > Give an IP that is within the VPC CIDR space e.g. 192.168.50.2 > Save
+    -- Go to Firewall > Rules > Newly Created VPC > Allow ICMP protocol
+    -- test if pfsense can reach VPC subnet
+
+#Creating the IPSec connection
+-- Go to VPN > IPSEC > Add P1 
+-- key exchange version : IKEv1
+-- Internet protocol: IPv4
+-- Interface : WAN
+-- Remote Gateway: 62.12.119.41 ( This is the IP to the other PFsense )
+-- Description ( Give it a descriptive name )
+-- Phase 1 Proposal ( Change only the: Preshared Key: M@w1ngu! )
+-- Encryption ( AES, 28 bit, SHA1, 2( 1024 ) )
+-- Lifetime: 86400
+-- Save 
+
+#Add Phase 2 ( Do on both PFSense servers )
+-- Add phase 2
+-- Local network ( IP of the local VPC e.g. 192.168.50.0/26 )
+-- Remote Network ( IP of the remote VPC e.g. 10.150.150.0/26 )
+-- Description ( Give a suitable name )
+-- Encryption Algorithm ( AES only )
+-- Hash Algorithm ( SHA1 )
+-- PFS key group ( OFF )
+-- Lifetime: 86400
+-- Save
+
+#Check whether an IPSEC tunnel is established
+-- Status > IPSec > Connect ( If it successful, it will establish )
+
+#To make the VMs communicate 
+
+-- Go to Firewall > RULES > IPSEC
+-- Add > Protocol (ICMP) > Source Network ( The IP of the remote Subnet e.g. 10.150.150.0/26)
+-- Destination ( ANTONYVPC2 ) > Save 
+-- Add > Protocol ( TCP ) > Source Network ( IP of remote subnet )
+-- Destination ( ANTONYVPC2 )
+-- Save ( Do for both PFsenses )
+
+#Add routes to VM
+-- Login to the VM
+-- ensure route is installed
+-- type: ip route add 10.150.150.0/26 via 192.168.50.2 dev eth0
+-- in case you need to delete the above ( ip route del 192.168.50.0/26 )
+-- try pinging a vm on the remote subnet
+
+
+

@@ -1,0 +1,11 @@
+to change resolvers for repos
+
+-- vim /etc/resolv.conf
+
+#If you cannot run update, ensure you have a nameserver 
+
+-- vim /etc/resolv.conf
+-- nameserver 8.8.8.8
+
+
+

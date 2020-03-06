@@ -1,0 +1,33 @@
+URL: https://app.vagrantup.com/centos/boxes/7
+
+#Create instance
+-- vagrant up
+
+#Stop instance 
+-- vagrant halt
+
+#Start instance
+-- vagrant up
+-- vagrant ssh ( Logs you into the system )
+
+#Creating an new instance of Vagrant 
+-- visit https://app.vagrantup.com
+-- Choose the vagrant box you need (Centos 8)
+-- create a directory on the Desktop (Wherever)
+-- vagrant init ( it creates a file called Vagrantfile  )
+-- vim Vagrantfile
+-- delete all contents in the file
+-- add contents from the website e.g.
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "twistedbytes/centos-8"
+  config.vm.box_version = "1905.1"
+  config.vm.network "private_network", ip: "10.150.50.10"
+end
+
+-- vagrant up ( this will start the install process, the ISO will be located in Homefolder > VirtualBox VMs )
+-- vagrant ssh ( allows you to access the VM )
+
+#Mounting Shared Folders
+-- vagrant plugin install vagrant-vbguest
+-- vagrant vbguest

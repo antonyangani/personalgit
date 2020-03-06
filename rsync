@@ -1,0 +1,6 @@
+#rsync
+
+-- used to synchronize two directories or directory trees whether they are on the same computer or on different computers but it can do so much more than that. rsync creates or updates the target directory to be identical to the source directory
+
+-- rsync -aH sourcedir targetdir
+

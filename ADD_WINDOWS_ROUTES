@@ -1,0 +1,10 @@
+#Adding routes to Windows Servers
+-- route -p ADD 172.16.17.0 MASK 255.255.255.0 10.64.0.247
+
+Explaination
+
+172.16.17.0 - This is the destination address
+255.255.255.0 - This the the nestmask
+10.64.0.247 - This is the current computer's IP address
+
+

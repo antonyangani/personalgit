@@ -1,0 +1,112 @@
+-- Add SSH key to the server to be managed by ansible
+#Adding a host to ansible 
+
+-- cd /etc/ansible
+-- vim hosts
+-- [under the "web" category, add the IP address you wish to manage]
+
+#Ping a Remote Host
+-- ansible -i /etc/ansible/hosts web -m ping
+#Syntax check
+-- ansible-playbok install.yml --syntax-check
+#Running a playbook
+-- ansible-playbook install.yml
+
+#Running playbook on a select group of hosts
+
+-- ansible-playbook file,yml --limit {group_name}
+
+#An example of an Ansible yml file
+
+---
+- name: Install HTOP in all my hosts
+  hosts: all
+  tasks:
+
+      - package:
+          name: htop
+          state: installed
+
+
+#More examples 
+-- https://www.tecmint.com/linux-system-administration-tasks-with-ansible/
+
+
+#enabling and disabling services 
+
+---
+- name: Cpanel installation script
+  hosts: all
+  tasks:
+
+      - package:
+          name: curl
+          state: installed
+      - service:
+          name: NetworkManager
+          state: stopped
+          enabled: no
+
+#to enable
+
+---
+- name: Cpanel installation script
+  hosts: all
+  tasks:
+
+      - package:
+          name: curl
+          state: installed
+      - service:
+          name: NetworkManager
+          state: started
+          enabled: yes
+
+
+#USING MOLECULE TO CREATE ROLES
+-- create a virtual environment 
+    virtualenv {foldername} using python 3
+-- pip install molecule docker
+-- molecule init role --role-name ansible-role-redis --driver-name docker
+
+=> the above create a directory with boilerplate for creating roles
+
+e.g. ansible-role-redis
+
+#Creating ROLES
+-- cd /etc/ansible/roles => ALL ROLES NEED TO BE IN THE ROLES FOLDER/DIR
+-- ansible-galaxy init {rolename}  --offline
+
+=> The above command will some dirs and files
+
+#Defaults
+-- It stores the data about the application. Some Default variables can be stored here
+#Files
+-- Static files can be stored here, files to be sent to remote machines
+#Handlers
+-- These are task directive/triggers to notify and subscribe 
+e.g. In case a conf file changes, it should trigger service restart
+#Meta
+-- Contains basic info about the role e.g. author name, platform supported, and dependencies
+#Tasks
+-- This will contain the core logic e.g. installing packages e.t.c
+#Templates
+-- These are dynamic files which can be modified as needed, and it is written in ginger2 templating language
+#Vars
+-- Both VARS and DEFAULTS store variables. BUT variables stored in VARS have a high priority and cannot be overwritten
+
+
+#INVENTORY
+-- The default host for ansible is under /etc/ansible/hosts
+-- You can create custom inventories e.g. in the root folder
+-- e.g.
+
+-- touch /root/ansiblehostfile
+-- vim !!
+[ a server group ]
+SOME_IP_ADDRESSES
+
+-- close
+-- ansible -i /root/ansiblehostfile group_name -m shell -a "uptime"
+
+

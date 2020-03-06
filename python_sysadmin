@@ -1,0 +1,5 @@
+#You need to install a couple of modules to run programs effectively
+-- sudo pip3 install subprocess.run ( allows for execution of localized functions )
+-- sudo pip3 install paramiko ( for helping with remote logins )
+
+

@@ -1,0 +1,56 @@
+#SSH into the server credentials in keypass
+-- Log into client's checkmk
+-- Scroll down to 'Monitoring agents'
+-- copy link address of appropriate OS
+-- log into the client cpanel server
+-- wget the file using the link adddress
+-- install file
+
+#After installation, do the below
+-- install xinetd ( yum install xinetd )
+-- vi /etc/xinetd.d/check_mk
+-- uncomment line starting with "only from"
+-- change IPs on the same line and replace with checkmk host server IP ( 62.12.117.80 )
+#Restart xinetd.d
+-- systemctl restart xinetd
+#The below is run on the checkmk host server (62.12.117.80)
+-- sudo su
+-- omd create (site_name)
+-- su - (site_name)
+-- htpasswd -m ~/etc/htpasswd cmkadmin [press enter] 
+-- New Password
+#exit (site_name) user
+-- omd start (site_name)
+
+#Go to https://checkmk-01.angani.co/{site_name}
+-- Go to WATO >  Hosts > New host > Give Name > IPV4 > IP address > Check SNMP & checkmk_agent  > Save & Go to services 
+
+#On the host, open port 6556
+-- firewall-cmd --add-port=6556/tcp --zone=public --permanent
+-- firewall-cmd --add-port=6556/udp --zone=public --permanent
+-- firewall-cmd --reload
+#Adding MYSQL monitor plugin
+
+-- Go to WATO > (Main Page) Applications > Mysql > Copy link address
+-- Log into a client server (any of the cpanel servers)
+-- Navigate to /usr/lib/check_mk_agent/plugins
+-- wget url_to_plugin (copies url)
+-- chmod 700 mk_mysql
+
+#Add the following codes in the client server 
+-- export MK_LIBDIR="/usr/lib/check_mk_agent"
+-- export MK_CONFDIR="/etc/check_mk"
+-- export MK_VARDIR="/var/lib/check_mk_agent"
+#Create a file
+-- cd /etc/check_mk/
+-- touch mysql.cfg
+-- vi mysql.cfg
+#Add
+
+[client]
+password=password
+
+-- chmod 600 mysql.cfg (use 400 if 600 does not work)
+
+
+

@@ -1,0 +1,10 @@
+#Making webpage visible when apache blocks urls
+
+<Directory /var/www/>
+     Order Allow,Deny
+     Allow from all
+     AllowOverride all
+     Header set Access-Control-Allow-Origin "*"
+</Directory>
+
+

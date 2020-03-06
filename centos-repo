@@ -1,0 +1,26 @@
+[base]
+name=CentOS-$releasever - Base
+baseurl=http://mirror.liquidtelecom.com/centos/$releasever/os/$basearch/
+enabled=1
+gpgcheck=1
+gpgkey=http://mirror.liquidtelecom.com/centos/$releasever/os/$basearch/RPM-GPG-KEY-CentOS-$releasever
+
+[updates]
+name=CentOS-$releasever - Updates
+baseurl=http://mirror.liquidtelecom.com/centos/$releasever/updates/$basearch/
+enabled=1
+gpgcheck=1
+gpgkey=http://mirror.liquidtelecom.com/centos/$releasever/os/$basearch/RPM-GPG-KEY-CentOS-$releasever
+
+[extras]
+name=CentOS-$releasever - Extras
+baseurl=http://mirror.liquidtelecom.com/centos/$releasever/extras/$basearch/
+enabled=1
+gpgcheck=1
+gpgkey=http://mirror.liquidtelecom.com/centos/$releasever/os/$basearch/RPM-GPG-KEY-CentOS-$releasever
+[centosplus]
+name= CentOS-$releasever - Plus
+baseurl=http://mirror.liquidtelecom.com/centos/$releasever/centosplus/$basearch/
+enabled=0
+gpgcheck=1
+gpgkey=http://mirror.liquidtelecom.com/centos/$releasever/os/$basearch/RPM-GPG-KEY-CentOS-$releasever

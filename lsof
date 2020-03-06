@@ -1,0 +1,7 @@
+#LSOF
+-- this command lists information about files opened by processes or users
+
+-- lsof -i :443             #this displays programs accessing the https port
+-- lsof -u antonyng         #this shows files opened by a users
+-- lsof -i                  #this shows all network connections
+-- lsof -i -a -c ssh        #shows files used by a specific process

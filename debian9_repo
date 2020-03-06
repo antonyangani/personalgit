@@ -1,0 +1,12 @@
+Debian9 Has an issue with repositories. to fix
+-- delete contents  in /etc/apt/sources.list
+-- replace with the following
+
+deb http://deb.debian.org/debian stretch main
+deb-src http://deb.debian.org/debian stretch main
+
+deb http://deb.debian.org/debian stretch-updates main
+deb-src http://deb.debian.org/debian stretch-updates main
+
+deb http://security.debian.org/debian-security/ stretch/updates main
+deb-src http://security.debian.org/debian-security/ stretch/updates main

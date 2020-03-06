@@ -1,0 +1,50 @@
+#Creating a virtual environment
+
+-- pip install virtualenv
+-- virtualenv {folder_name}
+
+#Activate an environment 
+
+-- source bin/activate 
+
+#To deactivate an environment
+
+-- deactivate
+
+#Setting up virtualenv with python3
+
+-- virtualenv -p python3 {directory_name}
+
+#PIPENV
+-- Another virtualization system is the pipenv module
+-- pip3 install pipenv
+-- cd into {target_directory}
+#Activate
+-- pipenv shell
+
+#Installing Packages
+-- pipenv install {package_name}
+
+#Creating a project
+
+-- pipenv install django djangorestframework django-rest-knox
+-- django-admin startproject leadmanager
+-- python manage.py startapp leads
+-- Go into leadmanager folder > vim settings > add leads + rest_frameworks under installed apps
+-- cd ..
+-- python manage.py makemigrations leads
+-- python manage.py migrate (add everything to the database/create the tables)
+
+#Creating a python serializer
+-- cd leads
+
+#Django Issue
+
+-- There might be some issue with respect to disallowed hosts
+-- Go to project settings.py
+-- add requisite IP e.g. 10.150.50.10 into the allowedHost section
+
+ALSO
+
+-- run the ./manage.py runserver 0.0.0.0:8000 
+

@@ -1,0 +1,5 @@
+#Disconnecting users 
+
+-- Search for user on Search
+-- Click on 'Configure' > Uncheck 'Enabled' checkbox
+-- ( The device will be disconnected instanteneously )

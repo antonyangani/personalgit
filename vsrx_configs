@@ -1,0 +1,46 @@
+#Initial set up
+-- cli
+-- configure
+-- set system root-authentication plain-text-password #Allows you to change the password
+
+#HOSTNAME
+
+-- set system host-name host-name
+
+#CONFIGURE MANAGEMENT 
+-- set interfaces fxp0 unit 0 family inet dhcp-client
+#CONFIGURE TRAFFIC INTERFACES
+-- set interfaces ge-0/0/0 unit 0 family inet dhcp-client
+
+#RESOURCE
+==> https://www.juniper.net/documentation/en_US/vsrx/topics/task/configuration/security-vsrx-cli-configuring.html
+
+
+#Initial interface setup (Mawingu example)
+
+set interfaces ge-0/0/2 unit 726 description VID-726-LTK-MAWINGU-MERU
+set interfaces ge-0/0/2 unit 726 vlan-id 726
+set interfaces ge-0/0/2 unit 726 family inet mtu 1500
+set interfaces ge-0/0/2 unit 726 family inet address 196.250.208.105/30
+set security zones security-zone MAWINGU-UNTRUST interfaces ge-0/0/0.726
+set routing-instances MAWINGU interface ge-0/0/2.726
+set routing-instances MAWINGU protocols ospf area 0.0.0.0 interface ge-0/0/2.726 interface-type p2p
+set routing-instances MAWINGU protocols ospf area 0.0.0.0 interface ge-0/0/2.726 metric 100
+
+#Switch (VSRX as a Switch)
+set vlans VID-2901-LTK-MAWINGU-BATUK vlan-id 2901
+set interfaces xe-0/0/15 unit 0 family ethernet-switching vlan members VID-2901-LTK-MAWINGU-BATUK
+set interfaces ge-0/0/31 unit 0 family ethernet-switching vlan members VID-2901-LTK-MAWINGU-BATUK
+
+#Cisco Switch 
+
+conf t
+interface e1/40
+switchport mode access
+switchport access lan 200
+
+#Making a an interface a Trunk
+
+swithport mode trunk
+switch trunk allowed vlan 200,201,206,210
+switch trunk encapsulation dot

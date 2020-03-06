@@ -1,0 +1,21 @@
+#Creating a profile VPN Profile on Mikrotik
+
+-- Log into Mikrotik
+-- PPP > Secrets > Add New 
+-- Give  a NAME > Password > Service "any" > Profile "Select Appropriate"
+-- Local Address "Local address gateway"
+-- Remote "IP to the local machine (give IP within the appropriate subnet)"
+-- Apply > OK
+
+
+#Creating VPN connection on windows 
+
+-- Click on network center
+-- search for VPN
+-- Give username, password, protocol:L2TCP/IPSEC 
+-- Give Preshared key
+-- Create
+
+-- Open VPN properties > Security Tab
+-- CHECK: "Allow these Protocols" (PAP, CHAP, MS-CHAP v2)
+-- leave **UNCHECKED** "AUTOMATICALLY USE MY WINDOWS LOGIN*"

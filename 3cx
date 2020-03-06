@@ -1,0 +1,81 @@
+#Restarting 3cx service
+-- systemctl restart 3CXPhoneSystemMC01.service
+#If there is a problem with incoming calls 
+-- Setting > E164 Processing Settings > (+254)
+
+#Angani Partner ID
+-- 201646
+
+#Outbound rule
+-- At the areas named "Calls from extension groups" > Add > Default > save!
+
+#Adding DID on VOIP Switch
+-- Open dialing plan console
+-- On the route section > type in the first three letters of the account name e.g. 'dent%' > Apply Filter
+-- change the tech prefix like 'DN!256206300966'
+-- specify the respective DIDs
+
+#Changing Static Public IP
+-- Log into the 3CX portal > Dashboard > Static IP > Click
+-- under static public IP, change the IP as required > save.
+-- Go to SIP Trunk
+-- Refresh Registration
+-- Check call logs if calls are connected.
+-- Finish
+
+#Adding IP to VoipSwitch Server Firewall
+-- Open firewall
+-- select inbound rules
+-- Search for VPS_UDP_PORTS & VPS_TCP_PORTS
+-- Select 'scope' tab
+-- Add the Required IPs
+-- Save 
+-- restart Firewall service
+#Enabling call recordings 
+-- Log in to the Admin console > navigate to extensions > click on the desired extension > go to 'OPTIONS' > Click on "Record all calls"
+
+#Renewing 3CX ssl certificate
+
+-- service nginx stop
+-- certbot certonly --standalone --preferred-challenges http -d yum.wingu.co.ke
+-- cp /etc/letsencrypt/live/yum.wingu.co.ke/*  /var/lib/3cxpbx/Bin/nginx/conf/Instance1
+-- cd /var/lib/3cxpbx/Bin/nginx/conf/Instance1
+#Move existing files and rename them to .old
+-- mv yum.wingu.co.ke-crt.pem yum.wingu.co.ke-crt.pem.old
+-- mv yum.wingu.co.ke-key.pem yum.wingu.co.ke-key.pem.old
+-- mv fullchain.pem yum.wingu.co.ke-crt.pem
+-- mv privkey.pem yum.wingu.co.ke-key.pem
+-- service nginx start
+
+#Provisioning an IP Phone on 3CX
+-- https://www.3cx.com/sip-phones/yealink-cp-series/
+
+-- Logon to the client's 3cx portal
+-- create an extension 
+-- go to Phones > Add phones > Select the desired extension > Choose model of phone (YeaLink CP920) > Add Mac address 
+-- On Phone provisioning > Provisioning Method ( DIRECT SIP ) 
+-- Go to "Options" > UNCHECK "Disallow use of extension outside the LAN (Remote extensions using Direct SIP or STUN will be blocked"
+
+-- get the Phone IP & the Mac address ( e.g. 192.168.10.62 , Mac address 805EC03737AA )
+-- Log onto the client's webpage via AnyDesk
+-- key in the IP address ( username: admin, pass: admin )
+-- Go to account
+-- Enable the extension
+-- Label name & Display name ( Details to match those in Phone extension )
+-- username ( Phone extension > Authentication > ID ( you can replace the cypher with the extension number e.g. 008 ) )\
+-- password ( Phone extension > Authentication > Password e.g. IuF8RjRbyP )
+-- Server ( Put the IP address to the 3cx server )
+-- DUP provision ( near the bottom )
+-- Confirm
+
+#Limiting the number of minutes an extention can make a call
+
+-- Log onto 3cx console > Go to Settings (Sidebar)> Parameters > MAXCALLDURATION
+
+#Cloudone numbers have issues
+-- Ensure you prepend +254
+-- Go to Settings > E164 Processing > Uncheck 'remove from same country'
+
+#Make extensions work
+-- Click on Extension ( e.g. 028  ) > Click Options > Uncheck 'Block Outbound Calls'
+

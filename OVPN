@@ -1,0 +1,41 @@
+#Creating an OVPN server 
+
+-- https://chrislazari.com/pfsense-setting-up-openvpn-on-pfsense-2-4/
+
+#To make OVPN Server login without Password
+-- Navigate to VPN > OPenVPN > Server > Server Mode == "Remote Access (SSL/TLS)"
+#Concurrent connections 
+-- Leave the field blank
+#Allow for Duplicate connections
+-- Check the box "Allow multiple concurrent connections from clients using the same Common Name."
+
+#Making a VM to have internet
+
+Go to Firewall > NAT > OUTBOUND
+-- add 
+-- interface WAN
+-- source the network is WAN (internet)
+-- dest IP to the VM e.g. 10.100.2.0/24 ==> this offers internet
+-- IP family IPv4/6
+-- protocol - any
+-- destination any
+
+ANOTHER
+==> traffic going to the VM
+
+-- add
+source IP 10.0.8.0/24 
+dest IP 10.100.2.0/24
+port any
+port any
+
+ANOTHER 
+
+==> traffic leaving the VM
+
+-- add
+source IP 10.100.2.0/24 
+dest IP 10.0.8.0/24
+port any
+port any
+

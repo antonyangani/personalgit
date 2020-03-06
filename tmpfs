@@ -1,0 +1,15 @@
+#Increasing the size of tmpfs
+
+-- vi /etc/fstab
+-- Add the following lines 
+
+tmpfs                   /dev/shm                tmpfs   size=7g        0 0
+tmpfs                   /run                    tmpfs   size=7g        0 0
+tmpfs                   /sys/fs/cgroup          tmpfs   size=7g        0 0
+tmpfs                   /run/user/0             tmpfs   size=7g        0 0
+
+-- Save and close
+-- Mount said folders 
+
+-- mount -o remount /dev/shm
+-- mount -o remount /run 

@@ -1,0 +1,81 @@
+#Creating an NFS Shared Folder 
+-- Have to VMs that can see each other on the network
+#Install Necessary software for nfs to function on both servers
+-- yum install nfs-utils -y
+#Create the folder that will be shared ( The storage server )
+-- mkdir /var/nfsshare
+-- chmod -R 755 /var/nfsshare
+-- chown nfsnobody:nfsnobody /var/nfsshare
+
+#Allow the enable and restart the following services 
+-- systemctl enable rpcbind
+-- systemctl enable nfs-server
+-- systemctl enable nfs-lock
+-- systemctl enable nfs-idmap
+-- systemctl start rpcbind
+-- systemctl start nfs-server
+-- systemctl start nfs-lock
+-- systemctl start nfs-idmap
+
+#Now share the folder (Storage server still)
+-- vi /etc/exports
+
+#In the file add the following lines 
+**(The IP: 192.168.0.101 belongs to the CLIENT SERVER)**
+-- /var/nfsshare    192.168.0.101(rw,sync,no_root_squash,no_all_squash)
+-- /home            192.168.0.101(rw,sync,no_root_squash,no_all_squash)
+
+#Restart the nfs-service
+-- systemctl restart nfs-server
+
+#Configure the firewall (Storage Server)
+
+-- firewall-cmd --permanent --zone=public --add-service=nfs
+-- firewall-cmd --permanent --zone=public --add-service=mountd
+-- firewall-cmd --permanent --zone=public --add-service=rpc-bind
+-- firewall-cmd --reload
+
+#ON THE CLIENT SIDE
+
+-- yum install nfs-utils
+
+#Create directories like so
+
+-- mkdir -p /mnt/nfs/home
+-- mkdir -p /mnt/nfs/var/nfsshare
+
+#Mount the remote storage like SO
+-- mount -t nfs 192.168.0.100:/home /mnt/nfs/home/
+-- mount -t nfs 192.168.0.100:/var/nfsshare /mnt/nfs/var/nfsshare/
+-- df -kh
+
+#Permanently adding the NFS Mount points
+
+-- vi /etc/fstab
+**(The IP 192.168.0.100 belongs to the STORAGE SERVER)**
+-- 192.168.0.100:/home    /mnt/nfs/home   nfs defaults 0 0
+-- 192.168.0.100:/var/nfsshare    /mnt/nfs/var/nfsshare   nfs defaults 0 0
+
+#OWN Example
+
+#On the storage server 
+-- mkdir -p /nfsshare
+-- chmod -R 755 /nfsshare
+-- chown nfsnobody:nfsnobody /nfsshare
+-- vi /etc/exports
+
+/nfsshare        10.150.150.4(rw,sync)
+
+** the 10.150.150.4 is the client server IP (its private because servers are connected via IPSec)**
+-- systemctl restart nfs-server
+
+
+#ON CLIENT SERVER
+
+-- mkdir /nfsshare
+-- mount -t nfs 192.168.50.41:/nfsshare/ /nfsshare/
+-- df -kh
+
+-- added it permanently to fstab
+
+

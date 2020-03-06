@@ -1,0 +1,9 @@
+#Configuring cloudberry on linux
+-- https://averagelinuxuser.com/cloudberry-backup-server/
+#To enable we interface
+-- ./cbb option -set wa -https on
+#Open in browser using the following format
+-- https://[IP_ADDRESS]:43211/
+-- use the ssh credentials to the server
+#Activate License
+-- ./cbb activateLicense -e mwai@empire.co.ke -p Dah2sieTha

@@ -1,0 +1,3 @@
+#Using TMPWATCH to monitor /tmp folder and remove any file not accessed in an hour
+-- 0 * * * * /usr/sbin/tmpwatch --mtime --all 1 /tmp
+

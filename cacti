@@ -1,0 +1,93 @@
+#Installing Cacti On CENTOS
+-- sudo yum install epel-release yum-utils
+-- sudo yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+-- sudo yum-config-manager --enable remi-php73
+-- sudo yum install php php-common php-opcache php-mcrypt php-cli php-gd php-curl php-mysqlnd
+-- vi /etc/php.ini
+-- change date.time = Africa/Nairobi
+-- change max_execution_time = 60 
+-- memory_limit = 512M
+#upgrade to the latest version of mariadb ( => 10 )
+-- vi /etc/yum.repos.d/MariaDB10.repo
+-- yum update -y
+-- yum -y install mariadb mariadb-servers
+-- systemctl start mariadb
+-- systemctl enable mariadb
+-- mysql_upgrade
+-- mysql_secure_installation
+
+-- yum -y install net-snmp net-snmp-utils net-snmp-libs rrdtool
+-- systemctl start httpd
+-- systemctl start snmpd
+-- systemctl start mariadb
+
+
+-- log into mysql 
+-- create database cacti;
+-- GRANT ALL ON cacti.* TO cactiuser@localhost IDENTIFIED BY 'cactipassword';
+-- flush privileges;
+-- exit
+-- mysql -u root -p mysql < /usr/share/mysql/mysql_test_data_timezone.sql
+-- login to mysql ( mysql -u root -p )
+-- GRANT SELECT ON mysql.time_zone_name TO cactiuser@localhost;
+-- flush privileges;
+-- exit
+
+#DATABASE TUNING
+-- vi /etc/my.cnf.d/server.cnf
+under the [mysqld] add the following:
+
+collation-server = utf8_general_ci
+init-connect='SET NAMES utf8'
+character-set-server = utf8
+max_heap_table_size = 128M
+max_allowed_packet = 16777216
+tmp_table_size = 64M
+join_buffer_size = 64M
+innodb_file_per_table = on
+innodb_buffer_pool_size = 512M
+innodb_doublewrite = off
+innodb_additional_mem_pool_size = 80M
+innodb_lock_wait_timeout = 50
+innodb_flush_log_at_trx_commit = 2
+
+-- save file
+
+#Install and confingure cacti
+-- yum install epel-release -y
+-- yum -y install cacti
+-- mysql cacti < /usr/share/doc/cacti-*/cacti.sql -u root -p
+
+#Edit database settings 
+-- vi /etc/cacti/db.php
+#Open Firewall ports
+-- firewall-cmd --permanent --zone=public --add-service=http
+-- firewall-cmd --reload
+
+#Configure network accessibility
+-- vi /etc/httpd/conf.d/cacti.conf
+
+Edit code to resemble the below:
+
+<Directory /usr/share/cacti/>
+        <IfModule mod_authz_core.c>
+                # httpd 2.4
+                Require all granted
+        </IfModule>
+        <IfModule !mod_authz_core.c>
+                # httpd 2.2
+                Order deny,allow
+                Deny from all
+                Allow from all
+        </IfModule>
+</Directory>
+
+
+-- systemctl restart httpd.service
+#set cron for Cacti (uncomment the line below)
+-- vi /etc/cron.d/cacti
+-- */5 * * * * cacti /usr/bin/php /usr/share/cacti/poller.php > /dev/null 2>&1
+-- save & exit
+-- disable selinux
+#make database utf8mb4 compliant 
+-- ALTER DATABASE cacti CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;

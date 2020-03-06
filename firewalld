@@ -1,0 +1,32 @@
+#Opening  http port
+-- firewall-cmd --zone=public --add-port=80/tcp --permanent
+-- firewall-cmd --reload OR firewall-cmd --complete-reload (done as root)
+
+#Troubleshooting server access isssue
+-- check if you can telnet to port 22
+    telnet IP_ADDRESS 22
+-- if the response is positive, but the server refuses to telnet on any other port
+    firewall-cmd --list-all
+    check if the port is open under "ports: "
+-- open specified port
+    firewall-cmd --zone=public --add-port=80/tcp --permanent
+
+#Checking status of firewall-cmd
+-- firewall-cmd --state
+#Adding service to public zone
+-- firewall-cmd --zone=public --add-service=smtp --permanent
+#Removing a service from public zone
+-- firewall-cmd --zone=public --remove-service=smtp --permanent
+#Checking active zones in the server 
+-- firewall-cmd --get-active-zones
+#Checking interfaces active on server
+-- firewall-cmd --zone=public --list-interfaces
+#Drop all incoming traffic to the server ( in emergencies )
+-- firewall-cmd --panic-on
+(resume traffic flow)
+firewall-cmd --panic-off
+(to check the status of panic mode )
+-- firewall-cmd --query-panic
+#List all ports in a zone
+-- firewall-cmd --zone=dmz --list-protocols
+

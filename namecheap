@@ -1,0 +1,12 @@
+#Creating an SSL certificate 
+-- Have the CSR record for the domain
+-- Log into  namecheap > Go to Products > Check if the certificates have been baught ( e.g. comodo etc )
+-- if bought > activate the record using CSR > After activation  > Use the CNAME method ( if you don't have email )
+-- Go to Domain List > Search for the Domain ( Click the Domain DropDown button on top-right corner ) > Show ALL PRODUCTS
+-- Once domain is located > on Transfer Button, click on the small arror > Manage > Products > Manage > under 'categories Version' click 'SEE DETAILS'
+-- Under 'EDIT METHODS' > Click on small arrow on the button > GET RECORD
+-- Open cpanel.angani.co > Edit DNS Record > Search for the required domain
+-- Create new CNAME record
+-- Hostname: _EEF9F1819233326F459779A3F59EDE10. ( leave out the domain info, leave the period in the end )
+-- Target: 005AE83F7546C1E4E947CC5B6F47782E.7637246EBC34A3062F326FA388782D8A.5dc18ca82cb4e.comodoca.com. (Ensure there is a period in the end, remove any information that will be appended in the record)
+-- contact namecheap support for accelerated deliverance of the certificates.

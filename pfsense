@@ -1,0 +1,99 @@
+PFSense
+
+IP:  10.15.0.12
+Password: 6OHhxBMqz
+
+VPC - PFSesnse
+
+- Create a VPC on cloudtsack with CIDR of 10.15.0.0/28
+- Create a network ( at the bottom default_allow )
+- Create a VM
+
+ON PFSense
+
+-- Install Pfsense
+-- Assign address on the WAN interface to a public IP ( Set Interface IP address > Put the IPv4 & gateway )
+-- Add an additional NIC on the PFsense VM
+-- Assing the NIC VPS-3003-GATEWAY
+-- Boot UP PFsense
+-- On the Menu > Choose Option 1 > Ensure em1 interface is visible 
+-- Do not assign the LAN interface any IP at the set up phase
+-- Open the web portal
+-- Go to firewall rules > WAN > add > Destination port range ( https 443 and http 80 ) > Save the two rules > Apply Changes
+-- Go to Interfaces > Assignments > on LAN > em1 > add > Save
+
+VLANS
+
+- Go to Interfaces > VLANS > Add > Choose LAN interface > add VLAN ID (From Cloudstack) > Save
+- Go to Interface Assignments > Add new VLAN > Interfaces > Click on OPT > Enable interface > assign IPV4 address ( address from within the VPC subnet) > save 
+- Firewall > rules > Newly Create VPC > protocol ICMP > save > Apply Changes
+- Firewall > rules > Newly create VPC > source address ( newly created VPC) > save > apply Changes
+
+Creating IPsec on Mikrotik
+
+Profile
+
+- Go to IP > IPSec > profile
+- Enter name (support-VPN)
+- Hash algorithms: aes-128, modp1024,
+- Proposal Check (obey)
+- Lifetime (1d)
+- Check: NAT traversal > save
+
+Proposal
+
+- Go to Proposal
+- Enter name (e.g support-VPN)
+- Check: sha1, aes-128 cbc
+- Lifetime (1d) > Save
+
+Peers
+- Go to Peers
+- Name of pfsense server (e.g support-pfsense)
+- IP address of PFsense server with net mask (e.g. 62.12.119.23/26)
+- Select created profile
+- Exchange mode (main)
+- Check: Send init contact > Save
+
+Policy
+- Go to policies
+- Select created peer
+- Src IP address (Mikrotik IP range e.g. 192.168.1.0/24)
+- Check: Tunnel
+- Dst address: VPC IP range e.g. (10.30.0.0/28)
+- Protocol (255 all)
+- Action (encrypted)
+- Level (required)
+- Proposal (support-VPN)
+
+
+PFsense VLAN/IPSec
+- Go to VPN > IPSec
+- Remote gateway: Address to Mikrotik
+- Interface: WAN
+- Preshared key: (Random set of characters e.g. GohGh4yu6S)
+- Phase 1 (Details must match those in the proposal section in the Mikrotik) [aes-128 cbc, sha1, DH Group ( found in profile section in Mikrotik IPSec i.e. 1024bit )]
+- Time in seconds (86400) > Save
+- Click on: Tunnels > Phase 2 (Blue button)
+- Local Network: VPC IP-Range
+- Remote Network: Client IP-Range (Public IP)
+- Phase 2 (AES 128bits, SHA1, PFS Key Group: off (Same details as in the proposal section in Mikrotik IPSec section)) > Save
+
+Mikrotik Firewall rules
+
+- First Go to IP > IPSec > Identities
+- Add  new > Auth method: Pre-shared key > Add preshared key (Same as one added in PFSense)
+- Save
+- FIREWALL Rules
+- Go to IP > Firewall > NAT
+- Add Source address (Client IP Range (e.g. 192.168.1.0/24))
+- Add destination address (VPC IP range e.g. 10.10.1.0/29)
+- Action: Accept
+- Save
+--  When you come back to IP > IPSec > new connection has to be: Established
+
+#Connecting two VPC with IPSEC
+-- local IP ( IP within the target VPC )
+-- (Check surestop set up 62.12.119.17)  
+--
+

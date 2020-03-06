@@ -1,0 +1,6 @@
+#How to transfer data to a remote server 
+
+Host: sftp://62.12.114.70
+username: username
+password: password
+port: if_applicable.
