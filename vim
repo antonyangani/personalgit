@@ -38,3 +38,9 @@
 -- %s/term_to_search/Term_to_replace_with/g ( g will make the changes globally )
 -- but to negate the latter you can add 'c' to confirm if you want to make a change at each and every step
 
+#NAVIGATING FASTER
+-- move 6 lines down => '6+'
+-- move word to word => 'w'
+-- change word to uppercase letters => 'gUaW' (mnemonic go Upper a word)
+-- change word into lowercase letters > guaW
+ 
