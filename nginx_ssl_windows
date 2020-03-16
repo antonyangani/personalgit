@@ -1,0 +1,9 @@
+#RENEWING SSL FOR Salamafikira
+
+-- I got the .zip from namecheap via mail
+-- I downloaded the .zip folder from namecheap and unzipped on my local computer
+-- Then, I combined the .crt and .ca-bundle files as shown below The order of the files is paramount
+-- cat sfbreathe_com.crt sfbreathe_com.ca-bundle >> sfnginx.cert
+-- I took the resultant file  sfnginx.cert and put it in the D:\ssl\nginx\ folder in the client's server
+-- I restarted the nginx service via services.msc in windows run
+
