@@ -75,4 +75,13 @@ delimiter ;
 -- the latter will display all triggers in play within the database
 
 #Delete a trigger
--- drop trigger {trigger_name};
+-- drop trigger {trigger_name}
+
+#Loging queries to determine problem
+
+-- open my.cnf in /etc/mysql
+
+add
+
+-- general_log_file = /var/log/mysql.log
+-- general_log = 1

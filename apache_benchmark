@@ -1,0 +1,9 @@
+#This is used to check  how much traffic a website can handle in a particilar port
+
+-- ab -c 1000 -n 10000 https://google.com:443/
+
+OR 
+
+-- ab -c 100 -n 1000000 http://127.0.0.1:8000/
+
+
