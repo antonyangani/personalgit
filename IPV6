@@ -1,0 +1,4 @@
+IPv6 addressing for angani
+
+-- Angani ipv6 gateway is 2c0f:f408:2:eadc:1::1 
+-- IPv6 address format is 2c0f:f408:2:eadc:1::X:Y/64    where X and Y are the last 2 octets of the IPv4 address

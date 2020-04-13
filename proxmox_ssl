@@ -1,0 +1,9 @@
+
+Mailgateway-02 renewal process
+
+1. certbot certonly
+
+2.  cp /etc/letsencrypt/live/mailgateway-02.angani.co/fullchain.pem /etc/pve/local/pve-ssl.pem 
+    cp /etc/letsencrypt/live/mailgateway-02.angani.co/privkey.pem /etc/pve/local/pve-ssl.key 
+
+3.  systemctl restart pmgproxy

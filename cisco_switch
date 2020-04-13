@@ -1,0 +1,45 @@
+#Checking interfaces
+
+== Enter privileged exec mode (conf t)
+
+-- show interface status
+
+OR 
+
+-- show ip interface brief
+
+
+#Shutting down interfaces
+
+SW1 > en
+SW1# conf t
+SW1(config)# int f0/1
+SW1(config-if)# shutdown
+SW1(config-if)# end
+SW1# write
+
+#Shutting down a range oof interfaces
+
+SW1 > en
+SW1# conf t
+SW1(config)# int range f0/1 - 21, g0/0 - 2
+SW1(config-if-range)# shutdown
+SW1(config-if)# end
+SW1# write               #write changes to start-up configs
+
+#Changing SPEED and DUPLEX nature of interface
+
+SW1 > en
+SW1# conf t
+SW1(config)# int f0/1
+SW1(config-if)# speed 100           #You can only choose between 10, 100, and AUTO ONLY
+SW1(config-if)# duplex full         #You can choose between FULL, HALF, and AUTO duplex ONLY
+SW1(config-if)# description ## Some descriptive statement ## 
+SW1(config-if)# end
+SW1# write               #write changes to start-up configs
+
+
+
+
+
+
