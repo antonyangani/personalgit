@@ -1,0 +1,69 @@
+---
+#setting up cpanel servers for prometheus monitoring
+#
+- name: Downloading Node Exporter
+  get_url: 
+    url: https://github.com/prometheus/node_exporter/releases/download/v1.0.0-rc.0/node_exporter-1.0.0-rc.0.linux-amd64.tar.gz
+    dest: /root/
+  ignore_errors: yes
+
+- name: Downloading Mysql_exporter
+  get_url: 
+    url: https://github.com/prometheus/mysqld_exporter/releases/download/v0.12.1/mysqld_exporter-0.12.1.linux-amd64.tar.gz
+    dest: /root/
+  ignore_errors: yes
+
+- name: extracting node_exporter
+  shell: "tar xvfz node_exporter-*.*-amd64.tar.gz"
+  ignore_errors: yes
+
+- name: extracting mysqld_exporter
+  shell: "tar xvfz mysqld_exporter-*.*-amd64.tar.gz"
+  ignore_errors: yes
+
+- name: changing into the node exporter folder and run the script
+  shell: "mv /root/node_exporter-1.0.0-rc.0.linux-amd64/node_exporter /usr/local/bin"
+  register: run_node_script
+  ignore_errors: yes
+
+- name: changing into the mysql exporter folder and run the script
+  shell: "mv /root/mysqld_exporter-0.12.1.linux-amd64/mysqld_exporter /usr/local/bin"
+  register: run_mysql_script
+  ignore_errors: yes
+
+- name: create node_exporter.service file in /etc/systemd/system/
+  file:
+    path: /etc/systemd/system/node_exporter.service
+    state: touch
+
+- name: create mysql_exporter.service file in /etc/systemd/system/
+  file:
+    path: /etc/systemd/system/mysqld_exporter.service
+    state: touch
+
+- name: add systemd content for node_exporter.service file
+  blockinfile:
+    path: "/etc/systemd/system/node_exporter.service"
+    block: "{{ lookup('file', 'node_exporter') }}"
+  ignore_errors: yes
+
+- name: add systemd content for mysqld_exporter.service file
+  blockinfile:
+    path: "/etc/systemd/system/mysqld_exporter.service"
+    block: "{{ lookup('file', 'mysqld_exporter') }}"
+  ignore_errors: yes
+
+- name: reload the daemon
+  shell: "systemctl daemon-reload"
+
+- name: enable mysqld_exporter and node_exporter services
+  shell: "{{ item }}"
+  with_items:
+    - "systemctl enable node_exporter.service"
+    - "systemctl enable mysqld_exporter.service"
+    - "systemctl start node_exporter.service"
+    - "systemctl start mysqld_exporter.service"
+  ignore_errors: yes
+
+
+

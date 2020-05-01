@@ -1,0 +1,4 @@
+---
+# tasks file for prometheus
+#
+- import_tasks: setup.yml

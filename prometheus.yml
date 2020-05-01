@@ -1,0 +1,6 @@
+--- 
+- hosts: cpanels
+  gather_facts: no
+  roles:
+    - prometheus
+
