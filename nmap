@@ -1,3 +1,4 @@
 #Scanning ports
--- nmap -sP 62.12.119.0/26
+-- nmap -sC -sV -oN  62.12.119.23
+
 

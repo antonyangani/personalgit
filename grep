@@ -1,0 +1,4 @@
+#using grep efficiently
+
+-- grep -vi {pattern} #this removes all lines matching a pattern
+-- 

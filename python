@@ -48,3 +48,15 @@ ALSO
 
 -- run the ./manage.py runserver 0.0.0.0:8000 
 
+#using regular expressions and raw strings
+
+raw strings are strings that don't pay attention to attributes such as new lines or tabs
+
+e.g.
+
+print("new line \n") == This will create a new line automatically
+
+BUT 
+
+print(r"new lin\n") == The r converts the string into a raw string meaning, python will neglect the new tab directive
+

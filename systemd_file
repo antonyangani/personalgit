@@ -1,0 +1,31 @@
+#Move the executable file to to /usr/local/bin
+ -- mv {binary} /usr/local/bin
+
+ #Create SYSTEMD file in /etc/systemd/system/
+
+-- vim /etc/systemd/system/{name_of_module}.service 
+e.g
+
+-- /etc/systemd/system/node_exporter.service
+
+#Paste in the below in the created file
+
+[Unit]
+Description=This is the prometheus node_exporter program
+Wants=network.target
+after=network.target
+
+[Service]
+Type=simple
+DynamicUser=yes
+ExecStart=/usr/local/bin/node_exporter
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
+
+#Restart system deamon
+-- systemctl daemon-reload
+-- systemctl enable node_exporter.service
+-- systemctl start node_exporter.service

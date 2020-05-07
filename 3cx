@@ -79,3 +79,6 @@
 #Make extensions work
 -- Click on Extension ( e.g. 028  ) > Click Options > Uncheck 'Block Outbound Calls'
 
+#Solving the issue of not being able to call using +254
+-- Go to settings > e164 Processing
+-- Uncheck the 'Remove if same Country'

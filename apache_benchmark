@@ -6,4 +6,9 @@ OR
 
 -- ab -c 100 -n 1000000 http://127.0.0.1:8000/
 
+#Checking number of concurrent connection to apache
+
+-- ps -A | grep httpd | wc -l
+-- netstat -plan | grep 80 | wc -l
+-- netstat -plan | grep 443 | wc -l
 

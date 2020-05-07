@@ -19,3 +19,7 @@ alias df="df -h"
 alias free="free -h"
 alias du="du -sh"
 alias web="elinks"
+
+#Reload bashrc
+-- source ~/.bashrc
+
