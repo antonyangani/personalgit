@@ -159,6 +159,11 @@ Tutorial: https://docker-curriculum.com/#webapps-with-docker
         - docker-compose file => used to define application and how services and the app work together
         - docker-compose command => used to build and start a docker application
 
+#Creating a docker image with docker-compose
+-- docker-compose build 
+-- docker-compose up -d
 
+#After an update
+-- docker-compose up --build -d         #this recreated the images and runs the container in the background as a daemon
 
 
