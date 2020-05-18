@@ -1,0 +1,82 @@
+#Installing kubenetes
+
+-- https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
+
+#Debian
+
+-- You can easily install kubernetes using MINIKUBE
+
+-- wget https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+-- chmod +x minikube-linux-amd64
+-- sudo mv minikube-linux-amd64 /usr/local/bin/minikube
+
+#setup
+-- minikube start --driver=none (this will create a ~/.kube/config file with requesite certificates)
+-- kubectl apply -f config-secret.yml 
+#alternatively 
+
+-- sudo apt-get update && sudo apt-get install -y apt-transport-https curl
+-- curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+-- cat <<EOF | sudo tee /etc/apt/sources.list.d/kubernetes.list
+    deb https://apt.kubernetes.io/ kubernetes-xenial main
+    EOF
+-- sudo apt-get update
+-- sudo apt-get install -y kubelet kubeadm kubectl
+-- sudo apt-mark hold kubelet kubeadm kubectl
+
+#Getting all the info in the kubenetes infra
+-- kubectl get all
+
+#setting up environment
+-- ensure the secret file is created first
+-- kubectl apply -f config_with_secret.yml
+-- kubectl get secret (ensure it is there)
+
+#secondly
+
+-- ensure to create any config maps 
+-- kubectl apply -f configmap.yml
+
+
+
+#Service
+
+-- You can create the Service config file in the same file as the Deployment confifs
+-- if done as above
+
+RUN
+
+-- kubectl apply -f mango.yml
+-- kubectl get service
+
+#To check if the service is connected to the right pod
+-- kubectl describe service {service_name}
+-- kubectl get pod -o wide
+-- check for the 'EndPoints' IP and port match the output of 'get pod -o wide' IP
+
+#ConfigMaps
+-- These are files used to keep track of addresses of shared resources e.g. IP addresses for database servers which multiple services rely on
+
+#Creating a service to be accessible in the public WAN
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+    name: mongo-express-service
+spec:
+    selector:
+      app: mongo-express
+    type: LoadBalancer
+    ports:
+      - protocol: TCP
+        port: 8081
+        targetPort: 8081
+        nodePort: 30000
+
+The type load balancer: means that the service will be given both an internal and external IP from which it can be accessible on the browser
+
+** ClusterIP ** this is an internal IP each service is given but can only be used within the pod
+
+

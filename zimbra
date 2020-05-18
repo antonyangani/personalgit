@@ -41,3 +41,5 @@ done
 -- make file executable -> chmod +x migrate.sh
 -- run code -> ./migrate.sh
 
+#Restarting Amavis
+-- zmamavisdctl restart

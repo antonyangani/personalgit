@@ -1,29 +1,19 @@
 #Creating a virtual environment
 
 -- pip install virtualenv
--- virtualenv {folder_name}
+-- python -m venv env
+
+OR
+
+-- python3 -m venv env
 
 #Activate an environment 
 
--- source bin/activate 
+-- source env/bin/activate 
 
 #To deactivate an environment
 
 -- deactivate
-
-#Setting up virtualenv with python3
-
--- virtualenv -p python3 {directory_name}
-
-#PIPENV
--- Another virtualization system is the pipenv module
--- pip3 install pipenv
--- cd into {target_directory}
-#Activate
--- pipenv shell
-
-#Installing Packages
--- pipenv install {package_name}
 
 #Creating a project
 
@@ -59,4 +49,8 @@ print("new line \n") == This will create a new line automatically
 BUT 
 
 print(r"new lin\n") == The r converts the string into a raw string meaning, python will neglect the new tab directive
+
+#PRINT without .format
+
+print(f'this is a sample test {variable_to_be_inserted} ...'')
 

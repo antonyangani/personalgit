@@ -7,4 +7,14 @@ SOLUTION
 run the below script
 => ln -s openssl-1.0.0.cnf openssl.cnf
 
+#Installing openvpn file in linux system
 
+-- download ovpn file onto the server
+-- install openvpn client
+
+#Ubuntu
+apt-get install openvpn -y
+
+#activating openvpn
+
+-- openvpn --config file.ovpn --daemon

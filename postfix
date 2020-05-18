@@ -36,3 +36,7 @@ e.g. uknevrologij@zdravstvo.gov.mk
 -- mailq | grep ^[A-F0-9]|cut -c 42-80 | sort |uniq -c|sort -n|tail
 #Check mail statistics
 -- cat /var/log/maillog | pflogsumm | more
+#DELETING SPECIFIC Emails
+-- postqueue -p | grep tradecon@tradeconkenya.com | awk '{print $1}' | postsuper -d -
+
+

@@ -49,6 +49,7 @@ OR
 -- docker logs {container_name} #this will return a log file for the container
 -- docker ports {container_name} #Checks for the ports exposed by the container
 -- docker exec -it {container_name} /bin/bash #this allows one to log into a container running in the background
+-- docker exec -it {container_name} /bin/sh  # this is when /bin/bash is not available
 -- docker system prune #this kills of all containers and remove objects that are no longer in use
 -- docker container stop $(docker container ls -aq) #Stops all containers
 -- docker container rm $(docker container ls -aq) #removes all the containers
@@ -150,6 +151,13 @@ ADDING INSTANCE TO NETWORK
 -- http://62.12.114.126:5000/
 
 Tutorial: https://docker-curriculum.com/#webapps-with-docker
+
+#DOCKER-COMPOSE
+
+-- docker-compose is a tool provided by docker to build and run multi-container operations
+-- docker compose comes in two forms:
+        - docker-compose file => used to define application and how services and the app work together
+        - docker-compose command => used to build and start a docker application
 
 
 

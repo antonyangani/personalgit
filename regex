@@ -88,3 +88,28 @@ Mr. T
 Match the 'Ms' or 'Mrs'
 
 Ans = M(s|rs)\.?\s[A-Z]\w* =>so we will be matchinf anything that starts with 'Ms' OR 'Mrs'
+
+Matching emails
+
+-- My attempt => [a-zA-Z0-9_.-+]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+
+
+- It the beginning i am matching all characters from a-z A-Z and 0-9
+- I am using the '+' to say I want to match one or more of anything in the character set []
+- Then I check if the aforementioned are followed by one of more '@' sign using the
+- Then I check for a [a-zA-Z] following the '@' symbol which will then be followed by a '.'
+
+
+URL Example
+
+https://www.google.com
+http://antonyngayo.com
+https://youtube.com
+https://www.nasa.gov
+
+Create a regex to match all the the URLS
+
+ANS = https?://(www\.)?(\w+)\.(\w+)
+
+https? => This matches both http and https as 's' is optional
+(www\.)? => this group matches areas were 'www' is present, but also matches areas where it is missing
+(\w+) => This create two other groups which are mandatory (domain name and top-level domain names)
