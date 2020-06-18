@@ -124,6 +124,15 @@ For more: https://tecadmin.net/install-csf-firewall-on-cpanel/
 -- vi /etc/csf/csf.conf (Edit LF_EMAIL_ALERT = "0" also LF_PERMBLOCK_ALERT = 0)
 #Disable Virtual RAM usage 
 -- vi /etc/csf/csf.conf (Edit PT_USERMEM = "0")
+
+#DISABLE CSF 
+
+-- csf -x 
+
+#ENABLE CSF 
+
+-- csf -e
+
 #Dealing with cpanel refusing to create account/creating DNS records
 -- https://documentation.cpanel.net/display/76Docs/Tweak+Settings+-+Domains#TweakSettings-Domains-AllowWHMuserstocreatesubdomainsacrossaccounts
 

@@ -43,4 +43,9 @@
 -- move word to word => 'w'
 -- change word to uppercase letters => 'gUaW' (mnemonic go Upper a word)
 -- change word into lowercase letters > guaW
- 
+
+#Changing multiple Lines
+
+-- ctrl + V
+-- s!^tag!new_tag!
+

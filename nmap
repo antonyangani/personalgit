@@ -1,4 +1,9 @@
 #Scanning ports
 -- nmap -sC -sV -oN  62.12.119.23
+-- nmap -Pn -sV -sC -sS
+
+#NO DNS lookup
+-- nmap -n IP_ADDR
+
 
 

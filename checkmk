@@ -22,6 +22,8 @@
 #exit (site_name) user
 -- omd start (site_name)
 
+#Reloading and restarting services
+-- omd reload && omd restart
 #Go to https://checkmk-01.angani.co/{site_name}
 -- Go to WATO >  Hosts > New host > Give Name > IPV4 > IP address > Check SNMP & checkmk_agent  > Save & Go to services 
 

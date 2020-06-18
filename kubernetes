@@ -9,7 +9,7 @@
 -- wget https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
 -- chmod +x minikube-linux-amd64
 -- sudo mv minikube-linux-amd64 /usr/local/bin/minikube
-
+-- sudo apt install conntrack
 #setup
 -- minikube start --driver=none (this will create a ~/.kube/config file with requesite certificates)
 -- kubectl apply -f config-secret.yml 
@@ -78,5 +78,8 @@ spec:
 The type load balancer: means that the service will be given both an internal and external IP from which it can be accessible on the browser
 
 ** ClusterIP ** this is an internal IP each service is given but can only be used within the pod
+
+#Accessing a pod
+-- kubectl exec -it {pod_id} -- /bin/sh
 
 

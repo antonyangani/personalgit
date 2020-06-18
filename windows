@@ -1,0 +1,5 @@
+#Repairing a server stuck in loop (VMWARE)
+-- Press F12 Continuously, once is done detecting the OS
+-- Press F8 and choose 'Safe mode with networking'
+-- The server ought to reboot and work just fine
+

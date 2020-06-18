@@ -1,0 +1,12 @@
+#Using VSRX
+
+-- login 
+-- cli
+-- configure
+
+-- set system host-name R1
+-- set system domain-name antony.com
+-- set system name-server 8.8.8.8
+-- set system root-authentication plain-text-password
+
+

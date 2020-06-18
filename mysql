@@ -85,3 +85,17 @@ add
 
 -- general_log_file = /var/log/mysql.log
 -- general_log = 1
+
+#Creating a remote user connection
+
+-- CREATE USER 'myuser'@'localhost' IDENTIFIED BY 'mypass';
+-- CREATE USER 'myuser'@'%' IDENTIFIED BY 'mypass';
+-- GRANT ALL ON *.* TO 'myuser'@'localhost';
+-- GRANT ALL ON *.* TO 'myuser'@'%';
+-- flush privileges;
+
+#TEST
+
+-- mysql -h IP_ADDR -u user_name -p
+
+

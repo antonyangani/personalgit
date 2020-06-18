@@ -82,3 +82,21 @@
 #Solving the issue of not being able to call using +254
 -- Go to settings > e164 Processing
 -- Uncheck the 'Remove if same Country'
+
+
+#3CX Letsencrypt renewal
+
+service nginx stop
+certbot certonly --standalone --preferred-challenges http -d voip.angani.co
+cd /etc/letsencrypt/live/voip.angani.co/
+ls -al
+cp fullchain.pem /var/lib/3cxpbx/Bin/nginx/conf/Instance1/
+cp privkey.pem /var/lib/3cxpbx/Bin/nginx/conf/Instance1/
+cd /var/lib/3cxpbx/Bin/nginx/conf/Instance1/
+ls -al
+mv voip.angani.co-crt.pem voip.angani.co-crt.pem.old
+mv voip.angani.co-key.pem voip.angani.co-key.pem.old
+mv fullchain.pem voip.angani.co-crt.pem
+mv privkey.pem voip.angani.co-key.pem
+service nginx start
+exit

@@ -17,5 +17,6 @@
 -- Default password for Ubuntu18: M@w1ngu!
 #Back to Cloudstack, create VM from the snapshot ( Under community section )
 
+#Scripts for password change
 
-
+-- http://docs.cloudstack.apache.org/projects/cloudstack-administration/en/4.8/templates/_password.html

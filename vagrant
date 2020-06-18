@@ -31,3 +31,4 @@ end
 #Mounting Shared Folders
 -- vagrant plugin install vagrant-vbguest
 -- vagrant vbguest
+-- vagrant reload

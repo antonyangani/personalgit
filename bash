@@ -121,4 +121,6 @@ do
     echo "This script adds text in files in a loop" > $myFile
 done
 
+#Looping through a list from a text file
+-- while read sub; do echo "$sub.yahoo.com"; done < subdomain.txt
 
