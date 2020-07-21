@@ -7,4 +7,43 @@
      Header set Access-Control-Allow-Origin "*"
 </Directory>
 
+#Certbot
+-- sudo apt-get install certbot python-certbot-apache
+-- sudo add-apt-repository ppa:certbot/certbot
+-- sudo apt install python-certbot-apache
+-- sudo certbot --apache -d example.com
+OR
+-- sudo certbot --apache -d example.com -d www.example.com
+
+#Set Cronjob
+-- crontab -l
+-- * */12 * * * certbot renew
+
+#Edit /etc/apache2/sites-available/000-default-le-ssl.conf
+
+<VirtualHost *:443>
+
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/html/
+
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+# Below are added by Certbot doing the Renewal phase
+    ServerName tutorials.angani.co
+    Include /etc/letsencrypt/options-ssl-apache.conf
+    SSLCertificateFile /etc/letsencrypt/live/tutorials.angani.co/fullchain.pem
+    SSLCertificateKeyFile /etc/letsencrypt/live/tutorials.angani.co/privkey.pem
+</VirtualHost>
+
+*** IMPORTANT ***
+-- Ensure that the DocumentRoot is /var/www/html OTHERWISE it will claim it cannot find the document
+
+-- systemctl restart apache2
+
+#CERTBOT FOR NGINX
+-- sudo apt-get install certbot python-certbot-nginx
+-- sudo certbot --nginx
+
 

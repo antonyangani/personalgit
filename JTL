@@ -1,0 +1,10 @@
+#Installing Ubuntu 20 & 18
+
+- Open XEN
+- Choose the OS to install
+- Click 'F6' key when booting
+- Choose the Language
+- Then Click 'F6' > 'Other Options' > 
+- Choose 'nolatic'
+- Choose 'Edd=on'
+- Press Escape key

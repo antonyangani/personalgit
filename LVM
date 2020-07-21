@@ -45,13 +45,19 @@ reslt:  VG #PV #LV #SN Attr   VSize   VFree
 
 -- xfs_growfs /dev/cl/root 
 
+OR 
+
+-- xfs_growfs /
+
 # To view if the changes have taken effect, 
 
 -- df -hT
 
 #If it is debian use
-#
-#-- resize2fs /dev/cl/root 
+
+-- resize2fs /dev/cl/root 
 #
 #Other alternatives
 -- https://devops.ionos.com/tutorials/increase-the-size-of-a-linux-root-partition-without-rebooting/
+
+

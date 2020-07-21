@@ -67,3 +67,7 @@ RESULT
 #Listing virtual machines by name
 -- list virtualmachines listall=true account=antony.ngayo name=grafana-antony-test
 
+#Migrating Volumes
+
+-- migrate volume volumeid=2d7335e7-7ae4-4989-a7ef-de7ee53f5dd7 domainid=e878b625-e722-4382-9676-de2066705ed6 storageid=8d9391ca-0510-365a-913c-c9cca733ddf9
+

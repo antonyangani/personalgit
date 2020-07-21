@@ -48,6 +48,7 @@ port any
 - Click on ‘Client’ Tab > Server host IP: PFSENSE IP > Port: Custom port you choose earlier e.g. 1199 > Description e.g. VPN_Client > User Authentication settings > Peer Cert. Authority: YOUR CA>Auth digest: SHA256 (256-bit) > IPV4 Only > Save
 - Navigate to VPN > OPenVPN > Server > Server Mode == "Remote Access (SSL/TLS)"
 - Check the box "Allow multiple concurrent connections from clients using the same Common Name.
+- UNCHECK "Force all client-generated IPv4 traffic through the tunnel"
 - System > User Manager > users > Add > username & password from the client creation step in VPN > Check: Click to create a user certificate > Cert Authority (Your CA) >
 - Firewall > NAT > OUTBOUND > Outbound NAT mode: Hybrid Outbound NAT > save
 - Firewall > NAT > Source {IP_FOR_OVPN e.g. 10.100.50.0/24} > Destination {VPC_ADDRESS e..g. 172.20.40.0/28}

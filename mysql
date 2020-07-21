@@ -94,8 +94,22 @@ add
 -- GRANT ALL ON *.* TO 'myuser'@'%';
 -- flush privileges;
 
+NAVIGATE TO:
+
+-- vi /etc/mysql/mariadb.conf.d/50-server.cnf
+-- comment # bind-address = 127.0.0.1
+-- systemctl stop mysql
+-- systemctl start mysql
+
 #TEST
 
 -- mysql -h IP_ADDR -u user_name -p
 
+# Writing contents of a db_table to a file
+-- mysql -uuser -ppass -e "SELECT id, name FROM person WHERE name like '%smith%'" database > smiths.txt
+OR
+
+LOG INTO MYSQL
+
+-- SELECT id, name INTO OUTFILE '/tmp/smiths.txt' FROM person WHERE name like '%smith%';
 

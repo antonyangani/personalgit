@@ -23,6 +23,15 @@ This tells the system to skip the first result and print the rest
 #Doing Math
 -- ps aux | grep -hE '^root(.*)' | awk '{sum+=$2}END{print sum/1024;}'
 
+#Getting number of raws
+-- awk 'END {print NR}' /etc/passwd
+
+==IMPORTANT==
+NR = Number of records in a file
+NF = Number of fields
+
+
+
 
 
 
