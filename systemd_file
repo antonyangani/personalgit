@@ -29,3 +29,30 @@ WantedBy=multi-user.target
 -- systemctl daemon-reload
 -- systemctl enable node_exporter.service
 -- systemctl start node_exporter.service
+
+
+#UBUNTU
+
+-- vim /etc/systemd/system/{name_of_file}.service
+
+#PASTE
+
+[Unit]
+Description=Starts OVPN service
+
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+ExecStart=/usr/sbin/openvpn --config /usr/local/connect.ovpn --daemon
+Type=simple
+Restart=always
+RestartSec=3
+WorkingDirectory=/root
+
+
+-- save file
+-- systemctl daemon-reload
+-- systemctl enable {name_of_file}.service
+-- systemctl start {name_of_file}.service
+

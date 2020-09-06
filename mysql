@@ -113,3 +113,5 @@ LOG INTO MYSQL
 
 -- SELECT id, name INTO OUTFILE '/tmp/smiths.txt' FROM person WHERE name like '%smith%';
 
+SHOWING MYSQL QUERIES
+-- mysqladmin proc stat

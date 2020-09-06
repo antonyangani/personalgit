@@ -173,3 +173,5 @@ LANGUAGE="en_US.UTF-8"
 -- package-cleanup --dupes
 -- package-cleanup --cleandupes
 
+#Checking httpd connections
+-- netstat -o state established '(sport = :http or sport = :https )'

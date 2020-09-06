@@ -53,7 +53,7 @@ OR
 -- docker system prune #this kills of all containers and remove objects that are no longer in use
 -- docker container stop $(docker container ls -aq) #Stops all containers
 -- docker container rm $(docker container ls -aq) #removes all the containers
-
+-- docker rmi $(docker images -a -q)  # Deleting all images
 #NETWORKING
 -- Containers come with 3 networks already created which are bridge, None (Null), and Host networks
 -- Bridge network is a private internal network ( they are in the range of 172.17.0.0/16 network ) and help containers communicate within themselves

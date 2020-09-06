@@ -32,3 +32,6 @@ end
 -- vagrant plugin install vagrant-vbguest
 -- vagrant vbguest
 -- vagrant reload
+
+#INSTALLING #VAGRANT-HOST-SHELL
+-- vagrant plugin install vagrant-host-shell
