@@ -1,14 +1,14 @@
 ---
-- hosts: 41.242.1.12
-  become: yes
+- hosts: postfix
+  gather_facts: no
+
   vars_prompt:
     - name: hostname
       prompt: "What is the new_hostname? e.g. cpanel.angani.co"
       private: no
 
-    - name: password
-      prompt: "Enter server password"
+    - name: IP_ADDRESS
+      prompt: "Enter server IP Address?"
       private: yes
-
   roles:
-    - cpanel
+    - postfix

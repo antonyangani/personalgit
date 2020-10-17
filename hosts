@@ -38,7 +38,7 @@
 
 
 [cpanel]
-62.12.114.181
+41.242.1.12
 
 [tiks]
 #62.12.119.42 ansible_user=admin ansible_network_os=routeros

@@ -1,0 +1,32 @@
+---
+#installing checkmk agent
+
+- name: Download and Install Monitoring agent
+  get_url:
+    url: http://check01.angani.co/angani_cpanels/check_mk/agents/check-mk-agent-1.5.0p12-1.noarch.rpm
+    dest: /root/
+  ignore_errors: yes
+
+- name: Installing the installed CheckMK RPM package
+  shell: rpm -i check-mk-agent-1.5.0p12-1.noarch.rpm
+  ignore_errors: yes
+
+- name: yum lock
+  shell: ps aux | grep yum
+  register: yum_lock
+  until: yum_lock.stdout_lines|length <= 2
+  retries: 100
+  changed_when: false
+  ignore_errors: yes 
+
+- name: Install Xinetd
+  yum:
+    name: xinetd
+    state: installed
+  ignore_errors: yes
+
+- name: Enable Xinetd
+  service:
+    name: xinetd
+    state: started
+

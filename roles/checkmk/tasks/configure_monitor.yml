@@ -1,0 +1,46 @@
+---
+#Configuring checkmk monitor
+- name: Edit CheckMK config file
+  replace:
+    path: /etc/xinetd.d/check_mk
+    regexp: '#only_from      = 127.0.0.1 10.0.20.1 10.0.20.2'
+    replace: 'only_from      = 62.12.117.80'
+  ignore_errors: true
+
+- name: Check system PATH
+  blockinfile:
+    path: ~/.bashrc
+    block: |
+        export MK_LIBDIR="/usr/lib/check_mk_agent"
+        export MK_CONFDIR="/etc/check_mk"
+        export MK_VARDIR="/var/lib/check_mk_agent"
+  ignore_errors: true
+
+- name: Install MYSQL Monitor
+  get_url:
+    url: http://check01.angani.co/angani_cpanels/check_mk/agents/plugins/mk_mysql
+    dest: /usr/lib/check_mk_agent/plugins
+  ignore_errors: true
+
+- name: Change File permission
+  file:
+    path: /usr/lib/check_mk_agent/plugins/mk_mysql
+    mode: 700
+
+- name: Create Checkmk dir
+  file:
+    path: /etc/check_mk
+
+- name: Create a mysql.cfg file
+  file:
+    path: /etc/check_mk/mysql.cfg
+    state: touch
+  ignore_errors: true
+
+- name: Edit mysql.cfg file
+  blockinfile:
+    path: /etc/check_mk/mysql.cfg
+    block: |
+        [client]
+        password='{{password}}'
+  ignore_errors: true
