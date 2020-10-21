@@ -175,3 +175,16 @@ LANGUAGE="en_US.UTF-8"
 
 #Checking httpd connections
 -- netstat -o state established '(sport = :http or sport = :https )'
+
+#TMP Not working
+
+-- lsof /tmp
+-- unmount -l /tmp
+-- unmount -l /var/tmp
+-- rm -rf /usr/tmpDSK
+-- /scripts/securetmp
+
+-- https://www.linode.com/community/questions/18919/filesystem-corruption-on-cpanelwhm-centos7
+
+#ROOTKIT Hunter
+-- https://www.woktron.com/secure/knowledgebase/79/Installation-Rootkit-Hunter-rkhunter-on-CentOS.html

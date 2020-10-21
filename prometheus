@@ -2,4 +2,15 @@
 
 -- https://github.com/martinlindhe/wmi_exporter/releases/download/v0.8.1/wmi_exporter-0.8.1-amd64.msi
 
+#ENABLE SSL ON GRAFANA
 
+-- install nginx
+-- in the config file, use ROOT as
+
+== root /usr/share/grafana/public/views/;
+
+	location / {
+		# First attempt to serve request as file, then
+		# as directory, then fall back to displaying a 404.
+		proxy_pass http://127.0.0.1:3000;
+	}

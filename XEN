@@ -1,0 +1,10 @@
+#CREATING XEN LOCAL STORAGE
+Source: https://support.citrix.com/article/CTX130897
+TEMPLATE
+
+-- xe sr-create name-label=<Storage ID> shared=false device-config:device=<Path of the Storage device> type=lvm content-type=user
+
+EXAMPLE
+
+-- xe sr-create name-label=local-disk-02 shared=false device-config:device=/dev/sdc type=lvm content-type=user
+

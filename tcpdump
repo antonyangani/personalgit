@@ -10,3 +10,5 @@
 => VIDEO RESOURCE
 -- https://www.youtube.com/watch?v=hWc-ddF5g1I
 
+#Checking specific traffic on ports
+-- tcpdump -envi wg0 host 8.8.8.8

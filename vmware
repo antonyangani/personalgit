@@ -1,0 +1,27 @@
+#Checking is snmp is up
+
+-- esxcli system snmp get
+
+#Enable snmp
+
+-- esxcli system snmp set --enable true
+
+#Disable snmp
+
+-- esxcli system snmp set --disable true
+
+#SNMP WALK 
+
+-- snmpwalk -v 2c -c public 172.28.17.23
+
+# SNMP STATUS
+-- /etc/init.d/snmpd status
+-- /etc/init.d/snmp restart
+
+#Troubleshooting SNMP
+-- Log into the 172.28.17.0/24 subnet (JTL MNGT)
+-- esxcli system snmp get
+-- /etc/init.d/snmp status
+-- /etc/init.d/snmp restart
+-- snmpwalk -v 2c -c public 172.28.17.23
+

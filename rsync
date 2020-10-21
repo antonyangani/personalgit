@@ -4,3 +4,8 @@
 
 -- rsync -aH sourcedir targetdir
 
+#Progress Bar
+
+-- rsync --progress sourcedir targetdir
+
+

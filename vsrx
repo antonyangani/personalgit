@@ -9,4 +9,44 @@
 -- set system name-server 8.8.8.8
 -- set system root-authentication plain-text-password
 
+#ECOBANK-3
+set security zones security-zone untrust address-book address net-ECOBANK3_160-119-246-63--32 160.119.246.63/32
+set security policies from-zone vpn-BlueSky-untrust to-zone untrust policy 10-64-0-236_to_160-119-246-63 match source-address net-BlueSky_10-64-0-236--32
+set security policies from-zone vpn-BlueSky-untrust to-zone untrust policy 10-64-0-236_to_160-119-246-63 match destination-address net-ECOBANK3_160-119-246-63--32
+set security policies from-zone vpn-BlueSky-untrust to-zone untrust policy 10-64-0-236_to_160-119-246-63 match application any
+set security policies from-zone vpn-BlueSky-untrust to-zone untrust policy 10-64-0-236_to_160-119-246-63 then permit tunnel ipsec-vpn ipsec-vpn-ECOBANK3
+set security policies from-zone vpn-BlueSky-untrust to-zone untrust policy 10-64-0-236_to_160-119-246-63 then permit tunnel pair-policy 160-119-246-63_to_10-64-0-236
+set security policies from-zone vpn-BlueSky-untrust to-zone untrust policy 10-64-0-92_to_160-119-246-63 match source-address net-BlueSky_10-64-0-92--32
+set security policies from-zone vpn-BlueSky-untrust to-zone untrust policy 10-64-0-92_to_160-119-246-63 match destination-address net-ECOBANK3_160-119-246-63--32
+set security policies from-zone vpn-BlueSky-untrust to-zone untrust policy 10-64-0-92_to_160-119-246-63 match application any
+set security policies from-zone vpn-BlueSky-untrust to-zone untrust policy 10-64-0-92_to_160-119-246-63 then permit tunnel ipsec-vpn ipsec-vpn-ECOBANK3
+set security policies from-zone vpn-BlueSky-untrust to-zone untrust policy 10-64-0-92_to_160-119-246-63 then permit tunnel pair-policy 160-119-246-63_to_10-64-0-92
+set security policies from-zone vpn-BlueSky-untrust to-zone untrust policy 10-64-0-199_to_160-119-246-63 match source-address net-BlueSky_10-64-0-199--32
+set security policies from-zone vpn-BlueSky-untrust to-zone untrust policy 10-64-0-199_to_160-119-246-63 match destination-address net-ECOBANK3_160-119-246-63--32
+set security policies from-zone vpn-BlueSky-untrust to-zone untrust policy 10-64-0-199_to_160-119-246-63 match application any
+set security policies from-zone vpn-BlueSky-untrust to-zone untrust policy 10-64-0-199_to_160-119-246-63 then permit tunnel ipsec-vpn ipsec-vpn-ECOBANK3
+set security policies from-zone vpn-BlueSky-untrust to-zone untrust policy 10-64-0-199_to_160-119-246-63 then permit tunnel pair-policy 160-119-246-63_to_10-64-0-199
+set security policies from-zone untrust to-zone vpn-BlueSky-untrust policy 160-119-246-63_to_10-64-0-236 match source-address net-ECOBANK3_160-119-246-63--32
+set security policies from-zone untrust to-zone vpn-BlueSky-untrust policy 160-119-246-63_to_10-64-0-236 match destination-address net-BlueSky_10-64-0-236--32
+set security policies from-zone untrust to-zone vpn-BlueSky-untrust policy 160-119-246-63_to_10-64-0-236 match application any
+set security policies from-zone untrust to-zone vpn-BlueSky-untrust policy 160-119-246-63_to_10-64-0-236 then permit tunnel ipsec-vpn ipsec-vpn-ECOBANK3
+set security policies from-zone untrust to-zone vpn-BlueSky-untrust policy 160-119-246-63_to_10-64-0-236 then permit tunnel pair-policy 10-64-0-236_to_160-119-246-63
+set security policies from-zone untrust to-zone vpn-BlueSky-untrust policy 160-119-246-63_to_10-64-0-92 match source-address net-ECOBANK3_160-119-246-63--32
+set security policies from-zone untrust to-zone vpn-BlueSky-untrust policy 160-119-246-63_to_10-64-0-92 match destination-address net-BlueSky_10-64-0-92--32
+set security policies from-zone untrust to-zone vpn-BlueSky-untrust policy 160-119-246-63_to_10-64-0-92 match application any
+set security policies from-zone untrust to-zone vpn-BlueSky-untrust policy 160-119-246-63_to_10-64-0-92 then permit tunnel ipsec-vpn ipsec-vpn-ECOBANK3
+set security policies from-zone untrust to-zone vpn-BlueSky-untrust policy 160-119-246-63_to_10-64-0-92 then permit tunnel pair-policy 10-64-0-92_to_160-119-246-63
+set security policies from-zone untrust to-zone vpn-BlueSky-untrust policy 160-119-246-63_to_10-64-0-199 match source-address net-ECOBANK3_160-119-246-63--32
+set security policies from-zone untrust to-zone vpn-BlueSky-untrust policy 160-119-246-63_to_10-64-0-199 match destination-address net-BlueSky_10-64-0-199--32
+set security policies from-zone untrust to-zone vpn-BlueSky-untrust policy 160-119-246-63_to_10-64-0-199 match application any
+set security policies from-zone untrust to-zone vpn-BlueSky-untrust policy 160-119-246-63_to_10-64-0-199 then permit tunnel ipsec-vpn ipsec-vpn-ECOBANK3
+set security policies from-zone untrust to-zone vpn-BlueSky-untrust policy 160-119-246-63_to_10-64-0-199 then permit tunnel pair-policy 10-64-0-199_to_160-119-246-63
+
+Then commit check
+
+then commit confirmed 30
+
+to save commit check
+
+
 

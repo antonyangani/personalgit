@@ -109,4 +109,29 @@ SOME_IP_ADDRESSES
 -- close
 -- ansible -i /root/ansiblehostfile group_name -m shell -a "uptime"
 
+# Checking Server INFO using ANSIBLE MODULE
+
+-- ansible ubuntu -i inventory/kubernetes -m setup
+
+
+#Installing packages from the CLI without a playbook
+
+-b = become
+-m  = module e.g. apt, yum, command (The latter is the default if not specified otherwise)
+-a = arguments
+ubuntu = this is the group I am targetting in the inventory
+
+-- ansible ubuntu -i inventory/kubernetes -b -m apt -a "name=ntp state=present"
+
+#INSTALLING MARIADB and configuring a user + database
+
+-- ansible ubuntu -i inventory/kubernetes -b -m apt -a "name=epel-release state=present"
+-- ansible ubuntu -i inventory/kubernetes -b -a "sudo apt update"
+-- ansible ubuntu -i inventory/kubernetes -b -m apt -a "name=mariadb-server state=present"
+
+#Creating user groups
+-- ansible -i inventory/linode linode -b -m group -a "name=admin state=present"
+#ADD user
+-- ansible -i inventory/linode linode -b -m user -a "name=johndoe group=admin createhome=yes"
+
 

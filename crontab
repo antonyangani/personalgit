@@ -1,3 +1,7 @@
 #Using TMPWATCH to monitor /tmp folder and remove any file not accessed in an hour
 -- 0 * * * * /usr/sbin/tmpwatch --mtime --all 1 /tmp
 
+
+#Crontab that runs every 3 seconds
+ * * * * * (sleep 3; /usr/sbin/postsuper -d ALL deferred )
+
