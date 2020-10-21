@@ -1,2 +1,6 @@
-[cpanels]
-62.12.115.178
+[wowza]
+62.12.118.226 ansible_user=angani 
+62.12.118.227 ansible_user=angani 
+62.12.118.228 ansible_user=angani 
+62.12.118.229 ansible_user=angani 
+62.12.118.230 ansible_user=angani 

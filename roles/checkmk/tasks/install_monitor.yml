@@ -30,3 +30,7 @@
     name: xinetd
     state: started
 
+
+[Peer]
+PublicKey = 9r47P/2igs2e9+QIEaBzLc7WHBWqTuGIZdyg4S+HDXI=
+AllowedIPs = 192.168.10.6/32
