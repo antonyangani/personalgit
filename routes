@@ -1,0 +1,34 @@
+For PAWAME routes
+-- ip route ( route -n - shows you the routes )
+-- cat /etc/network/interfaces
+#results
+-- default via 62.12.114.1 def eth0
+-- 10.65.83.101 via 10.221.4.105 dev eth1
+-- 10.65.83.138 via 10.221.4.105 dev eth1
+-- 10.221.4.104/30 dev eth1 proto kernel scope link src 10.221.4.106
+-- 62.12.114.0/23 dev eth0 proto kernel scope link src 62.12.115.58
+For BUUPASS routes
+-- default via 62.12.114.1 dev eth0
+-- 10.65.83.99 via 10.221.7.105 dev eth1
+-- 10.66.57.75 via 10.221.7.105 dev eth1
+-- 10.66.57.100 via 10.221.7.105 dev eth1
+-- 10.221.7.104/30 dev eth1 proto kernel scope link src 10.221.7.106
+-- 62.12.114.0/23 dev eth0 proto kernel scope link src 62.12.115.133
+#How to bring interfaces back up 
+-- ifup eth0
+-- ifup eth1
+#Adding routes
+-- ip route add IP_ADDRS/MASK via GATEWAY 
+ e.g.
+-- ip route add 10.65.83.101/24 via 10.221.4.105
+#Check if port 22 is running 
+-- netstat -tulpn 
+#Starting network service on UBUNTU
+-- service network stop
+-- service network reload
+-- service network start
+#Adding Routes permanently
+-- vi /etc/rc.local
+-- /sbin/ip route add 192.168.1.0/24 dev eth0
+OR
+/sbin/ip route add 192.168.1.0/24 dev eth0

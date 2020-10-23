@@ -1,0 +1,15 @@
+#Ceph Admin Guide
+-- https://docs.ceph.com/docs/hammer/radosgw/admin/
+#Create a user in Ceph
+-- radosgw-admin user create --uid={username} --display-name="{display-name}" [--email={email}]
+e.g.
+-- radosgw-admin user create --uid=johndoe --display-name="John Doe" --email=john@example.com
+#Creating a subuser
+-- radosgw-admin subuser create --uid={uid} --subuser={uid} --access=[ read | write | readwrite | full ]
+e.g.
+-- radosgw-admin subuser create --uid=johndoe --subuser=johndoe:swift --access=full
+
+#Delete user
+-- radosgw-admin user rm --uid=johndoe
+Delere a subuser
+-- radosgw-admin subuser rm --uid=johndoe:swift

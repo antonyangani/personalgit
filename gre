@@ -1,0 +1,31 @@
+#Creating a GRE tunnel between 2 devices
+
+#Example
+
+Comp A
+
+Public IP: 62.12.114.181
+Private IP: 10.42.1.0/24
+
+Comp B
+
+Public IP: 62.12.115.25
+Private IP: 10.42.2.0/24
+
+#On Comp A
+-- modprobe ip_gre
+-- ip tunnel add gre0 mode gre remote 62.12.115.25 local 62.12.114.181
+-- ip addr add 10.42.1.254 dev gre0
+-- ip link set gre0 up
+-- ip route add 10.42.2.0/24 dev gre0  # This is important as this allows for comp A to know how to route packets to subnet 10.42.2.0/24 
+
+
+#On Comp B
+-- ip tunnel add gre0 mode gre remote 62.12.114.181 local 62.12.115.25
+-- ip addr add 10.42.2.254 dev gre0
+-- ip link set gre0 up
+-- ip route add 10.42.1.0/24 dev gre0 #This rule allows comp B to know how o route packets to subnet 10.42.1.0/24
+
+#To Test
+-- systemctl firewalld stop
+

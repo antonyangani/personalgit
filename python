@@ -1,0 +1,61 @@
+#Creating a virtual environment
+
+-- pip install virtualenv
+-- python -m venv env
+
+OR
+
+-- python3 -m venv env
+
+#Activate an environment 
+
+-- source env/bin/activate 
+
+#To deactivate an environment
+
+-- deactivate
+
+#Creating a project
+
+-- pipenv install django djangorestframework django-rest-knox
+-- django-admin startproject leadmanager
+-- python manage.py startapp leads
+-- Go into leadmanager folder > vim settings > add leads + rest_frameworks under installed apps
+-- cd ..
+-- python manage.py makemigrations leads
+-- python manage.py migrate (add everything to the database/create the tables)
+
+#Creating a python serializer
+-- cd leads
+
+#Django Issue
+
+-- There might be some issue with respect to disallowed hosts
+-- Go to project settings.py
+-- add requisite IP e.g. 10.150.50.10 into the allowedHost section
+
+ALSO
+
+-- run the ./manage.py runserver 0.0.0.0:8000 
+
+#using regular expressions and raw strings
+
+raw strings are strings that don't pay attention to attributes such as new lines or tabs
+
+e.g.
+
+print("new line \n") == This will create a new line automatically
+
+BUT 
+
+print(r"new lin\n") == The r converts the string into a raw string meaning, python will neglect the new tab directive
+
+#PRINT without .format
+
+print(f'this is a sample test {variable_to_be_inserted} ...'')
+
+#using the requests method
+-- the 'wb' is meant for 'writing bytes'
+-- to get connents of a webpage in bytes, use the 'content' attribute
+-- r.text - this returns the contents of a website in UNICODE
+

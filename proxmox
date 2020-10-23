@@ -1,0 +1,19 @@
+#To access terminal
+-- Administratiion > console
+
+#To check mail queues
+-- queues
+
+#Tracking emails
+-- Tracking center 
+
+#Adding a domain to use proxmox
+
+- Change MX record of the domain to use {mailgateway-02.angani.co}
+- Login to Proxmox-02
+- COnfigurations > Mail proxy > Transports > Create
+- relay domain (The domain that will receive emails e.g. gbsafrica.net)
+- host (Email host e.g. mail.angani.co/email.angani.co)
+- port 25
+- UNCHECK: use MX
+- CREATE

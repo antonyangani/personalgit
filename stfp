@@ -1,0 +1,12 @@
+#Using SFTP to perform file moving functions
+- Log into SFTP
+
+-- sftp root@62.12.114.70
+-- provide password
+-- use normal navigation commands of linux to move into folders
+#To download a file to the local server
+-- get file_name
+#to upload local file to remote server
+-- put file_name
+
+

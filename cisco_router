@@ -1,0 +1,41 @@
+#Configuring a cisco router
+
+R1> en
+R1# show show ip route                                           #Displays all routes 
+R1# conf t
+R1(config)# hostname R1
+
+#Configuring INTERFACES
+
+R1> en
+R1# show ip interface brief #Displays all the interfaces
+R1# conf t
+R1# (config)#int g0/0/0                                           #You choose the specific interface to configure
+R1# (config-if)#ip address 192.168.13.2 255.255.255.0             # one MUST include the subnet mask
+R1# (config-if)#description ## to SW1 ##                          #This is a descriptive message
+R1 (config-if)#no shut                                           #this enables the interface
+
+
+#Configuring STATIC Routes
+
+R1> en
+R1# show show ip route                                           #Displays all routes 
+R1# conf t
+R1 (config)#ip route 192.168.1.0 255.255.255.0  192.168.12.2     #192.168.1.0 (destination), 255.255.255.0 (MASK), 192.168.12.2 (Next Hop)
+
+#DELETING a route
+
+R1> en
+R1# show show ip route                                           #Displays all routes 
+R1# conf t
+R1(config)# no ip route 192.168.1.0 255.255.255.0 192.168.12.2
+
+
+#Configuring a DEFAULT GATEWAY
+** Disclaimer, the PC is actually a Router **
+
+#R1> en
+#R11# show show ip route                                           #Displays all routes 
+#R11# conf t
+#R1(config)# ip route 0.0.0.0 0.0.0.0 192.168.1.254               #0.0.0.0 (destination), 0.0.0.0 (MASK), 192.168.1.254 (Next hop)
+

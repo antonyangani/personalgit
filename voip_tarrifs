@@ -1,0 +1,9 @@
+#If a client wants to call a country such as Tanzania
+
+-- Go to VSM (voip web interface)
+-- go to billing
+-- go to Tarrifs
+-- select 3Ksh tarrif
+-- add New tarrif with the appropriate prefix e.g. +255
+
+

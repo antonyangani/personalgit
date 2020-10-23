@@ -1,0 +1,169 @@
+#IMPORTANT#
+
+-- docker containers are not meant to to run operating systems, but rather to run specific instances of an application e.g. nginx, postgress etc.
+
+#Creating a docker container
+--
+#list docker containers
+-- docker container ls
+#login to container
+-- docker run -it [name of container NOT id] bash
+
+OR
+
+-- docker run -d -P --name static-site {image_name e.g. prakhar1989/static-site}
+-- docker run -d -p 8000:80 --name static-website prakhar1989/static-site
+
+
+-d == detached mode {runs in the background}
+--name = gives the container an easy name
+-p 8000:80 { port 8000 on the host is forwarded to port 80 on the docker container }
+
+
+#Stopping a docker instance 
+-- docker stop kobodocker_nginx_1
+
+#Backup
+
+-- docker commit -p [container-id] backup01
+-- docker save -o backup01.tar backup01
+-- check in home folder for the compressed folder
+-- USE: https://www.thegeekdiary.com/how-to-backup-and-restore-docker-containers/
+
+#Install docker
+-- yum -i install docker
+-- systemctl start docker && systemctl enable docker 
+-- go to https://hub.docker.com for images
+-- 
+
+#Check docker images
+-- docker images
+-- docker pull {image_name} #downloads an image and stores it for later use
+
+#Commands for managing containers {IMPORTANT}
+
+-- docker ps -a
+-- docker inspect {container_name} #Returns a json file with data on container
+-- docker stop {container_name} #This stops an instance of a container
+-- docker rm {container_name} #this deletes a container along with its data
+-- docker logs {container_name} #this will return a log file for the container
+-- docker ports {container_name} #Checks for the ports exposed by the container
+-- docker exec -it {container_name} /bin/bash #this allows one to log into a container running in the background
+-- docker exec -it {container_name} /bin/sh  # this is when /bin/bash is not available
+-- docker system prune #this kills of all containers and remove objects that are no longer in use
+-- docker container stop $(docker container ls -aq) #Stops all containers
+-- docker container rm $(docker container ls -aq) #removes all the containers
+-- docker rmi $(docker images -a -q)  # Deleting all images
+#NETWORKING
+-- Containers come with 3 networks already created which are bridge, None (Null), and Host networks
+-- Bridge network is a private internal network ( they are in the range of 172.17.0.0/16 network ) and help containers communicate within themselves
+-- Host network allows container to use the IP of the host server as its own without necessarily mapping ports
+-- docker run nginx --network=host
+-- docker network ls #this shows all the networks in a container
+
+#Custom Networks
+-- users can define their own networks like below:
+
+EXAMPLE
+
+-- docker network create \
+    --driver bridge \
+    --subnet 182.18.0.0/16
+    custom-isolated-network
+
+-- containers have an internal dns server that allows different containers to resolve each other. 
+-- Rather than entering the IP of an individual container, one can enter only the name e.g. mysql or nginx 
+-- docker uses network-namespace to implement network
+
+#Port Mapping in Docker
+-- docker run -p 80:5000 redis
+{ the P stands for port, port 80 is on the docker host while port 5000 is on the docker container side }
+
+-- the user can then access the service via HTTP://PUBLIC_IP_OF_HOST_SERVER:80
+
+#DATA PERSISTENCE
+-- Docker containers store data by default in /var/lib/docker/
+-- for persistence, one can map a different storage away from the default container storage
+-- mkdir /opt/datadir
+-- docker run -v /opt/datadir:/var/lib/mysql mysql #The container's data will be sent to the new location in /opt/datadir
+-- DATA will NOT be lost even if docker container is deleted
+#New Method of mounting volumes in docker
+
+-- docker run \
+    --mount type=bind,source=/data/mysql,target=var/lib/mysql mysql
+
+
+#Creating a docker image
+-- first create a docker file (Dockerfile)
+Enter the following as an example of a webapp made in python and flask:
+
+FROM Ubuntu
+RUN apt-get update
+RUN apt-get install python
+
+RUN pip install flask
+RUN pip install flask-mysql
+
+COPY . /opt/source-code
+ENTRYPOINT FLASK_APP=/opt/source-code/app.py flask run 
+
+
+-- docker build Dockerfile -t antony/my-custom-app
+
+#YAML Configuration
+
+-- This is used to create a complex setup, it requires docker-compose
+#Example Voting app that has multiple services 
+
+version: 3
+services:
+redis:
+     image: redis
+db:
+    image:postgres:9.4
+vote:
+    image: voting-app
+    port:
+        - 5000:80
+    links: 
+        - redis
+results:
+    image: result
+    port: 
+        -5001:80
+    links:
+        - db
+worker: 
+    image: worker
+    depends_on:
+        - db
+        - redis
+
+-- docker-compose up 
+
+
+#CREATING A NETWORK
+-- docker network create foodtruck-net
+
+ADDING INSTANCE TO NETWORK
+-- docker run -d --name es --net foodtrucks-net -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:6.3.2
+-- docker run -d --net foodtruck-net -p 5000:5000 --name foodtrucks-web antonyng/foodtruckweb
+-- http://62.12.114.126:5000/
+
+Tutorial: https://docker-curriculum.com/#webapps-with-docker
+
+#DOCKER-COMPOSE
+
+-- docker-compose is a tool provided by docker to build and run multi-container operations
+-- docker compose comes in two forms:
+        - docker-compose file => used to define application and how services and the app work together
+        - docker-compose command => used to build and start a docker application
+
+#Creating a docker image with docker-compose
+-- docker-compose build 
+-- docker-compose up -d
+
+#After an update
+-- docker-compose up --build -d         #this recreated the images and runs the container in the background as a daemon
+
+

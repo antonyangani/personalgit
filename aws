@@ -1,0 +1,44 @@
+#Restoring websites from AWS
+-- Login to AWS > angani-backups-01 > cpanels 
+-- choose backet to download from e.g. host-01.liquidtelecom
+-- choose appropriate folder > accounts
+-- click on the right file
+
+#One in the right file
+-- Click on 'make public' button
+-- copy file path at the bottom of the page
+
+#Login to the appropriate CPANEL
+-- navigate to the home folder e.g. cd /storage/home
+-- wget https://angani-backups-01.s3-eu-west-1.amazonaws.com/cpanels/host1-liquidtelecom/2019-06-18/accounts/kvmco.tar.gz
+
+#Restoration
+-- on WHM search for 'Restore a Full Backup/cpmove File'
+-- select the appropriate .gz file
+-- Choose 'Replace all instances of the original server’s IP address with the new IP address, such as in custom A records (default).'
+-- Restore
+
+#Configure AWS on Cpanel
+-- yum install awscli -y
+-- aws configure ( Leave reagion and output format as defaults )
+-- aws s3 ls s3://angani-backups-01/cpanels/{website_name e.g. kcisales}/
+-- aws s3 sync /backup/ s3://angani-backups-01/cpanels/kcisales/
+
+#Create Policies
+-- Services > IAM > policies
+-- create policy > Expand services > Search 'S3' 
+-- select  ALL in Write (Deselect all options with delete)
+-- Resources > Expand options > Check on JOBS, Objects > on Bucket click (Add ARN) > Paste link e.g. angani-backups-01/cpanels/gfunze
+-- Give policy a name > Save policy
+-- users > look for gfunze and click on it > Add permissions > Attach existing policy > Search for appropriate policy >Next Review > Add policy
+#Creating a user
+-- log into AWS
+-- Services > IAM > users > Create New User
+-- Programmatic access > Generate key pair (Access key & another one )
+-- Click Next to the finish leaving defaults > Download CSV file > Click close
+
+#AWS Crontab 
+-- 1 2 * * * /usr/bin/python2 -s /bin/aws s3 cp /backup/ s3://angani-backups-01/cpanels/gfunze/ --recursive; mailx -s "Gfunze Cpanel backup to AWS complete" support-notify@angani.co < /dev/null 2>&1
+-- 09,39 * * * * /usr/local/cpanel/scripts/clean_user_php_sessions > /dev/null 2>&1
+
+

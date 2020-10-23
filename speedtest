@@ -1,0 +1,10 @@
+# Doing Speedtests
+
+-- apt install speedtest-cli
+-- speedtest --list     # Gets list of all speedtest servers, pick ID
+-- speedtest --server SERVER_ID
+
+# You can Run it without the ID
+-- speedtest
+
+

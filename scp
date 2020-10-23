@@ -1,0 +1,6 @@
+#Transfer files from remote server to local machine
+-- scp angani@62.12.115.234:/var/log/messages.3.gz  ~/Downloads/
+
+#Tranfering files to a server with a specified port
+
+-- scp -P2022 ~/Downloads/file.zip antony@62.12.114.133:~

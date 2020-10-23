@@ -1,0 +1,38 @@
+#Wireguard is a VPN ochastration system that works similar to ssh
+
+#WIREGUARD UP
+
+-- wg-quick up wg0/{your interface}
+
+#WIREGUARD DOWN
+
+-- wg-quick down wg0
+
+#CLIENT CONFIGURATION
+
+[Interface]
+## client private key ##
+PrivateKey = EE29QsvDZusRarKuAJ2YM74LANoBKgMM66NLrllSk2w=
+
+## client ip address ##
+Address = 192.168.10.2/24
+
+[Peer]
+## Server public key ##
+PublicKey = fupWyYjg6qvdmlMC5VEsBIiurHC5mAm6mknyCOMZ+gk=
+
+## set ACL ##
+AllowedIPs = 0.0.0.0/0
+
+## Your CentOS 8 server's public IPv4/IPv6 address and port ##
+Endpoint = 23.239.29.253:51194
+
+##  Key connection alive ##
+PersistentKeepalive = 15
+
+
+
+# Resource
+-- https://www.cyberciti.biz/faq/centos-8-set-up-wireguard-vpn-server/
+
+

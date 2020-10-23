@@ -1,0 +1,10 @@
+#Fixing VM storage issues
+1. fsarchiever probe (Either XFS or EXT$)
+2. if XFS 
+-- lvdisplay (Look for root partition)
+-- xfs_repair -L /dev/cl/root
+3. If EXT4
+-- lvdisplay (look for root partition)
+-- fsck.ext4 /dev/ubuntu_vg/root
+
+

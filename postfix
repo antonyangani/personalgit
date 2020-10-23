@@ -1,0 +1,42 @@
+#Check current activity
+-- mailq 
+#Get email accounts with high Postfix queues
+-- mailq|grep ^[A-F0-9]|cut -c 42-80|sort |uniq -c|sort -n|tail
+#Postfix hold all deferred messages
+-- postsuper -h ALL deferred
+#Postfix remove all messages on hold
+-- postsuper -d ALL hold
+#Postfix release all messages on HOLD
+-- postsuper -H ALL
+#Postfix dump all mails back to queue (Requeue)
+-- postsuper -r ALL
+#Postfix purge old temporary files
+-- postsuper -p
+#Flushing queue with postqueue 
+-- postqueue -f
+#Print  postfix queue in sendmail-style
+-- postqueue -p
+#Postfix print queue in JSON format
+-- postqueue -j
+#Check postfix usage 
+-- qshape active 
+#Remove all email sent by domain adminlogs.info
+-- postqueue -p | grep '^[A-Z0-9]'|grep @adminlogs.info|cut -f1 -d' ' |tr -d \*|postsuper -d -
+#Watch Log Live
+-- tail -f /var/log/maillog
+#Count and sort success SMTP postfix logins on exact date “Jun 18″
+-- grep -i "sasl_username"  /var/log/maillog |grep "Jun 18"|awk {'print $9'}|sort|uniq -c|sort -n
+#deleting a spaming account 
+e.g. uknevrologij@zdravstvo.gov.mk
+
+-- postqueue -p | tail -n +2 | awk 'BEGIN { RS = "" } /uknevrologij@zdravstvo\.gov\.mk/ { print $1 }' | tr -d '*!' | postsuper -d -
+#Placing emails on hold
+-- mailq | tail -n +2 | awk 'BEGIN { RS = "" } /@nockenya\.co\.ke$/ { print $1 }' | tr -d '*!' | postsuper -h -
+#Checking number of emails per account
+-- mailq | grep ^[A-F0-9]|cut -c 42-80 | sort |uniq -c|sort -n|tail
+#Check mail statistics
+-- cat /var/log/maillog | pflogsumm | more
+#DELETING SPECIFIC Emails
+-- postqueue -p | grep tradecon@tradeconkenya.com | awk '{print $1}' | postsuper -d -
+
+

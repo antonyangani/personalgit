@@ -1,0 +1,5 @@
+#How to empty a large file
+-- > file_name.txt
+( The above is quite simple and rewarding, caveat is that it is not reversable )
+
+

@@ -1,0 +1,8 @@
+#Installing VMWareTools
+-- right click on the Linux VM > Guest OS > Install VmwareTools > mount
+-- log into VM
+-- mount /dev/sr0 /mnt
+-- Extract with tar -xzvf /mnt/Vmware....tar.gz
+-- cd /Vmware...
+-- ./VMware-install.pl ( Install Package )
+

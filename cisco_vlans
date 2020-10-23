@@ -1,0 +1,22 @@
+#Creating a VLAN
+
+-- en
+-- conf t
+-- vlan 10 
+-- end
+
+#Adding interfaces to VLAN
+
+-- en
+-- conf t
+-- int range f 0/1, f0/3
+-- switchport mode access
+-- switchport access vlan 10
+-- end
+
+# View VLANS (Privileged mode)
+-- show vlan brief
+
+#View VLANS (Global mode)
+-- do show vlan brief
+

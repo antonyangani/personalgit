@@ -1,0 +1,11 @@
+#Creating an ssl certificate
+
+-- ask for the CSR certificate from client
+-- login to namecheap
+-- go to Product list > Activate license already baught > Paste in the CSR cert.
+-- Use the email/DNS option (create the CNAME record in the DNS record)
+-- CLick on Download certificate (download the .zip file)
+-- Send the zip file to client
+
+
+

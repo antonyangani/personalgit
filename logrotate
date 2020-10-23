@@ -1,0 +1,34 @@
+#Creating a new log rorate 
+-- cd /etc/logrotate.d/
+-- touch new_file
+#Enter some code
+
+/var/log/myfile {
+    missingok
+    daily
+    size 2K
+    rotate 1
+    compress
+}
+
+#start logrotate
+
+-- logrotate -d /etc/logrotate.d/myfile
+
+#create a file in /var/log named 'myfile'
+-- echo "This is my first try" > myfile
+
+#An Example from cetrad
+
+# no packages own wtmp -- we'll rotate it here
+
+/home/cetrad/public_html/error_log {
+    missingok
+    daily
+    +size 10G
+    rotate 10
+    compress
+    compresscmd /bin/gzip
+    maxage 1
+    dateext
+}

@@ -1,0 +1,22 @@
+#First Download the ISO onto cloudstack
+-- create a VM from the ISO using the ISO option NOT Template option
+-- Ensure to give it harddisk space explicitly ( 20GB ) during provisioning
+-- Turn to XEN and finish the installation process
+-- Give it a password
+-- detach disk once installation process is complete
+-- reboot
+
+#Log into Root via XEN
+-- ifup eth0 ( brings up the eth0 interface if it down )
+-- Login cloudstack and do a reboot and check if the same occurs in XEN
+#IF success
+-- create a snapshot of the ROOT-DISK
+-- Go to Storage > Volumes/Snapshots ( Dropdown ) > Snapshots
+-- Locate the snapshot > Hover over the '+' sign > Create TEMPLATE 
+-- Give Template descriptive name and check on Public, Password Enabled, Dynamically scalable 
+-- Default password for Ubuntu18: M@w1ngu!
+#Back to Cloudstack, create VM from the snapshot ( Under community section )
+
+#Scripts for password change
+
+-- http://docs.cloudstack.apache.org/projects/cloudstack-administration/en/4.8/templates/_password.html

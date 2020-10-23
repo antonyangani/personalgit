@@ -1,0 +1,41 @@
+#Changing default ssh port on CentOS7
+1. Backup the current ssh configuration on the system
+-- sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak
+2. Open the sshconfig file  in VIM
+-- vim /etc/ssh/sshd_config 
+3. Search for the line that reads PORT
+-- Change the default (22) port number to whatever number suitable (e.g. 2022)
+4. Install semanage onto the computer
+-- sudo yum -y install policycoreutils-python
+5. Enable newly created port in SELinux
+-- sudo semanage port -a -t ssh_port_t -p tcp 2022
+6. Open port on  firewalld 
+-- sudo firewall-cmd --permanent --zone=public --add-port=2022/tcp
+7. reload firewall
+-- sudo firewall-cmd --reload
+8. Restart SSH by  running the commands below
+-- sudo systemctl restart sshd.service
+9. verify that ssh is running the on the appropriate port
+-- ss -tnlp | grep ssh
+
+#Changing root password
+
+-- enter rescue disk
+
+Type
+
+-- lvdisplay (locate the root disk)
+-- mount /dev/cl/root /mnt/
+-- chroot /mnt/ /bin/bash
+
+Navigate to the home folder
+
+-- passwd root
+
+Change password
+
+#sniffing ports
+netstat -tulpn
+
+#Another Way to solve root password issue
+-- https://www.rootusers.com/how-to-reset-root-user-password-in-centos-rhel-7/

@@ -1,0 +1,9 @@
+1. Go into general tab in the XEN tool
+2. Click on install xen-tools link
+3. ssh into the server where xen tools ought to be downloaded
+-- mount /dev/cdrom/ /mnt/
+-- cd /mnt/ 
+-- cd Linux 
+-- dpkg -i xe-guest-utilities_6.5.0-1440_amd64.deb
+
+

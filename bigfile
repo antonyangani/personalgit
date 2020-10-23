@@ -1,0 +1,7 @@
+#Creating a huge file fast
+
+
+-- fallocate -l 1G testfile.jpg
+
+
+

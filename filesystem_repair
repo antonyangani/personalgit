@@ -1,0 +1,8 @@
+#When you encounter an error like
+
+" An error occurred during the file system check. Dropping you to a shell: the system will reboot"
+-- Enter the  root password ( ASK the client  )
+-- as root
+-- fsck -y /
+-- reboot
+

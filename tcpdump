@@ -1,0 +1,14 @@
+#CHECK VERSION
+-- sudo tcpdump -h
+#CHECK AVAILABLE INTERFACES 
+-- sudo tcpdump -D
+#CAPTURE PACKETS ON ANY INTERFACE 5 TIMES
+-- sudo tcpdump -i any -c 5
+#CAPTURE PACKETS WITHOUT THEIR DNS NAMES
+-- sudo tcpdump -i any -c 5 -n 
+
+=> VIDEO RESOURCE
+-- https://www.youtube.com/watch?v=hWc-ddF5g1I
+
+#Checking specific traffic on ports
+-- tcpdump -envi wg0 host 8.8.8.8

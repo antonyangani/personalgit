@@ -1,0 +1,15 @@
+#Attaching a disk partition
+-- create a partition using fdisk 
+-- navigate to root
+-- mkdir /data
+-- mkfs.ext4 /dev/xvdb1
+-- mount /dev/xvdb1
+-- vi /etc/fstab
+
+#Within the FSTAB
+
+-- /dev/xvdb1 /data ext4 defaults 0 0
+-- save
+-- lsblk
+-- df -h
+-- reboot

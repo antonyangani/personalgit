@@ -1,0 +1,45 @@
+#When services are down
+ check postfix status
+-- service postfix status
+#Switch to zimbra user
+-- sudo su - zimbra
+-- zmcontrol restart
+#Blocking specific attachments
+
+-- Go to the Configure>Global Settings>Attachments page.
+-- In the Common Extensions list, select the extensions to block.
+-- Click Add Selected or Add All.
+-- If an extension that should be blocked is not listed, in the New extension text box, type the extension and click Add.
+-- Click Save.
+
+#When mailbox shows emails but there box is empty
+-- zmprov recalculateMailboxCounts email@account.com
+
+#Migrating accounts between 2 zimbra accounts
+-- go to the old cpanel
+-- create a file named accounts.txt as root and make zimbra owner
+-- switch into zimbra user
+-- zmprov -l gaa > accounts.txt
+
+#Switch to New Zimbra
+
+-- create a folder named MIGRATION as root > Make zimbra owner
+-- switch into zimbra user
+-- navigate into creatwd folder
+-- Create a migrate.sh file in the folder
+
+#!/bin/bash
+
+ACC="/opt/zimbra/test/accounts.txt"
+
+cat $ACC | while read ACCOUNT; do
+
+zmprov ca ${ACCOUNT} Pass123
+
+done
+
+-- make file executable -> chmod +x migrate.sh
+-- run code -> ./migrate.sh
+
+#Restarting Amavis
+-- zmamavisdctl restart

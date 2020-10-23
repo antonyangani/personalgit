@@ -1,0 +1,4 @@
+#Using curl in silent mode and ignoring SSL certificate warning
+
+-- curl -sk {URL}
+

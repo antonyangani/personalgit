@@ -1,0 +1,6 @@
+#Checking system logs
+
+-- journalctl -f  #gives live updates of the server
+-- journalctl --since "2020-05-12" # gives updates as per defined dates
+-- journalctl --since "2020-01-10 02:30" --until "2020-01-11 03:00" # provides a range
+

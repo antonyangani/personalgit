@@ -1,0 +1,9 @@
+#Looking up AS numbers
+
+-- whois -h whois.radb.net -- '-i origin AS1234' | grep 'route:'
+
+#Some important AS numbers
+
+JTL     - AS12455
+Angani  - AS37684
+

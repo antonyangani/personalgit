@@ -1,0 +1,190 @@
+#installing cpanel
+1. Give the server a hostname
+-- hostnamectl set-hostname cpanel.tecmint.lan
+2. Install packages 
+-- yum install perl curl -y
+use the following guide:
+3. Disable NetworkManager
+-- systemctl stop NetworkManager.service
+-- systemctl disable NetworkManager.service
+4. Follow link below for further installation steps
+-- https://www.tecmint.com/install-cpanel-whm-in-centos-7/
+#After installation, please login to the cpanel webUI
+http:IP_ADDRESS:2087  // (use user: root , Password is the ssh password)
+#Angani Nameservers 
+ns1.angani.co -> cpanel.angani.co
+ns3.angani.co & ns4.angani.co -> webhosting.angani.co
+(The above two are used for clients that are being hosted on our service)
+ns2.angani.co -> linode 
+#Migration
+1. Go to the old server which is to be decomissioned
+2. Change the password on the account to be migrated
+3. Return to the new server and on the WHM type on the search bar 'Migrate' and select 'Copy an account from Another Server..'
+4. Enter the IP address of the old server , account user, and the newly changed password
+5. Migrate/Restore
+
+#Installing php5.6 & php5.5
+-- yum install ea-php55 ea-php56 -y
+
+#Whitelisting ALL IPs to ACCESS cPANEL
+-- Login onto WHM (2087)
+-- Search for 'Tweak Settings'
+-- Search for 'Security Tab'
+-- Under Cookies IP Validation
+-- Select 'Disable/Loose' setting
+
+#CloudFlare
+-- log into cloudflare (Credentials on keypass)
+-- choose angani.co
+-- choose dns > add record > add cpanel hostname > add IPv4 address > save 
+-- On newly added entry, change proxy status to DNS ONLY
+
+#Email threshold
+-- go to List accounts > Find account (KVM.co.ke) > client on '+' sign on the leftside of the account
+-- click on 'Modify Account'
+-- go to "Maximum Hourly Email by Domain Relayed" > Give it a higher value e.g. 250
+-- save (Choose : 'Update package “root_5GIG” with these new values.')
+
+#Account backup
+-- /scripts/restorepkg user
+#Account restoration from terminal
+-- /scripts/restorepkg path-to-backup-file
+
+#Solving subdomain resolving issue
+-- Create a CNAME and A record in the SOA server
+-- A record ( Hostserver IP, the subdomain )
+-- CNAME ( under hostname: k24plus.co.ke, the first field, put in the common name of the subdomain )
+
+#restoring a domain under a different username e.g. ercgo to eprago
+
+-- /scripts/restorepkg --newuser eprago /backup/2019-09-26/accounts/ercgo.tar.gz
+-- Ensure you have at least 50G free 
+-- Ensure you have deleted any trace of eprago before attempting a restore
+#Adding restores into a queue
+-- search restore
+-- select 'backup restoration'
+-- select 'username' > select "date" > add account to queue
+-- scroll down and click "restore"
+
+#Handling yum cannot resolve repositories
+-- vi /etc/resolv.conf
+-- nameserver 8.8.8.8
+-- nameserver 8.8.4.4
+-- nameserver 9.9.9.9
+
+#How to troubleshoot mysql/mysqli connection issue
+-- go to WHM
+-- EasyApache
+-- select package with requisite PHP version and click on Customize
+-- Click on 'PHP extensions'
+-- Search for the specific php extension e.g. mysql ( mysqli is not available )
+-- enable both ( php55-php-mysqlnd and php56-php-mysqlnd )
+-- click on 'review'
+-- click on 'provision' > the selected extensions will be installed
+-- Ensure to install php extensions such as php-curl, php-myencrypt (deprecated) e.t.c
+
+#Solving cpanel user not being able to access PHPMyAdmin from their account via passwords
+-- Go to WHM > Search for the Account > Change password > CHECK "Synchronize MySQL password" button > Change
+
+#Fixing broken RPM packages in CPANEL
+-- /usr/local/cpanel/scripts/check_cpanel_rpms --fix
+( The aforementioned script will delete deprecated packaged and reinstall cpanel to the latest version )
+
+#Checking Blocked IPs (vituzote)
+-- WHM > plugins > ConfigServer Security & Firewall > cfs > Firewall Allow IPs > Add the IP into the file > Change
+
+#Backing up to AWS from WHM
+-- Go to Backup configurations > Select appropriate settings 
+-- Go to Additional destinations > Destination type (AMAZON S3) > Create
+-- Destination (Give it a name e.g. S3) > Backet (Name of the bucket e.g. angani-backups-01) > Folder ( e.g. cpanels/liquid-telecom-host-03 )
+-- Access Key & Secret Key are obtained from AWS after creating a user
+-- timeout ( 60  )
+-- IMPORTANT: Ensure hardware clock is in synch with system clock ( if not force them to sych )
+-- hwclock --systohc
+#Closing ports on cpanel
+-- Log into WHM > Service configurations > Service Manager > look for specific service ( e.g. ftp )
+-- Uncheck the checkboxes for both enabling and monitoring ( the latter is optional )
+#Installing custom Cpanel Firewall 
+-- wget https://download.configserver.com/csf.tgz
+-- tar xfz csf.tgz
+-- cd csf
+-- sh install.sh
+-- vi /etc/csf/csf.conf ( Edit " TESTING = “0” " )
+-- csf -r
+#Adding IPs to whitelist
+-- vi /etc/csf/csf.allow
+OR
+-- csf -a 62.12.0.0/24
+#Adding IPs to Deny list
+-- vi /etc/csf/csf.deny
+OR
+-- csf -d 62.12.0.0/24
+For more: https://tecadmin.net/install-csf-firewall-on-cpanel/
+#Disable email notifications
+-- vi /etc/csf/csf.conf (Edit LF_EMAIL_ALERT = "0" also LF_PERMBLOCK_ALERT = 0)
+#Disable Virtual RAM usage 
+-- vi /etc/csf/csf.conf (Edit PT_USERMEM = "0")
+
+#DISABLE CSF 
+
+-- csf -x 
+
+#ENABLE CSF 
+
+-- csf -e
+
+#Dealing with cpanel refusing to create account/creating DNS records
+-- https://documentation.cpanel.net/display/76Docs/Tweak+Settings+-+Domains#TweakSettings-Domains-AllowWHMuserstocreatesubdomainsacrossaccounts
+
+#How to fix AutoSSL renewal issue
+-- Go to WHM > Manage SSL > Check SSL for a domain
+-- Log into the cpanel of specified domain
+-- Search for SSL/TLS Status
+-- Check for the error received
+-- if error is: "cannot create file because of permission issue in /var/www/html/.well-known
+-- cd /var/www/html/
+-- chmod 777 -R .well-known
+
+#Adding a DNS server to a cluster
+
+-- Enter Remote server  WHM > search for "MANAGE API Token"
+-- Click on "Generate Token"
+-- In the "Name" field > give it a friendly name e.g. ns6
+-- Select "Everything" at the very bottom
+-- Save
+-- Copy the token generated and save it on notepad
+
+>> Go to the master DNS server e.g. cpanel angani.co
+-- Login into WHM > Search for DNS cluster > Click on "Configure" button
+-- Host enter the IP adress
+-- username: enter username e.g. root
+-- Remote server token: enter the token saved in the notepad
+-- Submit
+
+#Solving Perl Warnings of Locale
+-- vi /etc/environment 
+ADD
+
+LC_ALL="en_US.UTF-8"
+LC_CTYPE="en_US.UTF-8"
+LANGUAGE="en_US.UTF-8"
+
+#Removing duplicate yum entries
+-- package-cleanup --dupes
+-- package-cleanup --cleandupes
+
+#Checking httpd connections
+-- netstat -o state established '(sport = :http or sport = :https )'
+
+#TMP Not working
+
+-- lsof /tmp
+-- unmount -l /tmp
+-- unmount -l /var/tmp
+-- rm -rf /usr/tmpDSK
+-- /scripts/securetmp
+
+-- https://www.linode.com/community/questions/18919/filesystem-corruption-on-cpanelwhm-centos7
+
+#ROOTKIT Hunter
+-- https://www.woktron.com/secure/knowledgebase/79/Installation-Rootkit-Hunter-rkhunter-on-CentOS.html

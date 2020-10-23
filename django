@@ -1,0 +1,22 @@
+#Install Django
+
+-- pip3 install django
+-- python -m django --version
+
+#Creating a django Project
+-- django-admin startproject mydjangoapp
+-- tree  mydjangoapp/
+-- cd mydjangoapp
+-- python manage.py migrate
+
+#Create User
+-- python manage.py createsuperuser
+
+#Running the development server 
+-- python manage.py runserver
+-- (customized for vagrant) python manage.py runserver 0.0.0.0:8000
+#Adding IPs to ALLOWED_HOSTS
+-- vim /{name_of_project}/{name_of_project}/setting
+-- search for 'ALLOWED_HOSTS'
+-- add IP
+( In the case of Vagrant server, I have given it the IP of 10.150.50.10 )

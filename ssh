@@ -1,0 +1,56 @@
+#GENERATING SSH KEYS
+
+-- ssh-keygen -t rsa -b 4096 -C "your_email@domain.com"
+
+#Transferring ssh-key onto a remote server
+
+-- ssh-copy-id root@62.12.114.116
+
+#DISABLE ROOT USER
+
+#create a new user first
+-- useradd antony
+
+#give user a password
+
+-- passwd antony
+
+#to grant administrative privileges to new user
+
+-- visudo ( This command opens the sudoers file for editing )
+
+#in the opened file, add the following code
+
+-- antony ALL=(ALL) NOPASSWD: ALL
+
+#ADDING USERS TO DEBIAN, UBUNTU
+
+#add user
+-- adduser username
+
+#add the package sudo
+
+-- apt-get install sudo
+
+#add nee user to sudo group
+
+-- usermod -a -G sudo username
+
+#Disabling root USER SSH ACCESS  
+
+#Log in to the server as root using SSH
+#Open the /etc/ssh/sshd_config file in your preferred text editor (nano, vi, etc.)
+#Locate the following line
+        PermitRootLogin yes
+# Modify the line as follows
+        PermitRootLogin no
+#Add the following line
+ -- AllowUsers username
+ #restart sshd service( centos )
+-- service sshd restart
+#restart ssh service (Debian, unbuntu)
+-- service ssh restart
+
+
+
+

@@ -1,0 +1,9 @@
+#monitoring cpus, read-writes
+-- sar -q
+
+#Current IO writes
+-- iostat -x 1 10
+
+#Historic IO writes
+-- sar -d
+

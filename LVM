@@ -1,0 +1,63 @@
+#Externding the root disk
+1. first run this:
+
+-- df -hT -> helps view disk information
+
+#second, create the additional disk space for the VM e.g. 100GB
+
+#To view the created disk, run  
+
+-- fdisk -l
+
+#After vieweing the volume, run
+
+-- fdisk /dev/xvdb
+
+#Then select 
+
+'n' -> for new 
+'p' -> for primary
+'t' -> for type
+'8e'-> for Linux LVM
+'p' -> for printing volumes already created
+'w' -> to write changes 
+
+#To view volumes
+
+-- vgs 
+
+reslt:  VG #PV #LV #SN Attr   VSize   VFree
+  cl   1   2   0 wz--n- &lt;49.00g 4.00m
+
+#Create a physical Volume
+
+-- pvcreate /dev/xvdb1 
+
+#Extending the Volume Group
+
+-- vgextend cl /dev/xvdb1
+
+#Extending the logical volume Group (LVM)
+
+-- lvextend /dev/cl/root -l +100%FREE 
+
+#Grow the file system to make use of the new storage 
+
+-- xfs_growfs /dev/cl/root 
+
+OR 
+
+-- xfs_growfs /
+
+# To view if the changes have taken effect, 
+
+-- df -hT
+
+#If it is debian use
+
+-- resize2fs /dev/cl/root 
+#
+#Other alternatives
+-- https://devops.ionos.com/tutorials/increase-the-size-of-a-linux-root-partition-without-rebooting/
+
+

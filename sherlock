@@ -1,0 +1,11 @@
+#Using sherlock
+
+-- git clone https://github.com/sherlock-project/sherlock.git
+-- cd sherlock
+-- python3 -m pip install -r requirements
+
+#USE
+
+-- python3 sherlock.py {social_media_username}
+
+

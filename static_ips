@@ -1,0 +1,22 @@
+Assigning static IPs
+
+login to the affected server
+
+type 
+
+--vm /etc/sysconfig/network-scripts/ifcfg-eth0
+
+In the file add
+
+BOOTPROTO=static
+IPADDR=IP_ADRESS
+GATEWAY=IP_ADDRESS_GATEWAY
+NETMASK=255.255.255.0
+
+
+Close the file
+-- systemctl stop cloud-init
+-- systemctl disable cloud-init
+-- systemctl restart network
+
+

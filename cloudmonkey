@@ -1,0 +1,73 @@
+#Config file
+
+-- create a folder called .cmk 
+-- edit config file by adding the below
+
+prompt          = 🐱
+asyncblock      = true
+timeout         = 1800
+output          = json
+paramcompletion = true
+verifycert      = true
+profile         = angani
+
+[angani]
+url              = https://portal.nbo.angani.co/client/api
+domain           = ?
+verifysslcert    = false
+username         = antony.ngayo@angani.co
+password         = **5028**
+apikey           = _zP3XYUS_mA9O3S6iK07ypQ-TVKpOsgd_wPZn_UCrCx--HGN8QpZWcCMDbrObKdgrzJdhESOfeEN6wDX3AtX3A
+secretkey        = 549UoEp4QF3uCsaDDhca-TBZEkJZLZ2BoE56iL_p8vEFUtUc2OuL-O0wYHHWeJyO-2FWYGJYJjqWz_aKAdP-uQ
+timeout          = 3600
+expires          = 600
+signatureversion = 3
+
+-- create short-cut in .bashrc or .zshrc file ( Your bash client )
+-- cmk
+-- sync
+-- list users
+
+# Channging displays
+-- set display json/table
+
+#Filtering 
+-- list users filter={param}
+-- list accounts listall=true | grep 'username'
+#List virtual machine with ID
+-- list virtualmachine id={id} 
+
+#Show service offering
+
+-- list serviceofferings
+
+#Creating snapshots
+
+-- create snapshot volumeid=da6a8698-1a72-4757-96da-4f533ea3e214 asyncbackup=true name="name_of_snapshot"
+
+#Steps in resizing disk
+-- list virtualmachines id=d8d3e11e-1213-4f63-96a3-d8f2824f53b6
+-- set output table
+-- list volumes virtualmachineid=d8d3e11e-1213-4f63-96a3-d8f2824f53b6 listall=true filter=name,id,state,virtualsize,size,vmstate
+
+RESULT
+
++--------------------------------------+-----------+-----------------+-------+-----------------+---------+
+|                  ID                  |   NAME    |      SIZE       | STATE |   VIRTUALSIZE   | VMSTATE |
++--------------------------------------+-----------+-----------------+-------+-----------------+---------+
+| 49b78c5b-9ec1-4b2d-ad00-7d19f8ef1406 | ROOT-4079 | 3.221225472e+10 | Ready | 3.221225472e+10 | Running |
++--------------------------------------+-----------+-----------------+-------+-----------------+---------+
+
+
+-- ENSURE THAT VM IS SHUTDOWN
+#Resize
+-- resize volume id=49b78c5b-9ec1-4b2d-ad00-7d19f8ef1406 size=60            # id is the DISK id NOT the VM ID   #SIZE IS IN GB
+#Confirm resizing
+-- list volumes virtualmachineid=d8d3e11e-1213-4f63-96a3-d8f2824f53b6 listall=true filter=name,id,state,virtualsize,size,vmstate
+#Listing virtual machines by name
+-- list virtualmachines listall=true account=antony.ngayo name=grafana-antony-test
+
+#Migrating Volumes
+
+-- migrate volume volumeid=2d7335e7-7ae4-4989-a7ef-de7ee53f5dd7 domainid=e878b625-e722-4382-9676-de2066705ed6 storageid=8d9391ca-0510-365a-913c-c9cca733ddf9
+

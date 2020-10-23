@@ -1,0 +1,25 @@
+#How to create aliases
+
+-- alias ls="ls -l"
+
+#To remove an alias
+
+-- unalias ls 
+
+
+#Making Aliases Permanent
+
+-- vim .bash_profile / .zshrc
+
+#ADD
+
+alias ls="ls -alh"
+alias ip="ip a"
+alias df="df -h"
+alias free="free -h"
+alias du="du -sh"
+alias web="elinks"
+
+#Reload bashrc
+-- source ~/.bashrc
+

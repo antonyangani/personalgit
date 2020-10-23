@@ -1,0 +1,18 @@
+#using grep efficiently
+
+-- grep -vi {pattern} #this removes all lines matching a pattern
+
+#To SPECIFIC MATCHES
+
+-- grep -oiE 'regex' file_name
+e.g grep -oiE '<title>(.*)</title>' filename 
+
+The above will look through the file and ONLY return  lines that meet the criteria
+
+-- grep -hE "^< " * 
+
+==> The above line checks for lines that start with < and then followed by a space
+
+
+
+

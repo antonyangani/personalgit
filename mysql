@@ -1,0 +1,117 @@
+#importing huge files into the database
+
+-- mysql -u username -p database_name < file.sql
+(It will prompt for a password after which it will start the installation process)
+#Changing root password
+
+-- ALTER USER 'root'@'localhost' IDENTIFIED BY '**5028**';
+-- FLUSH PRIVILEGES;
+
+#Limiting query execution time
+
+-- open /etc/my.cnf
+-- ADD the following 
+
+[mysqld]
+log-error=/var/lib/mysql/cpanel.ufaa.co.ke.err
+performance-schema=0
+innodb_file_per_table=1
+max_allowed_packet=268435456
+open_files_limit=10000
+innodb_buffer_pool_size = 3072M
+innodb_flush_log_at_trx_commit = 0
+innodb_flush_method = O_DIRECT
+max-statement-time=15
+
+-- IMPORTANT
+
+-- max-statement-time=15 ( limits the time query can run before stalling the entire system )
+
+#Dumping SQL
+-- mysqldump -u user -p databasename > path_to_export_file.sql
+
+#repairing a corrupt db
+
+-- https://forums.cpanel.net/resources/innodb-corruption-repair-guide.395/
+
+-- Make a backup of the entire /var/lib/mysql
+-- chown -R mysql:mysql /var/lib/mysql
+
+#Using Triggers
+**Syntax is key when creating Triggers**
+
+EXAMPLE
+
+#Update Trigger
+
+delimiter $$
+create trigger likes_insert
+after insert on likes_table
+for each row
+begin
+    update post_table set likes = likes + 1 where post_id = new.post_id;
+end$$
+delimiter ;
+
+#Delete Trigger
+
+delimiter $$
+create trigger likes_delete
+after delete on likes_table
+for each row
+begin
+    update post_table set likes = likes - 1 where post_id = old.post_id;
+end$$
+delimiter ;
+
+
+** the space after the delimiter keyword is important **
+-- Triggers can make running queries faster especially when handling huge databases
+-- triggers are database specific
+
+#View all Triggers in a database
+-- log into a database
+-- show triggers;
+-- the latter will display all triggers in play within the database
+
+#Delete a trigger
+-- drop trigger {trigger_name}
+
+#Loging queries to determine problem
+
+-- open my.cnf in /etc/mysql
+
+add
+
+-- general_log_file = /var/log/mysql.log
+-- general_log = 1
+
+#Creating a remote user connection
+
+-- CREATE USER 'myuser'@'localhost' IDENTIFIED BY 'mypass';
+-- CREATE USER 'myuser'@'%' IDENTIFIED BY 'mypass';
+-- GRANT ALL ON *.* TO 'myuser'@'localhost';
+-- GRANT ALL ON *.* TO 'myuser'@'%';
+-- flush privileges;
+
+NAVIGATE TO:
+
+-- vi /etc/mysql/mariadb.conf.d/50-server.cnf
+-- comment # bind-address = 127.0.0.1
+-- systemctl stop mysql
+-- systemctl start mysql
+
+#TEST
+
+-- mysql -h IP_ADDR -u user_name -p
+
+# Writing contents of a db_table to a file
+-- mysql -uuser -ppass -e "SELECT id, name FROM person WHERE name like '%smith%'" database > smiths.txt
+OR
+
+LOG INTO MYSQL
+
+-- SELECT id, name INTO OUTFILE '/tmp/smiths.txt' FROM person WHERE name like '%smith%';
+
+SHOWING MYSQL QUERIES
+-- mysqladmin proc stat
