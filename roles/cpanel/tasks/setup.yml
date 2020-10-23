@@ -1,0 +1,23 @@
+---
+#setting up VM for cPanel installation
+
+- name: Setting the hostname
+  command: "hostnamectl set-hostname {{ hostname }}"
+  register: hostname_set
+
+- name: Installing yum and perl
+  yum:
+      name:
+        - curl
+        - perl
+        - yum-utils
+      state: present
+      lock_timeout: 300
+  register: perl_curl_installed
+
+- name: Disable NetworkManager
+  yum:
+      name: NetworkManager
+      state: absent
+  become: true
+  register: netmanager_disabled

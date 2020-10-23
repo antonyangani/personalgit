@@ -1,0 +1,7 @@
+---
+# tasks file for checkmk
+#
+- import_tasks: install_monitor.yml
+- import_tasks: configure_monitor.yml
+
+

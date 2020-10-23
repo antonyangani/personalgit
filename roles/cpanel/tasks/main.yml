@@ -1,0 +1,11 @@
+---
+# tasks file for cpanel
+#- include: gatherfacts.yml
+- include: setup.yml
+- include: cpanel_installation.yml
+- include: firewall.yml
+- include: install_monitor.yml
+- include: configure_monitor.yml
+
+
+

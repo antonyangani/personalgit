@@ -1,0 +1,37 @@
+---
+- name: CREATING ANSIBLE TMP DIR
+  file:
+      path: /opt/zimbra/.ansible/tmp
+      state: directory
+      owner: zimbra
+      group: zimbra
+  become: yes
+
+- name: GET HOST NAME
+  shell: "~/bin/zmhostname"
+  register: mail_hostname
+  become: yes
+  become_method: sudo
+  become_user: zimbra
+
+- name: STOPPING ZIMBRA PROCESSES
+  shell: "~/bin/zmproxyctl stop && ~/bin/zmmailboxdctl stop"
+  register: stopped_services
+  ignore_errors: yes
+  become: true
+  become_method: sudo
+  become_user: zimbra
+
+- name: CHECK IF GIT INSTALLED
+  yum:
+      name:
+        - git
+        - epel-release 
+        - python-pip
+        - expect
+      state: latest
+      update_cache: yes
+
+
+
+

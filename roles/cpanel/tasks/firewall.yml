@@ -1,0 +1,14 @@
+---
+#Configuring the firewall for SNMP
+
+- name: Opening SNMP UDP-Port
+  firewalld:
+      port: 6556/udp
+      permanent: yes
+      state: enabled
+
+- name: Opening SNMP TCP-Port
+  firewalld:
+      port: 6556/tcp
+      permanent: yes
+      state: enabled

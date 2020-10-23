@@ -1,0 +1,57 @@
+---
+
+# Setting up the VM for Postfix installation
+
+- name: 'Update all packages'
+  yum:
+    name: '*'
+    state: latest
+  register: update_complete
+
+- name: 'install vim'
+  yum: 
+    name: 
+      - vim
+      - curl
+      - yum-utils
+      - epel-release
+    state: latest
+
+- name: 'Disable SELinux'
+  selinux:
+    state: disabled
+  
+- name: 'Adding hostname'
+  shell: 'hostnamectl set-hostname {{ hostname }}'
+  register: hostname_changed
+  ignore_errors: true
+
+- name: 'adding hostname and IP to /etc/hosts'
+  shell: 'echo "{{ IP_ADDRESS }}  {{hostname}}" >> /etc/hosts'
+  ignore_errors: true
+  register: hosts_file_configured
+
+- name: 'Removing default postfix'
+  yum: 
+    name: postfix
+    state: absent
+
+- name: 'create GF repo file'
+  file:
+    path: /etc/yum.repos.d/gf.repo
+    state: touch
+
+- name: 'Adding GF Repos'
+  blockinfile:
+    path: "/etc/yum.repos.d/gf.repo"
+    block: "{{ lookup('file', 'GF_REPO') }}"
+    backup: yes
+
+- name: 'Update YUM'
+  yum:
+    name: '*'
+    state: latest
+
+
+
+

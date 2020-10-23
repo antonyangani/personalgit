@@ -1,0 +1,59 @@
+---
+setting up cpanel servers for prometheus monitoring
+
+- name: Downloading Node Exporter
+  get_url: 
+    url: https://github.com/prometheus/node_exporter/releases/download/v1.0.0-rc.0/node_exporter-1.0.0-rc.0.linux-amd64.tar.gz
+    dest: /root/
+    timeout: 60
+  ignore_errors: yes
+  become: true
+
+- name: extracting node_exporter
+  unarchive:
+    src: /root/node_exporter-1.0.0-rc.0.linux-amd64.tar.gz
+    dest: /usr/local/bin
+    remote_src: yes
+  ignore_errors: yes
+  become: true
+
+- name: Move files to /usr/local/bin
+  shell: "mv /usr/local/bin/node_exporter-1.0.0-rc.0.linux-amd64/node_exporter /usr/local/bin"
+  become: true
+
+- name: add systemd content for node_exporter.service file
+  blockinfile:
+    path: "/etc/systemd/system/node_exporter.service"
+    block: "{{ lookup('file', 'node_exporter') }}"
+  ignore_errors: yes
+  become: true
+
+- name: reload the daemon
+  shell: "systemctl daemon-reload"
+  become: true
+
+- name: enable mysqld_exporter and node_exporter services
+  shell: "{{ item }}"
+  with_items:
+    - "systemctl enable node_exporter.service"
+    - "systemctl start node_exporter.service"
+  ignore_errors: yes
+  become: true
+
+- name: open firewall ports
+  ufw:
+    rule: allow
+    port: "9104"
+    proto: tcp
+  become: true
+
+- name: open firewall ports
+  ufw:
+    rule: allow
+    port: "9100"
+    proto: tcp
+  become: true
+
+
+
+

@@ -1,0 +1,10 @@
+---
+- hosts: checkmk
+  gather_facts: no
+
+  vars_prompt:
+    - name: password
+      prompt: "Enter password to the server"
+      private: yes
+  roles:
+    - checkmk

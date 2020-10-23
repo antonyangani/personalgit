@@ -1,0 +1,6 @@
+---
+# tasks file for ssls
+
+- include: setup.yml
+- include: letsencrypt.yml
+- include: configure.yml
