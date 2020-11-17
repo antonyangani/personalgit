@@ -16,8 +16,6 @@
 
 # SNMP STATUS
 -- /etc/init.d/snmpd status
--- /etc/init.d/snmp restart
-
 #Troubleshooting SNMP
 -- Log into the 172.28.17.0/24 subnet (JTL MNGT)
 -- esxcli system snmp get
