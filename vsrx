@@ -49,4 +49,10 @@ then commit confirmed 30
 to save commit check
 
 
+#Checking IPs in an Interface
+-- show interfaces brief {INTERFACE}
+
+E.G.
+
+-- show interfaces brief ge-0/0/1.600
 
