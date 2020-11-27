@@ -1,0 +1,11 @@
+#Checking if the backhaul is down
+= GO to Zabbix 
+= Latest data > Look for: vsrx-01.chancery.nbo.angani.co >
+= Check interface ge-0/0/0.2642
+-- vsrx-01.chancery.nbo.angani.co: Interface ge-0/0/0.2642(VID-2642-SNET_EADC_CHANCERY_BH)
+-- Check graph
+
+= Log into JTL VPN
+-- CHeck if you can reach the .117 subnet
+
+

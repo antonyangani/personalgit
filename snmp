@@ -1,0 +1,9 @@
+#Switch JTL
+
+-- telnet 172.28.17.9 #This uses SNMP-V2
+-- enable
+-- configure terminal
+-- snmp-server community JTL-Angani ro
+-- exit
+
+

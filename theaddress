@@ -1,0 +1,17 @@
+VLAN FAILURE
+
+#Access the Switch
+-- https://62.12.119.62:8443/
+-- Top Right -- Ensure Current Site is DEFAULT (ISP switch) - click on default
+-- Click on the Settings gear (Bottom left) > Networks > Local Networks > Create New local network > Create Advanced Network
+-- Network Purpose 'VLAN ONLY' > VLAN ID > {VLAN_ID_NUMBER e.g. 404} > DONE
+
+#Access the OLT UNMS
+-- https://172.27.10.2/
+-- Add VLAN e.g 404
+-- On newly created VLAN ensure SPF1 is T (Tagged) and SPF2 is E (Enabled) 
+
+#Access client UNMS
+-- https://unms-01.eadc.nbo.angani.co/
+-- Search for the affected client and check graph to see if traffic is flowing
+
