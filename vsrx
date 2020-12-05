@@ -56,3 +56,18 @@ E.G.
 
 -- show interfaces brief ge-0/0/1.600
 
+#Checking if IPSEC session is 
+-- show security ike active-peer (Check whether 41.223.58.252 appears in the list)
+
+-- show security ike security-associations
+
+-- show security flow session | match ge-0/0/1.2994
+
+#Check if VPN is up
+
+-- show security ike security-associations
+
+#Troubleshooting VPN (Bluesky: VSRX-02)
+
+-- show security flow session source-prefix 41.223.59.226
+
