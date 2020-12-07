@@ -1,0 +1,5 @@
+#Compiling to different platforms e.g. Windows
+
+-- GOOS=windows go build gofilename.go 
+
+
