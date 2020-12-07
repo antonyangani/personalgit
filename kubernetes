@@ -112,3 +112,12 @@ results: hello-go   NodePort   10.108.238.145   <none>        80:32123/TCP   60s
 
 #Access on Web UI
 -- http://172.17.72.198:32123/
+
+#If we want multiple replicas of the same application running, we can easily edit the deployment 
+-- kubectl edit deployment hello-go
+-- search for "spec"
+-- locate "replicas" and append 3
+#Confirm
+-- kubectl get pods -l app=hello-go
+#Check Logs 
+-- kubectl logs -f -l app=hello=go --prefix=true # this will show which pod is actually handling the request
