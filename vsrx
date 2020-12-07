@@ -49,6 +49,7 @@ then commit confirmed 30
 to save commit check
 
 
+<<<<<<< HEAD
 #Checking IPs in an Interface
 -- show interfaces brief {INTERFACE}
 
@@ -70,4 +71,6 @@ E.G.
 #Troubleshooting VPN (Bluesky: VSRX-02)
 
 -- show security flow session source-prefix 41.223.59.226
+=======
+>>>>>>> 70b2e59eb2d62e925f6273c327d718cacb69ca2a
 

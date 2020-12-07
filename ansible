@@ -134,6 +134,7 @@ ubuntu = this is the group I am targetting in the inventory
 #ADD user
 -- ansible -i inventory/linode linode -b -m user -a "name=johndoe group=admin createhome=yes"
 
+<<<<<<< HEAD
 #Running AD-HOC commands in the background
 -B = Background
 -p = Polling (Check on the program after a certain amount of time)
@@ -145,4 +146,6 @@ The command will return an ansible jobID for tracking which can be used as follo
 #Having ansble playbook ask for root password
 
 --  ansible-playbook -i inventory/linode mysql.yml --ask-become-pass
+=======
+>>>>>>> 70b2e59eb2d62e925f6273c327d718cacb69ca2a
 

@@ -8,6 +8,7 @@ EXAMPLE
 
 -- xe sr-create name-label=local-disk-02 shared=false device-config:device=/dev/sdc type=lvm content-type=user
 
+<<<<<<< HEAD
 #ADDING ISO NFS
 
 ==CHANCERY
@@ -26,3 +27,5 @@ EXAMPLE
 -- Give appropriate Name > Next
 -- Path: 192.168.72.131:/mnt/nfs/exports/iso-storage > Finish
 
+=======
+>>>>>>> 70b2e59eb2d62e925f6273c327d718cacb69ca2a

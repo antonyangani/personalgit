@@ -2,11 +2,18 @@
 
 == Enter privileged exec mode (conf t)
 
+<<<<<<< HEAD
 #SHOWING INTERFACES
 -- show ip int brief
 OR
 -- show interface status
 OR 
+=======
+-- show interface status
+
+OR 
+
+>>>>>>> 70b2e59eb2d62e925f6273c327d718cacb69ca2a
 -- show ip interface brief
 
 
@@ -39,6 +46,7 @@ SW1(config-if)# description ## Some descriptive statement ##
 SW1(config-if)# end
 SW1# write               #write changes to start-up configs
 
+<<<<<<< HEAD
 #CREATING VLANS
 
 SW1 > en
@@ -69,6 +77,8 @@ SW1(config-if)# no shut
 -- conf t
 -- int gi0/1/1
 -- switchport trunk allowed vlan add 100 #Make sure to use ADD  or else delete other vlans
+=======
+>>>>>>> 70b2e59eb2d62e925f6273c327d718cacb69ca2a
 
 
 
