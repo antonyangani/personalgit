@@ -36,7 +36,6 @@ SW1(config)# do show ip interface trunk
 SW1(config)# do show ip route
 SW1(config)# do show mac-address-table
 
-f
-
-
-
+#When creating vlans across connected switches, ensure to do the below
+-- conf t
+-- vtp domain antony #VTP (Vlan Trunking protocol synchs VLANs across Switches on the same domain
