@@ -3,7 +3,7 @@ SW1# conf t
 
 #Creating trunk ports
 SW1(config)# int range g 1/0/1, g 1/0/2
-SW1(config-if-range)# switchport encapsulate dot1q              # Ensuring it uses the 802.1q encapsulation standard
+SW1(config-if-range)# switchport trunk encapsulate dot1q              # Ensuring it uses the 802.1q encapsulation standard
 SW1(config-if-range)# switchport mode trunk
 SW1(config-if-range)# do show int trunk
 
@@ -27,6 +27,13 @@ SW1(config-vlan)# int vlan 777
 SW1(config-vlan)# ip add 192.168.0.254 255.255.255.0
 SW1(config-vlan)# no shut
 
+#Helping DHCP clients discover DHCP server 
+In Layer 3 switches, vlans are treated as Interfaces
+
+-- SW1(config)# int vlan 20
+-- SW1(config-if)# ip helper-address {DHCP Serve IP} 
+-- SW1(config-if)# end
+
 #Enable ROUTING
 SW1(config)# ip routing
 
@@ -39,3 +46,10 @@ SW1(config)# do show mac-address-table
 #When creating vlans across connected switches, ensure to do the below
 -- conf t
 -- vtp domain antony #VTP (Vlan Trunking protocol synchs VLANs across Switches on the same domain
+
+
+#Ensuring that clients on using DHCP can access DHCP server
+-- conf t
+-- int vlan 10 (Accessing the SVI)
+-- ip helper {DHCP_IP}
+

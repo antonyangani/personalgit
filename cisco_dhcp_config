@@ -1,0 +1,14 @@
+#Creating a DHCP server
+
+-- Make sure that the server is set up in the right VLAN
+-- Go to config tab > Settings > Default gateway: the server gateway (192.168.1.1) > DNS: (The DHCP server IP)
+-- Go to config tab > Interface > FastEthernet > give the correct IP and Mask address
+-- Go to services tab > DHCP > Service: ON
+-- Pool name: VLAN10
+-- Default gateway: {Gateway of the VLAN subnet e.g. 172.16.10.1}
+-- DNS Server: This is the DNS server IP
+-- Starting IP: this is the IP from which the DHCP will start giving out IPs e.g. 172.16.10.10
+-- Subnet Mask: mask of the VLAN subnet e.g. 255.255.255.0
+-- Maximum Number f=of users: {A number that best captures number of clients in the network e.g. 10}
+-- Leave the rest as default > Add
+
