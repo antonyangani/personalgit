@@ -11,7 +11,7 @@ Log into R1
 -- en
 -- conf t
 -- router ospf 1
--- network 10.0.12.0 0.0.0.3 area 0 # Tells OSPF to look for networks within the 10.0.12.0 subnet with /28 wilcard 
+-- network 10.0.12.0 0.0.0.3 area 0 # Tells router on which interfaces to activate OSPF on, e.g. 10.0.12.0 subnet with /28 wilcard 
 -- network 10.0.13.0 0.0.0.3 area 0
 -- network 172.16.1.0 0.0.0.15 area 0
 
