@@ -13,3 +13,9 @@
 -- firewall-cmd --reload
 -- firewall-cmd --list-all
 -- start streaming ( use the test  )
+
+
+#Streaming
+-- Default ROOT FOlder for content: /usr/local/WowzaStreamingEngine/content
+-- Default port for WebUI = 8088
+
