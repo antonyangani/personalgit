@@ -17,5 +17,7 @@ Log into R1
 
 #Checking configs 
 -- show ip protols
---
+-- under OSPF check for "It is an autonomous system boundary router" meaning that the router connects the OSPF area to the internet
+
+
 
