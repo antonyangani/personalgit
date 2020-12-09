@@ -23,6 +23,12 @@ R1# show show ip route                                           #Displays all r
 R1# conf t
 R1 (config)#ip route 192.168.1.0 255.255.255.0  192.168.12.2     #192.168.1.0 (destination), 255.255.255.0 (MASK), 192.168.12.2 (Next Hop)
 
+#Adding default gateway statically
+
+-- en
+-- conf t
+-- ip route 0.0.0.0 0.0.0.0 {Interface_of_remote_router} e.g. ip route 0.0.0.0 0.0.0.0 192.168.13.2 
+
 #DELETING a route
 
 R1> en
@@ -39,3 +45,20 @@ R1(config)# no ip route 192.168.1.0 255.255.255.0 192.168.12.2
 #R11# conf t
 #R1(config)# ip route 0.0.0.0 0.0.0.0 192.168.1.254               #0.0.0.0 (destination), 0.0.0.0 (MASK), 192.168.1.254 (Next hop)
 
+
+#Using RIP (Routing Information Protocol) in Cisco Routers
+-- conf t
+-- router rip
+-- version 2
+-- no auto-summary #This prevents the router from advertising its routes outside the range specified below
+-- network 10.0.0.0
+-- end
+-- write
+-- show ip route # This will show the routes the router has learned from the peers it is connected to
+== When RIP is enabled across all connected routers, it begins to load balance by creating routing table entries with redundant routes; as such, when one link is down, the router fails over to the redundant link
+
+#Propagating default configs using RIP (Routing Information Protocol)
+-- en
+-- conf t
+-- router rip
+-- default-information originate 
