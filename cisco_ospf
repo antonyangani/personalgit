@@ -19,5 +19,7 @@ Log into R1
 -- show ip protols
 -- under OSPF check for "It is an autonomous system boundary router" meaning that the router connects the OSPF area to the internet
 
-
-
+#Configuring Default route to the internet
+-- ip route 0.0.0.0 0.0.0.0 {IP_TO_INTERNET_INTERFACE}
+-- router ospf 1
+-- default-information originate
