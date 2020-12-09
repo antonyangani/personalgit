@@ -1,3 +1,21 @@
+#DHCP Process
+-- There is a process called  DORA
+D - Discover; the client sends out a broadcast message over the network looking for the DHCP server
+O - Offer; the DHCP server responds with an offer of an IP appropriate for the network, the duration of the lease, 
+R - Request; the client then sends a request broadcast to the server requesting the offered IP
+A - Acknowledgement; the server responds to the client request with the IP, lease duration, and other config details
+
+#DHCP relay
+
+-- In most cases, a DHCP server will not reside in the same subnet as the requesting client
+-- DHCP relays come to the rescue; these appliances listen for any Discover messages on their network, repackages the request and ships it off to the appropriate DHCP server
+-- The network appliance can be a router or a L3 switch on either the interface or SVI depending on the appliance
+		== COMMAND ==
+-- en
+-- conf t
+-- int g0/0/0 OR (SVI: int vlan 20)
+-- ip helper-address {IP_ADDR_FOR_DHCP_SERVER}
+
 #Creating a DHCP server
 
 -- Make sure that the server is set up in the right VLAN
