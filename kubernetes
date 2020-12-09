@@ -120,4 +120,4 @@ results: hello-go   NodePort   10.108.238.145   <none>        80:32123/TCP   60s
 #Confirm
 -- kubectl get pods -l app=hello-go
 #Check Logs 
--- kubectl logs -f -l app=hello=go --prefix=true # this will show which pod is actually handling the request
+-- kubectl logs -f -l app=hello-go --prefix=true # this will show which pod is actually handling the request
