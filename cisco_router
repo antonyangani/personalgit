@@ -61,4 +61,35 @@ R1(config)# no ip route 192.168.1.0 255.255.255.0 192.168.12.2
 -- en
 -- conf t
 -- router rip
--- default-information originate 
+-- default-information originate
+
+#Router-on-a-stick
+== MAKE the interface coming from the switch to the Router a TRUNK port
+i.e. 
+SW1 > en
+-- conf t
+-- int g0/0/0    #Interface connected to the switch 
+-- switchport mode trunk
+-- switchport trunk allow vlan 10,20
+-- end
+
+Router # A single interface acting as the stick for both VLAN 10 and 20
+
+	== Interface to be used: g0/0/1 ==
+
+-- en
+-- conf t
+-- int g0/0/1.10 #This creates sub interface for vlan 10
+-- encapsulation dot1Q 10 # 10 stands for vlan 10
+-- ip address 172.16.10.1 #IP in the subnet range that you want to work as gateway
+-- no shut
+
+-- en
+-- conf t
+-- int g0/0/1.20 #This creates sub interface for vlan 20
+-- encapsulation dot1Q 20 # 10 stands for vlan 20
+-- ip address 192.168.10.1 #IP in the subnet range that you want to work as gateway
+-- no shut
+
+
+ 

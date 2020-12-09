@@ -87,7 +87,7 @@ SW1(config-if)# no shut
 -- int gi0/1/1
 -- switchport trunk allowed vlan add 100 #Make sure to use ADD  or else delete other vlans
 
-#Checking neigboring devices connected to the switch
+#using Cisco Discovery Protocol (cdp) to checking neigboring devices connected to the switch
 -- show cdp neighbors 
 
 
