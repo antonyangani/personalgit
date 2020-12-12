@@ -3,6 +3,8 @@
 -- PATH VECTOR PROTOCOL defines a route as a pairing between a destination and the attributes to the path to that destination
 -- BGP is an EGP (Exterior Gateway protocol) that links different autonomous networks together
 -- OSPF is an IGP (Interior gateway protocol) that is used for routing within a single network
+-- BGP is the main protocol used in implementing MLPS (Multiprotocol Label Switching)
+-- BGP uses TCP (TCP keep-alive, TCP-handshake e.t.c)
 
 e.g
 12.6.126.0/24 207.126.96.43 1021 0    6461 7018 6337 11268 i
@@ -17,3 +19,18 @@ e.g. Simbanet sells transit access to Angani so that Angani uses its UPSTEAM tra
 - Peering - This is the process of exchanging routing information and traffic
 - Default - This determines where traffic is sent when there is no explicit matchin the routing table
 
+#Creating a BGP Peering
+-- en
+-- conf t
+-- router bgp {AS_NUMBER}
+-- neigbor {IP_ADDR_TO_NEIGHBOR} remote-as {NEIGHBOR_AS_NUMBER}
+
+#Advertising routes
+== TO ADVERTISE, ensure that you are giving BGP the exact prefixes available in the router's routing table with the correct MASK
+e.g.
+
+-- en 
+-- conf t
+-- router bgp 65000
+-- network 1.1.1.1 mask 255.255.255.255 # This is essentially 1.1.1.1/32 NOT WILDCARDS
+-- network 10.12.0.0 mask 255.255.255.0 
