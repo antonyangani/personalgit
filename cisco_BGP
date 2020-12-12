@@ -1,0 +1,19 @@
+#BGP
+-- BGP is the Border gateway protocol that uses the PATH VECTOR PROTOCOL to calculate routes to destinations
+-- PATH VECTOR PROTOCOL defines a route as a pairing between a destination and the attributes to the path to that destination
+-- BGP is an EGP (Exterior Gateway protocol) that links different autonomous networks together
+-- OSPF is an IGP (Interior gateway protocol) that is used for routing within a single network
+
+e.g
+12.6.126.0/24 207.126.96.43 1021 0    6461 7018 6337 11268 i
+
+-> 6464 7018 6337 11268 } These are AS numbers of being advertised by the BGP session example above
+
+
+#Key terms
+- Transit - A network operator allows traffic to pass through their network destined for the internet for a free.
+e.g. Simbanet sells transit access to Angani so that Angani uses its UPSTEAM transit to get to the internet
+
+- Peering - This is the process of exchanging routing information and traffic
+- Default - This determines where traffic is sent when there is no explicit matchin the routing table
+

@@ -6,6 +6,14 @@
 -- each router with OSPF enabled has an LSA (Link State Advertisement) which contains all the routes it has learned from its neighbors
 -- LSAs are stored in an LSDB (Link State Database)
 
+#OSPF Process
+
+1. Hello - Neighbor discovery and maintenace
+2. DBD (database description) - Summary of the LSDB of the router, and checks if the LSDBs of connected routers are the same
+3. Link0State Request (LSR)- Requests specific LSAs from the neighbor
+4. Link-State update (LSU)- Sends specific LSAs to requesting neigbor 
+5. Link-State Acknowledgement (LSAck) - Used to acknowledge that a router has received a message
+
 #Configuring OSPF
 Log into R1
 -- en

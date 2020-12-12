@@ -91,5 +91,11 @@ Router # A single interface acting as the stick for both VLAN 10 and 20
 -- ip address 192.168.10.1 #IP in the subnet range that you want to work as gateway
 -- no shut
 
+AFTER Creating the virtual interfaces, CREATE the main Interface to BRING Interface UP
 
+-- en
+-- conf t
+-- int g0/0/0 
+-- ip address 192.168.0.1 #Ensure to give this am IP that is outside the vlan range
+-- no shut
  
