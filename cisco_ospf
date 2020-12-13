@@ -23,6 +23,26 @@ Log into R1
 -- network 10.0.13.0 0.0.0.3 area 0
 -- network 172.16.1.0 0.0.0.15 area 0  # Tells router on which interfaces to activate OSPF on, e.g. 10.0.12.0 subnet with /28 wilcard
 
+## IMPORTANT ##
+
+-- You have to add networks already attached to the router is you wish them to be advertised on LSA
+e.g.
+
+-- If R1 has three interfaces, two to neighboring routers and one to a Local Lan with subnet 62.12.119.0/24, you need to make that explicit in R1 ospf advertsement
+-- network 62.12.119.0 0.0.0.255 area 0
+-- This will be propagated to neigboring routers which will now know how to reach the subnet
+
+#DEFAULT OSPF ROUTE
+== When one of the routers is connecting to the internet or having a BGP peering, you need to have a default route
+== Any Device within the area that would like to reach an IP on the internet but doesn't have a route to it will use the default route which has been propagated by OSPF
+
+-- Create a default route in the appropriate router that is facing the internet
+-- en
+-- conf t
+-- ip route 0.0.0.0 0.0.0.0 {interface} e.g. ip route 0.0.0.0 0.0.0.0 g0/0/0
+-- router ospf 1
+-- default-information originate # This will propagate the information to other routers in the area 
+
 #Passive interfaces {These are interfaces that will not advertise LSA table out of their interface}
 
 -- en
