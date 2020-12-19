@@ -1,0 +1,23 @@
+	== SWITCHES ==
+
+conf t
+no ip domain-lookup
+line con 0
+logging synch
+no exec-timeout
+privilege level 15
+exit
+spann mode rapid
+spann portf default
+hostname
+
+
+	== ROUTERS ==
+
+conf t
+no ip domain-lookup
+line con 0
+logging synch
+no exec-timeout
+privilege level 15
+hostname
