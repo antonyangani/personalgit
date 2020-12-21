@@ -1,0 +1,11 @@
+#Installing packages
+-- pkg search zabbix | grep agent
+-- pkg install zabbix5-agent-5.0.4
+
+#Opening firewall
+-- ee /etc/pf.conf
+-- add port 10050 in service ports and also at the very bottom
+-- Press ESC key > leave editor > save changes
+-- pfctl -f /etc/pf.conf
+-- service pf enable
+ 
