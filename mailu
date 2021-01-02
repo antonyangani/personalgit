@@ -1,6 +1,7 @@
 #Create a server 
 -- install docker and docker-compose
 -- mkdir /mailu
+-- https://setup.mailu.io/1.7/setup/ba3fe4bb-83c5-445d-b877-98d3a58e7a9e
 -- wget http://setup.mailu.io/1.7/file/ba3fe4bb-83c5-445d-b877-98d3a58e7a9e/docker-compose.yml
 OR 
 
