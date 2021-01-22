@@ -1,0 +1,41 @@
+#HAProxy is used as a LoadBalancer
+-- It is used when you have numerous servers running the same app and you need to balance traffc thus not overhelming either of the servers
+
+#Installation
+-- apt install haproxy -y
+-- systemctl enable haproxy
+-- systemctl start haproxy
+
+#EDIT CONFIGS
+
+-- vim /etc/haproxy/haproxy.cfg
+
+== ADD THE BELOW AT THE BOTTOM ==
+
+frontend http80
+   	bind *:80
+   	timeout client 60s
+	mode http
+	acl app1 path_end -i /brs
+	acl app2 path_end -i /techbiz
+	use_backend monitor1 if app1
+	use_backend monitor2 if app2
+	default_backend myservers
+
+backend monitor1
+	timeout connect 30s
+	timeout server 30s
+	mode http
+	server brsMonitor 62.12.113.105:9090
+
+backend monitor2
+	timeout connect 30s
+	timeout server 30s
+	mode http
+	server techbizMonitor 62.12.114.183:9090
+
+# The above config balances traffic between two servers 62.12.113.105 and 62.12.114.183
+== MODE = should be set to http if NOT it will default to TCP which causes an error for WEB APPs
+== ACL = Access control list => This determines the best path to route traffic based on the rules set
+== Timeout = This determines the length of time that HAProxy should spend trying to connect to a service
+
