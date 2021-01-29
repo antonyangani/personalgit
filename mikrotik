@@ -1,0 +1,11 @@
+#MIKROTIK
+-- this is a robust router that provides more functionality for the price compared to competition
+
+#CONCEPT OF BRIDGE
+-- A bridge is a way to group interfaces so that they can be configured in unison
+
+#Creating a BRIGE
+-- Go to quick set
+-- On Local Network, add an IP/SUBNET
+-- Check on ADD ALL PORTS TO BRIDGE
+-- Go to IP > DHCP Server > 

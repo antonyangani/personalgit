@@ -12,30 +12,72 @@
 
 == ADD THE BELOW AT THE BOTTOM ==
 
+listen stats
+    bind *:9000
+    mode http
+    stats enable
+    stats hide-version
+    stats realm HAproxy\ Statistics
+    stats uri /stats
+    stats auth admin:M@w1ngu! # NOTE admin:M@w1ngu are credentials to the UI to be found at https://domain:9000/stats
+
+
 frontend http80
-   	bind *:80
-   	timeout client 60s
-	mode http
-	acl app1 path_end -i /brs
-	acl app2 path_end -i /techbiz
-	use_backend monitor1 if app1
-	use_backend monitor2 if app2
-	default_backend myservers
+    bind *:80
+    timeout client 60s
+    mode http
+    acl app1 path_end -i /brs
+    acl app2 path_end -i /techbiz
+    use_backend monitor1 if app1
+    use_backend monitor2 if app2
+    default_backend myservers
 
 backend monitor1
-	timeout connect 30s
-	timeout server 30s
-	mode http
-	server brsMonitor 62.12.113.105:9090
+    timeout connect 30s
+    timeout server 30s
+    mode http
+    server brsMonitor 62.12.113.105:9090
 
 backend monitor2
-	timeout connect 30s
-	timeout server 30s
-	mode http
-	server techbizMonitor 62.12.114.183:9090
+    timeout connect 30s
+    timeout server 30s
+    mode http
+    server techbizMonitor 62.12.114.183:9090
 
 # The above config balances traffic between two servers 62.12.113.105 and 62.12.114.183
 == MODE = should be set to http if NOT it will default to TCP which causes an error for WEB APPs
 == ACL = Access control list => This determines the best path to route traffic based on the rules set
 == Timeout = This determines the length of time that HAProxy should spend trying to connect to a service
+
+#HAPROXY SSL
+
+-- sudo snap install --classic certbot
+-- sudo ln -s /snap/bin/certbot /usr/bin/certbot
+-- systemctl stop haproxy.service
+-- sudo certbot certonly --standalone
+-- FILL IN the required details
+-- Merge fullchain.pem with privkey.pem into haproxy.pem file
+E.G
+--  cat /etc/letsencrypt/live/anthonyproxy.ddns.net/fullchain.pem /etc/letsencrypt/live/anthonyproxy.ddns.net/privkey.pem | tee /root/haproxy.pem
+-- vim /etc/haproxy/haproxy.cfg
+
+EDIT LIKE FRONTEND part like Below:
+
+-- ADD bind *:443 ssl crt /path/ssl/file alpn h2,http/1.1
+
+--ALPN (Application Layer Protocol Negotiation): this allows HAProxy to negotiate on the Ptotocol it will support e.g. h2 (http2) OR http/1.1
+
+frontend http80and443
+    bind *:80
+    bind *:443 ssl crt /etc/haproxy/haproxy.pem alpn h2,http/1.1
+    timeout client 60s
+    mode http
+    acl app1 path_end -i /brs
+    acl app2 path_end -i /techbiz
+    use_backend monitor1 if app1
+    use_backend monitor2 if app2
+    default_backend myservers
+
+
+-- restart HAPROXY
 

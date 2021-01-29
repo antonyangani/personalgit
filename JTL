@@ -8,3 +8,47 @@
 - Choose 'nolatic'
 - Choose 'Edd=on'
 - Press Escape key
+
+#NFS Checks and repair
+-- Ping host first to check if it’s reachable
+-- If it’s not, connect via ipmi. The error on console is normally that the boot disk can’t be seen.
+-- Restart the system using the Reset System (warm boot) option.
+-- Press CTRL+R until you enter the raid configuration utility. Ensure that the boot disk is being seen (normally the first listed disk).
+-- Press ESC, accept to leave the configuration page and press CTRL+ALT+DEL to restart the server (use option in Macros).
+-- Check if raid check is up using cat proc/mdstat.
+-- Check if drdb is running using cat proc/drdb.
+-- The pcs status should show the current drdb status. A manual start of the drbd status may also be needed to being it up. Just ensure that primary stays primary.
+
+#If after bringing up the nfs, you don’t see the disks that should be mounted for the drbd setup or the drbd service is not running, but the disks can be seen when you run lsblk, use the following steps to have the disks join the RAID array again and restore the drdb process:
+
+Step 1: Check the status and detail of the array
+# mdadm --detail /dev/md0
+This should list all the disks
+
+Step 2:Examine each individual disk and note down the 'Array UUID' to be used later. The Raid level field should be raid10 for all disks
+# mdadm --examine /dev/sdb1
+
+Step 3: Stop the array
+# mdadm -S /dev/md0
+mdadm: stopped /dev/md0
+
+Step 4: Re-assemble the array using the UUID gotten in Step 2 above
+# mdadm --assemble /dev/md0 --uuid=0f347b09:d5a9c65a:8a381e4a:467d0c55
+
+Step 5: If you get an error that 'not enough drives to start the array' error. Force re-assemble
+# mdadm --assemble /dev/md0 --uuid=0f347b09:d5a9c65a:8a381e4a:467d0c55 --force
+
+Step 6: Check the re-assembled array
+# mdadm --detail /dev/md0
+
+Step 7 : Restart DRBD
+#systemctl restart drbd
+
+
+#CHECK DRDB
+-- cat /proc/drbd
+results uptodate/uptodate
+
+#CHECK RAID status
+
+-- cat /proc/mdstat
