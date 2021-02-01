@@ -1,3 +1,19 @@
+#Initial setup
+-- Go to https://github.com/apache/cloudstack-cloudmonkey/releases
+-- select cmk.linux.x86-64
+-- mkdir .cmk in the home directory
+-- wget cmk.linux.x86-64
+-- chmod +x cmk.linux.x86-64
+-- mv cmk.linux.x86-64 cmk
+-- mv cmk /bin/cmk
+-- cmk
+
+# This above will lead to creation of some files in the .cmk directory
+-- vim config
+-- Paste the code below starting at Angani into the config file
+-- cmk
+-- set profile angani
+
 #Config file
 
 -- create a folder called .cmk 
