@@ -54,7 +54,9 @@ OR
 -- docker container stop $(docker container ls -aq) #Stops all containers
 -- docker container rm $(docker container ls -aq) #removes all the containers
 -- docker rmi $(docker images -a -q)  # Deleting all images
-#NETWORKING
+
+#NETWORKING IN CONTAINERS
+
 -- Containers come with 3 networks already created which are bridge, None (Null), and Host networks
 -- Bridge network is a private internal network ( they are in the range of 172.17.0.0/16 network ) and help containers communicate within themselves
 -- Host network allows container to use the IP of the host server as its own without necessarily mapping ports
