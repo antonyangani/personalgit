@@ -17,3 +17,50 @@
 - port 25
 - UNCHECK: use MX
 - CREATE
+
+#PROXMOX AS HYPERVISOR
+-- Login to the proxmox host e,g. 172.20.5.6
+OR
+-- use web interface http://172.20.5.6:8006/
+
+#ADDING A VLAN TO THE HOST
+-- vim /etc/network/interface
+-- COPY on the configs that look like Below:
+
+
+auto enp130s0f0.{VLAN}
+iface enp130s0f0.{VLAN} inet static
+        address 0.0.0.0
+
+-- The create a VMBridge interface
+
+auto vmbr2
+iface vmbr2 inet static
+        address 0.0.0.0/32
+        bridge-ports enp130s0f0.{VLAN}
+        bridge-stp off
+        bridge-fd 0
+
+-- ifdown enp130s0f0.{VLAN}
+-- ifup enp130s0f0.{VLAN}
+
+OR 
+
+-- It might require a HOST REBOOT
+
+#Adding IP to VM
+-- On the web interface
+-- Click on Host on the left handside menu
+-- The Dropdown will reveal a VM e.g. 101 app-2.bliss.angani.co > Select it with the Mouse
+-- On the right side of the screen, there will be a menu {  >_console }
+-- Launch console
+-- use ntui > Select wired connection > Edit > Add IP addresses > GAteway > Save and Exit
+-- Check if there are conflicting gateways 
+-- route -n
+-- if there is a private route that is the default gateway, remove it as the default 
+-- ip route delete default via 172.20.5.1
+-- systemctl restart network
+
+
+
+
