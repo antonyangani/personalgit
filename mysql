@@ -122,4 +122,122 @@ ROUND(SUM(data_length + index_length) / 1024 / 1024, 2) AS "Size (MB)"
 FROM information_schema.TABLES 
 GROUP BY table_schema;
 
+#REPLICATION (MASTER-SLAVE)
+== CREATING MASTER
+
+[mysqld]
+bind-address            = 62.12.118.236
+server-id               = 1
+log_bin                 = /var/log/mysql/mysql-bin.log
+binlog_do_db            = anthony
+
+
+Log into MySQL
+-- GRANT REPLICATION SLAVE ON *.* TO 'slave_user'@'%' IDENTIFIED BY 'M@w1ngu!';
+-- FLUSH PRIVILEGES;
+-- use anthony;
+-- IF YOU NEED TO TAKE A BACKUP
+-- SHOW MASTER STATUS;
+
+OUTPUT
+
++------------------+----------+--------------+------------------+-------------------+
+| File             | Position | Binlog_Do_DB | Binlog_Ignore_DB | Executed_Gtid_Set |
++------------------+----------+--------------+------------------+-------------------+
+| mysql-bin.000001 |      595 | anthony      |                  |                   |
++------------------+----------+--------------+------------------+-------------------+
+
+Slave DB will start replicating at Position 595
+
+
+== You need to dump the db so as to import it in the slave
+-- FLUSH TABLES WITH READ LOCK;
+
+OPEN a new terminal and log into the master sql server AGAIN and dump
+
+-- mysqldump -u root -p --opt anthony > anthony.sql
+-- UNLOCK TABLES;
+-- quit;
+
+== CREATING SLAVE
+
+-- create database anthony;
+-- import database from master 
+-- sudo vim /etc/mysql/my.cnf
+
+== PASTE
+
+[mysqld]
+bind-address            = 62.12.117.139
+server-id               = 2
+log_bin                 = /var/log/mysql/mysql-bin.log
+binlog_do_db            = anthony
+
+
+-- systemctl restart mysql
+== Remember the File and position of the table from the master server mysql-bin.000001 & 595 respectively, put them in the command Below:
+-- mysql
+-- CHANGE MASTER TO MASTER_HOST='62.12.118.236',MASTER_USER='slave_user', MASTER_PASSWORD='M@w1ngu!', MASTER_LOG_FILE='mysql-bin.000001', MASTER_LOG_POS=  595;
+-- START SLAVE;
+-- SHOW SLAVE STATUS\G
+
+RESULTS
+
+
+MariaDB [(none)]> SHOW SLAVE STATUS\G
+*************************** 1. row ***************************
+                Slave_IO_State: Connecting to master
+                   Master_Host: 62.12.118.236
+                   Master_User: slave_user
+                   Master_Port: 3306
+                 Connect_Retry: 60
+               Master_Log_File: mysql-bin.000001
+           Read_Master_Log_Pos: 595
+                Relay_Log_File: mysqld-relay-bin.000001
+                 Relay_Log_Pos: 4
+         Relay_Master_Log_File: mysql-bin.000001
+              Slave_IO_Running: Connecting
+             Slave_SQL_Running: Yes
+               Replicate_Do_DB:
+           Replicate_Ignore_DB:
+            Replicate_Do_Table:
+        Replicate_Ignore_Table:
+       Replicate_Wild_Do_Table:
+   Replicate_Wild_Ignore_Table:
+                    Last_Errno: 0
+                    Last_Error:
+                  Skip_Counter: 0
+           Exec_Master_Log_Pos: 595
+               Relay_Log_Space: 256
+               Until_Condition: None
+                Until_Log_File:
+                 Until_Log_Pos: 0
+            Master_SSL_Allowed: No
+            Master_SSL_CA_File:
+            Master_SSL_CA_Path:
+               Master_SSL_Cert:
+             Master_SSL_Cipher:
+                Master_SSL_Key:
+         Seconds_Behind_Master: NULL
+ Master_SSL_Verify_Server_Cert: No
+                 Last_IO_Errno: 0
+                 Last_IO_Error:
+                Last_SQL_Errno: 0
+                Last_SQL_Error:
+   Replicate_Ignore_Server_Ids:
+              Master_Server_Id: 0
+                Master_SSL_Crl:
+            Master_SSL_Crlpath:
+                    Using_Gtid: No
+                   Gtid_IO_Pos:
+       Replicate_Do_Domain_Ids:
+   Replicate_Ignore_Domain_Ids:
+                 Parallel_Mode: conservative
+                     SQL_Delay: 0
+           SQL_Remaining_Delay: NULL
+       Slave_SQL_Running_State: Slave has read all relay log; waiting for the slave I/O thread to update it
+              Slave_DDL_Groups: 0
+Slave_Non_Transactional_Groups: 0
+    Slave_Transactional_Groups: 0
+1 row in set (0.000 sec)
 
