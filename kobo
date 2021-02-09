@@ -1,0 +1,9 @@
+#Renewing KOBO SSL
+-- BE on EADC VPN
+-- Login as angani to IP: 139.162.182.206 > Switch to root 
+-- docker stop kobodocker_nginx_1
+-- /usr/local/bin/kobo-ssl
+-- cd /etc/letsencrypt/live/kobo.angani.co-0002/
+-- cp fullchain.pem /home/ikahugu/kobo-docker/secrets/ssl.crt
+-- cp privkey.pem /home/ikahugu/kobo-docker/secrets/ssl.key
+-- docker start kobodocker_nginx_1
