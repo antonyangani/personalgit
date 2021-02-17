@@ -32,6 +32,13 @@ DS_Store
 -- git status
 -- git log
 
+#Making a branch of master
+-- git checkout -b {name_of_new_branch}
+
+OR 
+
+-- git checkout branch_name
+
 #Checking for changes after modification
 -- git diff
 -- git add -A
