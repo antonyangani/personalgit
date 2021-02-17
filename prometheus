@@ -14,3 +14,18 @@
 		# as directory, then fall back to displaying a 404.
 		proxy_pass http://127.0.0.1:3000;
 	}
+
+#Changing the retention policy
+-- vim /etc/systemd/system/prometheus.service
+-- under the 'ExecStart'
+
+ExecStart=/usr/local/bin/prometheus \
+	--config.file=/etc/prometheus/prometheus.yml   \
+	--storage.tsdb.path=/var/lib/prometheus   \
+	--web.console.templates=/etc/prometheus/consoles   \
+	--web.console.libraries=/etc/prometheus/console_libraries   \
+	--web.listen-address=0.0.0.0:9090   \
+	--web.external-url=
+	--storage.tsdb.retention.time=1y
+
+== RETENTION POLICY will be set to  1Year
