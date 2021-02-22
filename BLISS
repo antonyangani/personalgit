@@ -1,3 +1,18 @@
+#Bliss Active setup
+-- XCP IP: 192.168.70.243 {root/P@s51234!}
+-- ACTIVE SERVER: app-03
+-- ACTIVE DB: DB03 {primary} / DB04 {backup}
+
+
+#DB-03 PROXMOX SERVER
+
+-- https://172.19.5.6:8006/ {root/P@s51234!}
+-- DB-03 IP: 172.19.5.52 {angani/M@w1ngu!}
+
+#DB-04 PROXMOX SERVER 
+-- https://172.19.5.5:8006/ {root/P@s51234!}
+-- DB-04 IP: 172.19.5.53 {angani@M@w1ngu!}
+
 #Making a Backup
 -- SSH into 172.19.5.52 {angani/M@w1ngu!}
 -- sudo -i
