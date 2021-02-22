@@ -9,12 +9,28 @@
 - Choose 'Edd=on'
 - Press Escape key
 
-#NFS Checks and repair
+#NFS Down
+
+-- Log into the IPMI (subnet 172.28.16.105/172.28.16.61  Pass: Keepass)
+-- In the "Virtual Console Preview" Select Launch
+-- If the error is "Cannot not see boot disk"
+-- Under "Quick Launch Task" > Power Cycle System (cold boot)
+-- When it is coming up "F/W" Start pressing CRTL + R
+-- A window will pop up with disk, Use CRTL + N to move to next, Check if disks are ONLINE
+-- ESC > Reboot
+-- When the F/W comes back a second time, let it RUN to completion, don't do ANYTHING
+-- On the terminal Window > Macros > CTRL + ALT + DEL button
+-- cat /proc/drbd 
+-- cat /proc/mdstat
+-- snmpwalk -v2c -c public IP_OF_SERVER
+
+OR
+
 -- Ping host first to check if it’s reachable
 -- If it’s not, connect via ipmi. The error on console is normally that the boot disk can’t be seen.
 -- Restart the system using the Reset System (warm boot) option.
 -- Press CTRL+R until you enter the raid configuration utility. Ensure that the boot disk is being seen (normally the first listed disk).
--- Press ESC, accept to leave the configuration page and press CTRL+ALT+DEL to restart the server (use option in Macros).
+-- Press ESC, accept to leave the configuration page and at the top of the terninal window, press MACROS >  CTRL+ALT+DEL to restart the server (use option in Macros).
 -- Check if raid check is up using cat proc/mdstat.
 -- Check if drdb is running using cat proc/drdb.
 -- The pcs status should show the current drdb status. A manual start of the drbd status may also be needed to being it up. Just ensure that primary stays primary.

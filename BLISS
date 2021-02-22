@@ -1,0 +1,11 @@
+#Making a Backup
+-- SSH into 172.19.5.52 {angani/M@w1ngu!}
+-- sudo -i
+-- vim /usr/local/bin/mysql-backup.sh
+-- comment out "rm $FILL_PATH"
+-- bash /usr/local/bin/mysql-backup.sh
+-- cd /data/dbbackup/
+-- get the latest data
+-- Inform client
+
+
