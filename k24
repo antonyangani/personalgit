@@ -1,0 +1,75 @@
+#STREAMING FROM AWS
+
+== Make sure the REGION IS: EU-FRANKFURT
+-- Visit URL Below
+-- https://www.wowza.com/docs/how-to-bring-your-wowza-streaming-engine-license-to-cloud front-live-http-streaming
+-- SEARCH FOR (CRTL + F): Create an AWS CloudFormation stack for live streaming 
+-- Click ON: Create a stack in EU (Frankfurt)
+
+FILL USING BELOW DETAILS
+
+-- Stack name = Livestreaming
+-- Application name = livecf
+-- Instance type = m5.large
+-- Keypair = ANG-JM-FRANKFURT StartupPackageURL - don’t change anything here.
+-- StreamName = myStream.
+-- CREATE STACK
+-- YOU WILL SEE: CREATE_IN_PROGRESS
+-- Click Refresh UNTIL: CREATE_COMPLETE (IT May take some time)
+
+-- Upon complete creation, go to ‘Outputs’ tab of the page:
+
+YOU WILL SEE THE BELOW INFORMATION
+-- WowzaEngineManagerURL - URL to use for wowza web management
+-- WowzaEngineDomainName - WOWZA domain name/resolvable hostname pointing to your WOWZA instance.
+-- WowzaServerLoginInfo - Wowza username and password (web)
+-- PlaybackHLSURL - Playable URL that we can use to embed to webserver, upon successful configuration of the streamer.
+
+##NEXT
+-- Use the URL from: WowzaEngineManagerURL
+-- Use password from: WowzaServerLoginInfo
+
+## HOW TO SEND STREAM FROM ANGANI PRIMARY STREAMER TO AWS INSTANCE
+-- Login to WEBUI 62.12.118.226:8088 username/Pass  {keepass}
+-- Applications > Live > Choose k24 Application 
+-- Check "Incoming streams" > Status should be active
+-- If status is "active"
+-- select "Stream Targets"
+-- edit "aws-cloudfront"
+
+USE THE INFORMATION BELOW:
+
+-- Source Stream Name = myStream_360p 
+-- Destination Application Name = livecf
+-- Destination Host = The new instance hostname (WowzaEngineDomainName) in the outputs
+-- Destination port =1935
+-- Destination Stream Name = myStream
+-- Username and password = the details in the outputs page (WowzaServerLoginInfo)
+-- SAVE
+
+
+## HOW TO CONFIGURE STREAMING URL ON WEBSERVER
+-- ssh 62.12.118.230 username: angani {ssh-key}
+-- sudo -i
+-- TEST IF mu38 link is working, take URL from PlaybackHLSURL from cloudformation output
+-- Paste link inside VLC
+
+## IF SUCCESSFUL
+-- docker ps -a
+-- docker exec -it webserver4 /bin/bash
+-- vim /usr/share/nginx/html/index.html
+-- Paste URL under source
+
+## GEOBLOCKING
+-- login to AWS
+-- Search for cloudfront
+-- select the ID that is "Enabled"
+-- Click on "Restriction Tab" > Edit
+-- Countries > KE > ADD > Yes
+
+
+
+
+
+
+
