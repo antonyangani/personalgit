@@ -2,7 +2,7 @@
 
 == Make sure the REGION IS: EU-FRANKFURT
 -- Visit URL Below
--- https://www.wowza.com/docs/how-to-bring-your-wowza-streaming-engine-license-to-cloud front-live-http-streaming
+-- https://www.wowza.com/docs/how-to-bring-your-wowza-streaming-engine-license-to-cloudfront-live-http-streaming
 -- SEARCH FOR (CRTL + F): Create an AWS CloudFormation stack for live streaming 
 -- Click ON: Create a stack in EU (Frankfurt)
 
