@@ -1,0 +1,3 @@
+#Repairing apt keys
+
+-- sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys {MISSING_KEY}
