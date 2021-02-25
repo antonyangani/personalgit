@@ -1,0 +1,161 @@
+### Galera is a MySQL replication service 
+-- Requirements:
+- 3 Centos Servers {Master, slave1, slave2}
+- Mariadb 10.4
+
+
+## Installation of Mariadb on all the servers
+-- sudo vi /etc/yum.repos.d/mariadb.repo
+PASTE
+
+[mariadb]
+name = MariaDB
+baseurl = http://yum.mariadb.org/10.4/centos7-amd64
+gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
+gpgcheck=1
+
+-- sudo yum makecache --disablerepo='*' --enablerepo='mariadb'
+-- sudo yum install MariaDB-server MariaDB-client
+-- sudo systemctl start mariadb
+-- sudo systemctl enable mariadb
+-- sudo mysql -uroot
+-- set password = password("your_password");
+-- quit
+-- sudo yum install rsync policycoreutils-python
+
+## Master Node
+-- sudo vi /etc/my.cnf.d/galera.cnf
+
+PASTE {Change IP_MASTER, IP_SLAVE1, IP_SLAVE2, HOSTNAME}
+
+[mysqld]
+binlog_format=ROW
+default-storage-engine=innodb
+innodb_autoinc_lock_mode=2
+bind-address=0.0.0.0
+
+# Galera Provider Configuration
+wsrep_on=ON
+wsrep_provider=/usr/lib64/galera-4/libgalera_smm.so
+
+# Galera Cluster Configuration
+wsrep_cluster_name="test_cluster"
+wsrep_cluster_address="gcomm://{IP_MASTER},{IP_SLAVE1},{IP_SLAVE2}"
+
+# Galera Synchronization Configuration
+wsrep_sst_method=rsync
+
+# Galera Node Configuration
+wsrep_node_address="{IP_MASTER}"
+wsrep_node_name="{HOSTNAME}"
+
+-- EXIT
+
+== SLAVE1
+
+PASTE
+
+[mysqld]
+binlog_format=ROW
+default-storage-engine=innodb
+innodb_autoinc_lock_mode=2
+bind-address=0.0.0.0
+
+# Galera Provider Configuration
+wsrep_on=ON
+wsrep_provider=/usr/lib64/galera-4/libgalera_smm.so
+
+# Galera Cluster Configuration
+wsrep_cluster_name="test_cluster"
+wsrep_cluster_address="gcomm://{IP_MASTER},{IP_SLAVE1},{IP_SLAVE2}"
+
+# Galera Synchronization Configuration
+wsrep_sst_method=rsync
+
+# Galera Node Configuration
+wsrep_node_address="{IP_SLAVE1}"
+wsrep_node_name="{HOSTNAME1}"
+
+-- save and exit
+
+== SLAVE2
+
+PASTE
+
+[mysqld]
+binlog_format=ROW
+default-storage-engine=innodb
+innodb_autoinc_lock_mode=2
+bind-address=0.0.0.0
+
+# Galera Provider Configuration
+wsrep_on=ON
+wsrep_provider=/usr/lib64/galera-4/libgalera_smm.so
+
+# Galera Cluster Configuration
+wsrep_cluster_name="test_cluster"
+wsrep_cluster_address="gcomm://{IP_MASTER},{IP_SLAVE1},{IP_SLAVE2}"
+
+# Galera Synchronization Configuration
+wsrep_sst_method=rsync
+
+# Galera Node Configuration
+wsrep_node_address="{IP_SLAVE2}"
+wsrep_node_name="{HOSTNAME2}"
+
+
+-- save and exit
+
+
+### Firewall configuration on ALL 3 Servers
+
+-- sudo firewall-cmd --zone=public --add-port={3306,4567,4568,4444}/tcp --permanent
+-- sudo firewall-cmd --permanent --zone=public --add-source={IP_MASTER,IP_SLAVE1,IP_SLAVE2}/32
+-- sudo firewall-cmd --reload
+-- sudo semanage port -a -t mysqld_port_t -p tcp 4567
+-- sudo semanage port -a -t mysqld_port_t -p udp 4567
+-- sudo semanage port -a -t mysqld_port_t -p tcp 4568
+-- sudo semanage port -a -t mysqld_port_t -p tcp 4444
+-- sudo semanage permissive -a mysqld_t
+-- sudo systemctl stop mariadb
+
+### MASTER NODE
+
+-- sudo galera_new_cluster
+-- mysql -u root -p 
+-- CREATE DATABASE selinux;
+-- CREATE TABLE selinux.selinux_policy (id INT NOT NULL AUTO_INCREMENT, PRIMARY KEY(id));
+-- INSERT INTO selinux.selinux_policy VALUES ();
+
+### SLAVE1 AND SLAVE2
+-- sudo systemctl start mariadb
+
+## Test
+-- mysql -u root -p -e 'INSERT INTO selinux.selinux_policy VALUES ();'
+
+### Enable SELinux on ALL THREE Servers
+-- sudo grep mysql /var/log/audit/audit.log | sudo audit2allow -M Galera
+-- semodule -i Galera.pp
+
+### Disable permissive mode on ALL SERVERS
+
+-- sudo semanage permissive -d mysqld_t
+
+### Shut MariaDB down in order from SLAVE2, SLAVE1, and last, MASTER
+-- sudo systemctl stop mariadb
+
+### START CLUSTER FROM MASTER 
+-- sudo galera_new_cluster
+-- mysql -u root -p -e "SHOW STATUS LIKE 'wsrep_cluster_size'"
+
+## SLAVE1
+-- sudo systemctl start mariadb
+-- mysql -u root -p -e "SHOW STATUS LIKE 'wsrep_cluster_size'" # Make sure the Value = 2
+
+## SLAVE2
+-- sudo systemctl start mariadb
+-- mysql -u root -p -e "SHOW STATUS LIKE 'wsrep_cluster_size'"  # Make sure the Value = 3
+
+
+
+
