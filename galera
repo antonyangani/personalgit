@@ -1,3 +1,7 @@
+### Article
+
+-- https://www.digitalocean.com/community/tutorials/how-to-configure-a-galera-cluster-with-mariadb-on-centos-7-servers
+
 ### Galera is a MySQL replication service 
 -- Requirements:
 - 3 Centos Servers {Master, slave1, slave2}
