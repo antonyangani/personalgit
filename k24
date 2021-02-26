@@ -67,6 +67,13 @@ USE THE INFORMATION BELOW:
 -- Click on "Restriction Tab" > Edit
 -- Countries > KE > ADD > Yes
 
+#IPMI
+
+-- wowza-host-2 IP: 172.21.4.126 {user: root, Password: calvin}
+-- typically it reboots and requires Pressing F1
+-- repair NFS-05 & NSF-ISO_library
+-- Start VMs
+
 
 
 
