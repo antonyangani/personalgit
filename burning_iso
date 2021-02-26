@@ -1,0 +1,5 @@
+#Burning ISO to flashdrive
+-- check the location of the disk
+-- lsblk 
+-- sudo dd if=localtion/to/iso of=/dev/{location_of_usb_drive} bs=1M status=progress
+
