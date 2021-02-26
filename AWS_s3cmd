@@ -1,0 +1,12 @@
+#CONFIGURATION
+
+-- s3cmd --configure
+
+PASTE
+-- access key
+-- access secret
+-- backet-location: eu-central-1
+-- accept defaults
+-- save credentials
+-- s3cmd put /path/to/file s3://angani-backups-01/cpanels/gfunze/
+
