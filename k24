@@ -67,6 +67,11 @@ USE THE INFORMATION BELOW:
 -- Click on "Restriction Tab" > Edit
 -- Countries > KE > ADD > Yes
 
+#Wowza XCP-XEN culter
+
+-- wowza-cluster1: 192.168.70.233
+-- wowza-cluster2: 192.168.70.232
+
 #IPMI
 
 -- wowza-host-2 IP: 172.21.4.126 {user: root, Password: calvin}
