@@ -47,6 +47,10 @@ USE THE INFORMATION BELOW:
 -- Username and password = the details in the outputs page (WowzaServerLoginInfo)
 -- SAVE
 
+## HAProxy
+-- IP: 62.12.113.240
+-- SSH-Key
+-- check if HA-Proxy is working as expected
 
 ## HOW TO CONFIGURE STREAMING URL ON WEBSERVER
 -- ssh 62.12.118.230 username: angani {ssh-key}
