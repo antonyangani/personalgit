@@ -1,0 +1,3 @@
+#Hushes SSH text
+-- touch .hushlogin
+
