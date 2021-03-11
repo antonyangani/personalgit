@@ -84,6 +84,12 @@ USE THE INFORMATION BELOW:
 -- Start VMs
 
 
+# Stats for Prometheus
+-- login to 62.12.113.240
+-- run below
+-- docker run -d --name node_exporter -p 9101:9101 quay.io/prometheus/haproxy-exporter:v0.9.0 --haproxy.scrape-uri="http://62.12.113.240:8404/stats;csv"
+-- check techbiz.novum.co.ke for graphs
+-- Graphana dashboard: 2428
 
 
 
