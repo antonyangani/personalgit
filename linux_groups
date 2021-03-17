@@ -1,0 +1,36 @@
+#Creating a user 
+
+-- useradd user_name
+
+#Creating a group
+
+-- groupadd group_name
+
+#adding user to group
+
+-- usermod -aG group_name user_name
+
+#Listing users in a group
+
+-- groupmems -g group_name -l
+
+#Deleting a member from a group
+
+-- groupmems -d user_name -g group_name
+
+#Creating shared directories
+
+-- create a directory
+-- mkdir -p /data/{accounts,sales}
+-- chmod -R 775 /data/* 
+-- chown :accounts accounts/
+-- chown :sales sales/
+-- chmod g+s /data/* # This adds the group bit onto the directory thus making any users of a particular group able to write files
+
+=== IF YOU DONT WANT NON-OWNERS DELETING FILES, USE STICKY-BIT
+-- chmod +t /data/accounts
+
+== This prevent anyone else, other than owner of a resource to delete it.
+
+
+

@@ -1,0 +1,7 @@
+#What is UMASK
+-- This is a setting of a mask that controls how permissions are set on newly created files (both dirs and files)
+-- ROOT has umask (0022) 
+-- to understand how permissions are going to be given, you subtract 0777 - 0022  = 0755 
+
+
+-- Other user have umask of 0002 => 0777 - 0002 = 0775

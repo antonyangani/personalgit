@@ -23,4 +23,8 @@
 -- get the latest data
 -- Inform client
 
+#ROOT MySQL Credentials
+-- user: root
+-- Pass: $$Medb00k$$
+-- MYSQL CONFIG FILE: /etc/my.cnf.d/server.cnf
 

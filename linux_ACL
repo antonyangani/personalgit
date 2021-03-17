@@ -1,0 +1,24 @@
+#UBUNTU
+-- apt install acl -y
+
+#CREATE USERS
+-- useradd test_user
+
+#CREATE GROUP
+
+-- groupadd group_name
+
+#ADD USER to GROUP
+-- usermod -G test_user group_name
+
+#SCENARIO
+-- Create a folder that can only be accessed by a specific group
+
+-- mkdir -p /sales
+-- getfacl /sales
+-- chgrp hr /sales
+-- chmod 740 /sales
+
+#Adding another user to view the sales folder
+-- setfacl -m u:test_user2:rwx /sales
+
