@@ -1,0 +1,22 @@
+#Creatign L2TP in Pfsense
+-- Go to VPN > L2TP
+-- Enable L2TP Server
+-- Server address: Give private ip e.g. 192.168.50.1
+-- Remote address range: Give an IP_range
+-- Under the "Users" tab
+-- Enter: username e.g. zabbix
+-- Password: Secure Password
+-- IP Address: The same subnent as "Remote address range"
+
+== Go to firewall rules
+-- Rules > WAN 
+-- Protocol: UDP
+-- Destination  Port: L2TP (1701)
+
+
+-- Check if you can reach UDP 1701
+
+
+-- Ping any IP from other VPCs
+
+
