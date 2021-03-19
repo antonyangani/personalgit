@@ -255,3 +255,5 @@ Slave_Non_Transactional_Groups: 0
     Slave_Transactional_Groups: 0
 1 row in set (0.000 sec)
 
+#MASTER-MASTER REPLICATION (MIRRORING)
+-- https://www.ryadel.com/en/mysql-master-master-replication-setup-in-5-easy-steps/
