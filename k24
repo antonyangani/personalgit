@@ -92,7 +92,10 @@ USE THE INFORMATION BELOW:
 -- check techbiz.novum.co.ke for graphs
 -- Graphana dashboard: 2428
 
-
-
+#SSL renewal
+-- systemctl stop haproxy
+-- sudo certbot certonly --standalone --preferred-challenges http --http-01-port 80 -d live.k24tv.co.ke
+-- DOMAIN='live.k24tv.co.ke' sudo -E bash -c 'cat /etc/letsencrypt/live/$DOMAIN/fullchain.pem /etc/letsencrypt/live/$DOMAIN/privkey.pem > /etc/haproxy/certs/$DOMAIN.pem'
+-- systemctl start haproxy
 
 
