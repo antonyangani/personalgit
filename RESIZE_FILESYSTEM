@@ -1,0 +1,15 @@
+#Resizing filesystem without using LVM
+-- Say you have a VM with a mounted partition of 100G which is full
+-- lsblk # Get partition info
+
+#IN CENTOS 7
+-- yum install cloud-utils-growpart
+-- umount /mnt/partition_name
+-- growfs /dev/sdb 1 # this will imply grow /dev/sdb1
+== IF FS was XFS
+-- xfs_growfs /dev/sdb1
+-- mount /mnt/partition_name
+
+== IF FS was EXT4
+-- resize2fs /dev/sdb1
+
