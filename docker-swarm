@@ -1,4 +1,4 @@
-#Creating a Docker Swarm Cluster
+# Creating a Docker Swarm Cluster
 -- Ensure you have at least 2 servers configured with docker so that one can act as the master and the other as the slave
 
 == CHOOSE ONE SERVER TO ACT AS MASTER
@@ -10,7 +10,7 @@
 
 -- copy the above code and paste into the other servers you wish to add to the cluster
 
-#DEPLOYING AN APP
+# DEPLOYING AN APP
 
 -- docker service create --name {NAME_OF_SERVICE} --replicas {NUMBER_OF_REPLICAS} -p {HOST_POST:CONTAINER_PORT}  {IMAGE_NAME}
 
@@ -18,7 +18,7 @@ E.G.
 
 -- docker service create --name uploader --replicas 3 -p 8000:8000 groctech/video-uploader
 
-#INSPECTING
+# INSPECTING
 
 -- docker inspect --pretty {SERVICE_NAME}
 
