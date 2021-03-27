@@ -22,6 +22,19 @@
 E.G.
 
 -- docker service create --name uploader --replicas 3 -p 8000:8000 groctech/video-uploader
+-- docker service ps {SERVICE_NAME} 			# This command will show the containers and where they are running
+
+# SCALING CLUSTER
+
+-- docker service scale {SERVICE_NAME}={NUMBER_OF_REPLICAS}
+ E.G.
+-- docker service scale uploader=2 			# This will reduce the number of replicas to 2 
+-- docker service ps {SERVICE_NAME} 			# This command will show that the number of containers has reduced to 2
+
+E.G.
+
+-- docker service ps uploader
+
 
 # INSPECTING
 
@@ -30,3 +43,13 @@ E.G.
 E.G.
 
 -- docker inspect --pretty uploader
+
+# REMOVING A SERVICE 
+
+-- docker service rm {SERVICE_NAME}
+
+E.G.
+
+-- docker service rm uploader  				# This command clears all the containers built under the swarm service
+
+
