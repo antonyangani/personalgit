@@ -14,7 +14,7 @@
 
 -- docker service create --name {NAME_OF_SERVICE} --replicas {NUMBER_OF_REPLICAS} -p {HOST_POST:CONTAINER_PORT}  {IMAGE_NAME}
 
-EG.
+E.G.
 
 -- docker service create --name uploader --replicas 3 -p 8000:8000 groctech/video-uploader
 
@@ -22,8 +22,6 @@ EG.
 
 -- docker inspect --pretty {SERVICE_NAME}
 
-EG.
+E.G.
 
 -- docker inspect --pretty uploader
-
-
