@@ -1,0 +1,29 @@
+#Creating a Docker Swarm Cluster
+-- Ensure you have at least 2 servers configured with docker so that one can act as the master and the other as the slave
+
+== CHOOSE ONE SERVER TO ACT AS MASTER
+-- Login to master
+-- docker swarm init 
+==> The result: docker swarm join --token SWMTKN-1-2f30c7fqwh6nf6jphgbndnhqm7v2lbrxa0g389oklt4t1y0gep-12zaam0s2xhn0koml88wb88n6 23.239.29.253:2377
+
+# SLAVE
+
+-- copy the above code and paste into the other servers you wish to add to the cluster
+
+#DEPLOYING AN APP
+
+-- docker service create --name {NAME_OF_SERVICE} --replicas {NUMBER_OF_REPLICAS} -p {HOST_POST:CONTAINER_PORT}  {IMAGE_NAME}
+
+EG.
+
+-- docker service create --name uploader --replicas 3 -p 8000:8000 groctech/video-uploader
+
+#INSPECTING
+
+-- docker inspect --pretty {SERVICE_NAME}
+
+EG.
+
+-- docker inspect --pretty uploader
+
+
