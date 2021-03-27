@@ -10,6 +10,11 @@
 
 -- copy the above code and paste into the other servers you wish to add to the cluster
 
+# CHECK NODES
+
+-- Login to Master
+-- docker nodes ls # This will display all nodes on the cluster with master INDICATED as LEADER
+
 # DEPLOYING AN APP
 
 -- docker service create --name {NAME_OF_SERVICE} --replicas {NUMBER_OF_REPLICAS} -p {HOST_POST:CONTAINER_PORT}  {IMAGE_NAME}
