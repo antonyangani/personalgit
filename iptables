@@ -2,4 +2,8 @@
 
 -- sudo iptables -A INPUT -p tcp --dport 9100 -j ACCEPT
 
+OR 
 
+-- 	vi /etc/sysconfig/iptables
+ADD the below, REMEMBER the -A
+-- 	-A RH-Firewall-1-INPUT -p tcp --dport 10050 -j ACCEPT

@@ -1,0 +1,12 @@
+# Resetting IPMI password
+-- Login to host using Management IP
+-- ipmitool user list 1 		# This will show a list of users
+-- ipmitool user set password 2		# Select the user you would like ro reset the password for
+
+e.g.
+
+Dukaree HOST 1 IPMI pass: IP: 172.21.4.50 root/root
+Dukaree HOST 2 IPMI pass: IP: 172.21.4.101 admin/P@s51234!
+
+
+
