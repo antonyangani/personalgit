@@ -1,0 +1,24 @@
+TODO
+-- decide whether client would want access to the host (this means we will give separete vlan for management)
+-- if the above is true:
+-- create a vlan on switch and make port access (so as to carry traffic for the specific vlan)
+-- Allow vlan on host containing pfsense
+-- create a network on PFsense and create OVPN files
+-- assign host IPs within the subnet created on PFsense
+
+# Installation
+
+-- Burn disk onto USB
+-- Take server to DC
+-- Mount it and give server management IP (DHCP)
+-- put flash with boot os
+-- allow for installation process to start
+
+# Creating ISO-Storage
+
+-- mkdir -p /var/opt/xen/iso_library
+-- xe sr-create name-label ="ISO-Storage" type=iso device-config:location=/var/opt/xen/iso_library/ device-config:legacy_mode=true content-type=iso
+-- cd /var/opt/xen/iso_library
+-- wget https://releases.ubuntu.com/18.04/ubuntu-18.04.5-live-server-amd64.iso
+-- rescan storage on the host
+

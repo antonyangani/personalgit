@@ -6,4 +6,20 @@
 -- snmp-server community JTL-Angani ro
 -- exit
 
+#Installing
 
+
+-- sudo apt install snmpd snmp libsnmp-dev -y
+-- mv /etc/snmp/snmpd.conf /etc/snmp/snmpd.conf.orig
+-- vi /etc/snmp/snmpd.conf 
+
+PASTE
+
+rocommunity 4ng4n1
+syslocation "EADC"
+syscontact logcheck@angani.co
+
+includeAllDisks 10%
+
+
+-- systemctl restart snmpd
