@@ -2,7 +2,7 @@
 -- XCP IP: 192.168.70.243 {root/P@s51234!}
 -- ACTIVE SERVER: app-03
 -- ACTIVE DB: DB03 {primary} / DB04 {backup}
-
+-- IPMI: 172.21.4.234 {root/root}
 
 #DB-03 PROXMOX SERVER
 
@@ -31,3 +31,7 @@
 MEDBOOK MySQL user
 -- USER: medbooka_server
 -- PASSWORD: $$@@Blsy%*!!2020$$
+
+# IPMI for db04
+-- 172.21.4.238 {root/root}
+
