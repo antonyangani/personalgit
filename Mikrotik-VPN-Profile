@@ -12,8 +12,11 @@
 
 -- Click on network center
 -- search for VPN
--- Give username, password, protocol:L2TCP/IPSEC 
--- Give Preshared key
+-- connection name: GIVE DESCRIPTIVE NAME
+-- server name/address: PUBLIC_IP of the MIkrotik the profile was created in
+-- Type of sign-in info: username/Password
+-- username: PROFILE_USERNAME
+-- password: PROFILE_PASSWORD
 -- Create
 
 -- Open VPN properties > Security Tab
