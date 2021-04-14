@@ -4,3 +4,8 @@
 -- port: 3306
 -- username: root
 -- password: 7ihZX7NQD2f6xcX3
+
+
+# Slow Queries
+
+-- less /data/mysql/longhorn-db01-slow.log
