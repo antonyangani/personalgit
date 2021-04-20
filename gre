@@ -1,5 +1,8 @@
 #Creating a GRE tunnel between 2 devices
 
+
+== CENTOS
+
 #Example
 
 Comp A
@@ -28,4 +31,13 @@ Private IP: 10.42.2.0/24
 
 #To Test
 -- systemctl firewalld stop
+
+
+== UBUNTU
+
+-- ip tunnel add gre1 mode gre remote 62.12.119.6 local 62.12.113.241 ttl 255
+-- ifconfig gre1 up
+-- ifconfig gre1 10.200.0.51/28
+
+
 

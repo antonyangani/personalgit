@@ -8,4 +8,14 @@
 -- Go to quick set
 -- On Local Network, add an IP/SUBNET
 -- Check on ADD ALL PORTS TO BRIDGE
--- Go to IP > DHCP Server > 
+-- Go to IP > DHCP Server >
+
+# Creating a POOL
+-- IPs > Pool > + 
+
+# Adding routes
+-- ip route add dest-address=IP_TO_REMOTE_SERVER gateway=IP_OF_GATEWAY
+
+#SNMP
+-- snmp community print
+-- snmp 
