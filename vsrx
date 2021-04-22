@@ -48,3 +48,8 @@ Interface       Admin Link Description
 ge-0/0/1.2154   up    up   VID-2154-BLUESKY-VPC
 
 
+# Monitor Interface Traffic
+-- monitor interface traffic
+
+# Checking IPTs 
+-- show interfaces descriptions 
