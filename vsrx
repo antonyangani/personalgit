@@ -53,3 +53,17 @@ ge-0/0/1.2154   up    up   VID-2154-BLUESKY-VPC
 
 # Checking IPTs 
 -- show interfaces descriptions 
+
+# Checking BGP neighbor configs
+
+-- show configuration protocols bgp group IWAY-ANGANI
+
+OR 
+
+-- show configuration protocols bgp group ?
+
+# Checking IPSEC configurations 
+
+-- show security ipsec ?
+
+

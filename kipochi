@@ -1,0 +1,29 @@
+# DB Cluster
+-- Three VMs are in a cluster
+
+
+- 172.16.45.6 (Master)
+- 172.16.45.5
+- 172.16.45.4
+
+# NDBD MANAGER (.6)
+
+-- ndb_mgm
+-- SHOW
+-- HELP
+
+# REMOVE a node 
+
+-- NODE_ID STOP
+
+OR
+
+-- 3 STOP
+
+# Add Node to cluster
+
+-- 3 START
+
+# SLAVE NODES
+
+-- ndbd # This will provide info if a node is connected.
