@@ -1,10 +1,13 @@
 # DB Cluster
+
 -- Three VMs are in a cluster
+-- cat /var/lib/mysql-cluster/config.ini
 
+-- Login with FINTEXX VPN
 
-- 172.16.45.6 (Master)
-- 172.16.45.5
-- 172.16.45.4
+- 172.16.45.6 (Master) (angani/M@w1ngu!)
+- 172.16.45.5 (angani/M@w1ngu!)
+- 172.16.45.4 (angani/M@w1ngu!)
 
 # NDBD MANAGER (.6)
 
