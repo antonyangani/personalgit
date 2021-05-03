@@ -1,0 +1,5 @@
+# Running HPING3 Diagnosis
+
+-- sudo hping3 -c 10 62.12.114.70 -S -p 22
+
+

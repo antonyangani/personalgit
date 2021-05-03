@@ -11,5 +11,16 @@ e.g.
 
 #Delete user
 -- radosgw-admin user rm --uid=johndoe
-Delere a subuser
+Delete a subuser
 -- radosgw-admin subuser rm --uid=johndoe:swift
+
+# Restart Redos Gateway
+
+1. Log in to Radosgateway
+
+ssh angani@192.168.70.76
+Password: M@w1ngu!
+
+2. Restart rados service
+
+sudo /etc/init.d/radosgw restart
