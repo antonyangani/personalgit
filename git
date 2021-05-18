@@ -81,6 +81,10 @@ e.g. git clone https://github.com/some_path /home/antonyng/custom_dir
 -- git stash 
 -- git pull origin master
 
+OR 
+
+-- git pull origin master --allow-unrelated-histories
+
 #MAC git push issues
 -- open "Keychain Access.app" (You can find it in Spotlight or LaunchPad)
 -- Select "All items" in Category
