@@ -1,0 +1,25 @@
+# Troubleshooting VPN
+-- VPN applicance IP: 62.12.114.149 {angani/M@w1ngu!}
+-- login
+-- ip a # Check for pppo link with IP: 172.29.0.1 
+-- route -n # results should be as below:
+
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+0.0.0.0         62.12.114.1     0.0.0.0         UG    0      0        0 eth0
+62.12.114.0     0.0.0.0         255.255.254.0   U     0      0        0 eth0
+172.29.0.90     0.0.0.0         255.255.255.255 UH    0      0        0 ppp0
+172.29.1.0      0.0.0.0         255.255.255.248 U     0      0        0 eth1
+192.168.25.0    172.29.0.90     255.255.255.0   UG    0      0        0 ppp0
+
+
+
+-- Ping 192.168.25.10 	# Mikrotik on the Tembo Sacco end
+-- If it successful, the tunnel is UP
+
+
+/***
+For Tembo, I normally check if pptp interface is up, ppp0, if not it means tunnel is down. You need to contact Tembo team if that's the case
+If tunnel is up, check if there is a default route for their 192.168.25.x subnet, if not add it (There's a cron that checks this, so it will not be an issue)
+If both check out it means tunnel is up and you should be able to ping 192.168.25.10
+***/
