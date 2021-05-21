@@ -1,0 +1,35 @@
+## Managing memory
+
+VALUES
+
+0	= Estimate if we have enough memory to allocate
+1	= Always say yes when process needs more memory
+2	= Say NO if the system no memory left
+
+-- cat cat /proc/sys/vm/overcommit_memory
+
+## Checing if you are almost running out of memory
+
+-- grep -iER 'MemTotal|Committed_AS:' /pro/meminfo
+-- grep -iER 'MemTotal|Committed_AS:' /pro/meminfo | awk '{print $2 / 1024 / 1024 }'
+
+Ensure that Committed_AS is NOT greated that MemTotal!!!
+
+## Remove Caches/Buffers
+# VALUES
+= 1	- 	Clear PageCache only  (PageCache is anything the OS would rather have on memory than to read from a file)
+= 2	-	clear dentries and inodes (Dentries are datastructures that represent directories  and used to store cache)
+= 3	-	clear PageCache, dentries, and inodes
+		Inodes are data structures which provide a representation of a file
+
+# Clear PageCache
+
+-- sync; echo 1 > /proc/sys/vm/drop_caches 
+
+# Clear dentries and Inodes
+
+-- sync; echo 2 > /proc/sys/vm/drop_caches 
+
+# Clear PageCache, dentries, and Inodes
+
+-- sync; echo 3 > /proc/sys/vm/drop_caches 
