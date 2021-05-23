@@ -33,3 +33,7 @@ Ensure that Committed_AS is NOT greated that MemTotal!!!
 # Clear PageCache, dentries, and Inodes
 
 -- sync; echo 3 > /proc/sys/vm/drop_caches 
+
+# Enforcing UserSpace Does not COMMIT 50% of memory
+
+-- sync; echo 50 > /proc/sys/vm/overcommit_ratio
