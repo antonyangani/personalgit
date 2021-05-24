@@ -18,3 +18,6 @@ apt-get install openvpn -y
 #activating openvpn
 
 -- openvpn --config file.ovpn --daemon
+
+# Running two openVPN files at the same time
+-- openvpn --config file.ovpn --port {custom_number} --daemon

@@ -78,4 +78,9 @@
 
 -- added it permanently to fstab
 
+# CHECKING NFS HEALTH
+
+-- /etc/init.d/nfs-kernel-server status
+-- nfsstat -s           # Check the BADCALLS column to see if there are any recorded
+-- nfsstat -o net       # Helps check if there are any dropped packets to the server 
 
