@@ -4,7 +4,11 @@
 
 #Enable snmp
 
+-- esxcli system snmp set --communities 4ng4n1
 -- esxcli system snmp set --enable true
+-- esxcli network firewall ruleset set --ruleset-id snmp --allowed-all true
+-- esxcli network firewall ruleset set --ruleset-id snmp --enabled true
+-- /etc/init.d/snmpd restart
 
 #Disable snmp
 
@@ -16,11 +20,8 @@
 
 # SNMP STATUS
 -- /etc/init.d/snmpd status
-<<<<<<< HEAD
-=======
 -- /etc/init.d/snmp restart
 
->>>>>>> 70b2e59eb2d62e925f6273c327d718cacb69ca2a
 #Troubleshooting SNMP
 -- Log into the 172.28.17.0/24 subnet (JTL MNGT)
 -- esxcli system snmp get
