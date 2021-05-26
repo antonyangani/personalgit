@@ -2,11 +2,11 @@
 
 VALUES
 
-0	= Estimate if we have enough memory to allocate
-1	= Always say yes when process needs more memory
-2	= Say NO if the system no memory left
+0	= Estimate if we have enough memory to allocate (kernel performs heuristic memory overcommit handling by estimating amount of memory available and deny requests that are too large)
+1	= Always say yes when process needs more memory, This increases the possibility of memory overload, but improves performance for memory-intensive tasks
+2	= The kernel denies requests for memory equal to or larger than the sum of total available swap space and the percentage of physical RAM specified in overcommit_ratio
 
--- cat cat /proc/sys/vm/overcommit_memory
+-- cat /proc/sys/vm/overcommit_memory
 
 ## Checing if you are almost running out of memory
 
