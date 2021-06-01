@@ -1,0 +1,17 @@
+# Grub
+-- It is the GRand Unified Bootloader
+
+# Config location: 
+
+-- cd /boot/grub/grub.cfg
+
+# Fixing a corrupt GRUB installation
+
+-- Switch off VM
+-- Insert Rescue Disk
+-- Allow for boot
+-- mount root-fs to /mnt
+-- chroot /mnt
+-- grub-install --root-directory=/mnt /path/to/rootfs
+
+

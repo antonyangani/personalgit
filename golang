@@ -2,4 +2,8 @@
 
 -- GOOS=windows go build gofilename.go 
 
+# Staring a new go project
+
+-- git mod init github.com/antonyangani/microservice.git
+
 
