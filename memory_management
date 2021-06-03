@@ -37,3 +37,14 @@ Ensure that Committed_AS is NOT greated that MemTotal!!!
 # Enforcing UserSpace Does not COMMIT 50% of memory
 
 -- sync; echo 50 > /proc/sys/vm/overcommit_ratio
+
+# Top command output
+
+-- us: user cpu time (or) % CPU time spent in user space
+-- sy: system cpu time (or) % CPU time spent in kernel space
+-- ni: user nice cpu time (or) % CPU time spent on low priority processes
+-- id: idle cpu time (or) % CPU time spent idle
+-- wa: io wait cpu time (or) % CPU time spent in wait (on disk)
+-- hi: hardware irq (or) % CPU time spent servicing/handling hardware interrupts
+-- si: software irq (or) % CPU time spent servicing/handling software interrupts
+-- st: steal time - - % CPU time in involuntary wait by virtual cpu while hypervisor is servicing another processor (or) % CPU time stolen from a virtual machine
