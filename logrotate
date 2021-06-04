@@ -32,3 +32,26 @@
     maxage 1
     dateext
 }
+
+# If logrotate is giving permission issues
+
+-- touch /etc/logrotate.d/access_log_rotate
+
+== PASTE
+
+/var/log/httpd/access_log{
+
+su root apache		# explicitly mention the owners of the file being logrotated
+missingok
+    daily
+    +size 10G
+    rotate 10
+    compress
+    compresscmd /bin/gzip
+    maxage 1
+    dateext
+}
+
+-- save
+-- logrotate -d /etc/logrotate.d/access_log_rotate
+-- Fixed!
