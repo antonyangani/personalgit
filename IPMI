@@ -1,3 +1,13 @@
+#Access IPMI on windows
+
+-- Java line to edit in the lib/java.security file
+
+PASTE 
+
+jdk.tls.disabledAlgorithms=SSLv3, RC4, MD5withRSA, DH keySize < 1024, \
+EC keySize < 224, DES40_CBC, RC4_40
+
+
 # Resetting IPMI password
 -- Login to host using Management IP
 -- ipmitool user list 1 		# This will show a list of users
