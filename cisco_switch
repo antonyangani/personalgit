@@ -91,4 +91,10 @@ SW1(config-if)# no shut
 -- show cdp neighbors 
 
 
+# Checking Interface status
+-- show interface status 
+
+OR 
+
+-- show interface Eth1/2 status
 

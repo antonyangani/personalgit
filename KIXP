@@ -1,0 +1,18 @@
+# Troubleshooting KIXP BGP sessions being down
+-- Log into Edge-01 
+-- show bgp summary | match 196.223.21.10 # Any IPs with 196.223.21.*
+-- if status is (connect, active) BUT not ESTABLISHED
+-- Log into SW-07 (192.168.70.4), use SSH-KEY
+
+
+# SWITCH
+
+-- show interface status | include Eth1/2
+-- check status if Connected
+
+Eth1/2        KIXP-NBO:XCONNECT  connected 510       full    1000    1000base-SX
+
+-- if not
+-- conf t
+-- int Eth1/2
+-- no shut
