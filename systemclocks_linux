@@ -6,4 +6,6 @@
 
 -- timedatectl list-timezones
 -- timedatectl set-timezone Africa/Nairobi
-
+-- timedatectl set-ntp true
+-- sudo systemctl restart systemd-timedated
+-- date 					# it should be synched 
