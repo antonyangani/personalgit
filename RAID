@@ -1,0 +1,62 @@
+# This is a cheat that explains the creation of LVM
+
+# Prerequisites 
+1. have a VM with multiple disks attached
+
+# Create a DISK array using MDADM
+-- sudo mdadm --create --verbose /dev/{fitting-name-for-array} --level=0 --raid-devices={number of disks} /dev/xvdb /dev/xvdc
+
+EG
+
+-- sudo mdadm --create --verbose /dev/md0 --level=0 --raid-devices=2 /dev/xvdb /dev/xvdc
+
+# Check if array is created
+
+-- cat /proc/mdstat
+
+# use the created /dev/md0 as a device
+
+-- mkfs.ext4 -F /dev/md0
+
+# Create a mount point 
+
+-- mkdir -p /mnt/md0
+
+# Mount the FS
+
+-- mount /dev/md0 /mnt/md0
+-- df -h
+
+# make the raid changes permanent 
+
+-- sudo mdadm --detail --scan | sudo tee -a /etc/mdadm/mdadm.conf
+-- sudo update-initramfs -u
+-- echo '/dev/md0 /mnt/md0 ext4 defaults,nofail,discard 0 0' | sudo tee -a /etc/fstab
+
+# STOP MDADM
+
+-- umount /opt/arrary  # The location you mounted the RAID 
+-- sudo mdadm --stop /dev/md0
+OR
+-- mdadm -S /dev/md0
+
+# LIST disks in a RAID
+
+-- mdadm --detail /dev/md0
+
+# Examine each individual disk and note down the 'Array UUID' to be used later. The Raid level field should be raid10 for all disks
+
+-- mdadm --examine /dev/sdb1
+
+# Re-assemble the array using the UUID gotten in Step 2 above
+
+-- mdadm --assemble /dev/md0 --uuid=0f347b09:d5a9c65a:8a381e4a:467d0c55
+
+# If you get an error that 'not enough drives to start the array' error. Force re-assemble
+
+-- mdadm --assemble /dev/md0 --uuid=0f347b09:d5a9c65a:8a381e4a:467d0c55 --force
+
+# Step 6: Check the re-assembled array
+
+-- mdadm --detail /dev/md0
+
