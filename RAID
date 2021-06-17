@@ -60,3 +60,7 @@ OR
 
 -- mdadm --detail /dev/md0
 
+# Adding a new DISK to an array
+
+-- mdadm --add /dev/md0 /dev/xvdf 
+

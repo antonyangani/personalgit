@@ -98,3 +98,24 @@ OR
 
 -- show interface Eth1/2 status
 
+
+# Tagging SAF SIP VLANS
+
+== Log Into SW-06
+
+-- conf t
+-- vlan 1453
+-- name VID-1453-SBS-SAF-SIP
+-- exit 
+-- conf t
+-- int eth1/3
+-- switchport trunk allowed vlan add 1453
+-- int eth1/19
+-- switchport trunk allowed vlan add 1453
+-- int eth1/20
+-- switchport trunk allowed vlan add 1453
+-- int eth1/30
+-- switchport trunk allowed vlan add 1453
+-- exit
+-- copy running-config startup-config
+
