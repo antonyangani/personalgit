@@ -1,3 +1,15 @@
+# Flushing Binary logs 
+
+== This deletes binary logs which are in /var/lib/mysql folder based on date selected
+-- mysql -u root -p
+-- purge binary logs before '2021-06-10 00:00:00';
+
+
+OR 
+
+-- mysqladmin -u username -p flush-logs 	# This deletes binary logs older than 3 days
+
+
 #importing huge files into the database
 
 -- mysql -u username -p database_name < file.sql

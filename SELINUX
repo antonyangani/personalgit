@@ -1,0 +1,28 @@
+# Security Enhanced Linux
+
+-- config file  /etc/sysconfig/selinux
+-- config 	/etc/selinux/config  
+#LOGS  /var/log/messages   # e.g. avc:denied message  
+
+
+# Check Status
+
+-- sestatus
+OR 
+-- getenforce
+
+# Operation Modes
+
+1. Enforcing
+2. Permissive
+3. Disabled
+
+# Terminologies
+
+AVC 		- Access Vector cache 	# This is where SELinux keeps its policies
+Subject 	- This can be a process, program that needs to access a resource controlled by SELinux
+
+# Types of Policies
+
+1. Targeted policies - 
+2. Multi-level Security (MLS)
