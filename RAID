@@ -36,9 +36,8 @@ EG
 # STOP MDADM
 
 -- umount /opt/arrary  # The location you mounted the RAID 
--- sudo mdadm --stop /dev/md0
-OR
--- mdadm -S /dev/md0
+-- sudo mdadm --stop /dev/md0  OR  mdadm -S /dev/md0
+-- mdadm --remove /dev/md0
 
 # LIST disks in a RAID
 
@@ -63,4 +62,10 @@ OR
 # Adding a new DISK to an array
 
 -- mdadm --add /dev/md0 /dev/xvdf 
+-- mdadm --grow /dev/md0
+-- sudo mdadm --detail --scan | sudo tee -a /etc/mdadm/mdadm.conf
 
+# Removing a disk from array
+
+-- sudo mdadm /dev/md0 --fail /dev/sdc			# Mark a disk as fail even if it has not been marked by the array
+-- sudo mdadm /dev/md0 --remove /dev/xvdf

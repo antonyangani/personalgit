@@ -1,0 +1,20 @@
+# Ubuntu Firewall
+
+-- ufw enable
+-- ufw allow 22/tcp
+-- ufw allow from 62.12.119.26 to any port 22 proto tcp 	# A SINGLE IP address
+
+OR 
+
+-- ufw allow from 62.12.113.0/24 to any port 22 proto tcp  	# An entire SUBNET of IPs
+
+# Deleting a rule
+
+-- ufw status numbered
+-- ufw delete {RuleIndex}
+
+# Enable logging
+
+-- ufw logging on
+-- ufw looging low|medium|high
+
