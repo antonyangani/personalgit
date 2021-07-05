@@ -188,3 +188,9 @@ LANGUAGE="en_US.UTF-8"
 
 #ROOTKIT Hunter
 -- https://www.woktron.com/secure/knowledgebase/79/Installation-Rootkit-Hunter-rkhunter-on-CentOS.html
+
+
+# Fixing Roundcube corrupt DB
+
+-- ‘/home/<cpanel_user>/etc/<domain>/’ in cpanel, Rename the file <email_user>.rcube.db to <email_user>.rcube.db.bak or move it out of the folder.
+-- relooad the affected account on the webUI, it will recreate the db once again
