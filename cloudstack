@@ -1,0 +1,16 @@
+# Login 
+
+-- IP: 192.168.70.102
+-- user: root/key
+
+-- Login via vpc-zabbix
+
+# Login to the MYSQL database
+
+-- mysql -u root -pV8imjOJMmcIP cloud
+
+# Queries
+
+-- select id, state, desired_state, display_name from vm_instance where id = 4217;
+
+
