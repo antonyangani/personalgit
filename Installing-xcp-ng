@@ -18,7 +18,9 @@ TODO
 
 -- mkdir -p /var/opt/xen/iso_library
 -- xe sr-create name-label ="ISO-Storage" type=iso device-config:location=/var/opt/xen/iso_library/ device-config:legacy_mode=true content-type=iso
+# The above will generate a UUID
 -- cd /var/opt/xen/iso_library
 -- wget https://releases.ubuntu.com/18.04/ubuntu-18.04.5-live-server-amd64.iso
 -- rescan storage on the host
+-- xe sr-scan uuid=905c1e19-4c23-7642-ed35-51abda6e8a3d
 
